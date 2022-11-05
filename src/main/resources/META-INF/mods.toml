@@ -1,14 +1,15 @@
 modLoader="javafml"
 loaderVersion="[36,37)"
-[[mods]]
-modId="redstoneelectronics"
-version="0.1.1"
-displayName="Redstone Electronics"
-authors="Codetoil"
-license="All Rights Reserved"
-description='''
+license="All rights reserved"
 
-'''
+[[mods]]
+    modId="redstoneelectronics"
+    version="0.1.1"
+    displayName="Redstone Electronics"
+    authors="Codetoil"
+    description='''
+
+    '''
 [[dependencies.redstoneelectronics]]
     modId="forge"
     mandatory=true

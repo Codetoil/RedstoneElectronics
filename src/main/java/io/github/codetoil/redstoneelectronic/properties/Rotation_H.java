@@ -1,10 +1,3 @@
-/*
- * Decompiled with CFR 0.150.
- * 
- * Could not load the following classes:
- *  net.minecraft.util.Direction
- *  net.minecraft.util.IStringSerializable
- */
 package io.github.codetoil.redstoneelectronic.properties;
 
 import java.util.function.Function;
@@ -13,10 +6,10 @@ import net.minecraft.util.IStringSerializable;
 
 public enum Rotation_H implements IStringSerializable
 {
-    LEFT(Direction::func_176735_f, Direction::func_176746_e, "left"),
+    LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
     FRONT(a -> a, a -> a, "front"),
-    RIGHT(Direction::func_176746_e, Direction::func_176735_f, "right"),
-    BACK(Direction::func_176734_d, Direction::func_176734_d, "back");
+    RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right"),
+    BACK(Direction::getOpposite, Direction::getOpposite, "back");
 
     private final Function<Direction, Direction> onApply;
     private final String name;
@@ -36,7 +29,7 @@ public enum Rotation_H implements IStringSerializable
         return this.reverseApply.apply(direction);
     }
 
-    public String func_176610_l() {
+    public String getSerializedName() {
         return this.name;
     }
 }

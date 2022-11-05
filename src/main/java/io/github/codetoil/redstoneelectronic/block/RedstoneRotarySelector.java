@@ -1,25 +1,3 @@
-/*
- * Decompiled with CFR 0.150.
- * 
- * Could not load the following classes:
- *  net.minecraft.block.Block
- *  net.minecraft.block.Block$Properties
- *  net.minecraft.block.BlockState
- *  net.minecraft.block.Blocks
- *  net.minecraft.block.RedstoneDiodeBlock
- *  net.minecraft.block.RedstoneWireBlock
- *  net.minecraft.entity.player.PlayerEntity
- *  net.minecraft.state.IProperty
- *  net.minecraft.state.StateContainer$Builder
- *  net.minecraft.util.ActionResultType
- *  net.minecraft.util.Direction
- *  net.minecraft.util.Hand
- *  net.minecraft.util.math.BlockPos
- *  net.minecraft.util.math.BlockRayTraceResult
- *  net.minecraft.world.IBlockReader
- *  net.minecraft.world.World
- *  net.minecraftforge.event.ForgeEventFactory
- */
 package io.github.codetoil.redstoneelectronic.block;
 
 import io.github.codetoil.redstoneelectronic.properties.PropertiesRE;
@@ -31,7 +9,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneDiodeBlock;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -46,65 +23,69 @@ public class RedstoneRotarySelector
 extends RedstoneDiodeBlock {
     public RedstoneRotarySelector(Block.Properties builder) {
         super(builder);
-        this.func_180632_j((BlockState)((BlockState)((BlockState)((BlockState)this.field_176227_L.func_177621_b()).func_206870_a((IProperty)field_185512_D, (Comparable)Direction.NORTH)).func_206870_a(PropertiesRE.ROTATION_LFR, (Comparable)((Object)Rotation_LFR.FRONT))).func_206870_a((IProperty)field_196348_c, (Comparable)Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any()
+            .setValue(FACING, Direction.NORTH)
+            .setValue(PropertiesRE.ROTATION_LFR, Rotation_LFR.FRONT));
     }
 
-    protected int func_196346_i(BlockState p_196346_1_) {
+    protected int getDelay(BlockState state) {
         return 2;
     }
 
-    public ActionResultType func_225533_a_(BlockState p_225533_1_, World p_225533_2_, BlockPos p_225533_3_, PlayerEntity p_225533_4_, Hand p_225533_5_, BlockRayTraceResult p_225533_6_) {
-        if (!p_225533_4_.field_71075_bZ.field_75099_e) {
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+        if (!player.abilities.mayBuild) {
             return ActionResultType.PASS;
         }
-        p_225533_2_.func_180501_a(p_225533_3_, (BlockState)p_225533_1_.func_177231_a(PropertiesRE.ROTATION_LFR), 3);
+        world.setBlock(pos, state.cycle(PropertiesRE.ROTATION_LFR), 3);
         return ActionResultType.SUCCESS;
     }
 
-    protected int func_176397_f(World worldIn, BlockPos pos, BlockState state) {
-        Direction direction = (Direction)state.func_177229_b((IProperty)field_185512_D);
-        direction = ((Rotation_LFR)((Object)state.func_177229_b(PropertiesRE.ROTATION_LFR))).reverseApply(direction);
-        BlockPos blockpos = pos.func_177972_a(direction);
-        int i = worldIn.func_175651_c(blockpos, direction);
+    protected int getInputSignal(World worldIn, BlockPos pos, BlockState state) {
+        Direction direction = state.getValue(FACING);
+        direction = state.getValue(PropertiesRE.ROTATION_LFR).reverseApply(direction);
+        BlockPos blockpos = pos.offset(direction.getNormal());
+        int i = worldIn.getSignal(blockpos, direction);
         if (i >= 15) {
             return i;
         }
-        BlockState blockstate = worldIn.func_180495_p(blockpos);
-        return Math.max(i, blockstate.func_177230_c() == Blocks.field_150488_af ? (Integer)blockstate.func_177229_b((IProperty)RedstoneWireBlock.field_176351_O) : 0);
+        BlockState blockstate = worldIn.getBlockState(blockpos);
+        return Math.max(i, blockstate.getBlock() == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedstoneWireBlock.POWER) : 0);
     }
 
-    public int func_180656_a(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-        if (!((Boolean)blockState.func_177229_b((IProperty)field_196348_c)).booleanValue()) {
+    public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+        if (!(blockState.getValue(POWERED)).booleanValue()) {
             return 0;
         }
-        return blockState.func_177229_b((IProperty)field_185512_D) == side ? this.func_176408_a(blockAccess, pos, blockState) : 0;
+        return blockState.getValue(FACING) == side ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
     }
 
-    protected void func_176400_h(World worldIn, BlockPos pos, BlockState state) {
-        Direction direction = (Direction)state.func_177229_b((IProperty)field_185512_D);
-        BlockPos blockpos1 = pos.func_177972_a(direction.func_176734_d());
-        BlockPos blockpos2 = pos.func_177972_a(direction.func_176746_e());
-        BlockPos blockpos3 = pos.func_177972_a(direction.func_176735_f());
-        if (ForgeEventFactory.onNeighborNotify((World)worldIn, (BlockPos)pos, (BlockState)worldIn.func_180495_p(pos), EnumSet.of(direction.func_176734_d()), (boolean)false).isCanceled() || ForgeEventFactory.onNeighborNotify((World)worldIn, (BlockPos)pos, (BlockState)worldIn.func_180495_p(pos), EnumSet.of(direction.func_176746_e()), (boolean)false).isCanceled() || ForgeEventFactory.onNeighborNotify((World)worldIn, (BlockPos)pos, (BlockState)worldIn.func_180495_p(pos), EnumSet.of(direction.func_176735_f()), (boolean)false).isCanceled()) {
+    protected void updateNeighborsInFront(World worldIn, BlockPos pos, BlockState state) {
+        Direction direction = state.getValue(FACING);
+        BlockPos blockpos1 = pos.offset(direction.getOpposite().getNormal());
+        BlockPos blockpos2 = pos.offset(direction.getClockWise().getNormal());
+        BlockPos blockpos3 = pos.offset(direction.getCounterClockWise().getNormal());
+        if (ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
-        worldIn.func_190524_a(blockpos1, (Block)this, pos);
-        worldIn.func_175695_a(blockpos1, (Block)this, direction);
-        worldIn.func_190524_a(blockpos2, (Block)this, pos);
-        worldIn.func_175695_a(blockpos2, (Block)this, direction);
-        worldIn.func_190524_a(blockpos3, (Block)this, pos);
-        worldIn.func_175695_a(blockpos1, (Block)this, direction);
+        worldIn.neighborChanged(blockpos1, this, pos);
+        worldIn.updateNeighborsAtExceptFromFacing(blockpos1, this, direction);
+        worldIn.neighborChanged(blockpos2, this, pos);
+        worldIn.updateNeighborsAtExceptFromFacing(blockpos2, this, direction);
+        worldIn.neighborChanged(blockpos3, this, pos);
+        worldIn.updateNeighborsAtExceptFromFacing(blockpos3, this, direction);
     }
 
-    protected int func_176408_a(IBlockReader worldIn, BlockPos pos, BlockState state) {
+    protected int getOutputSignal(IBlockReader worldIn, BlockPos pos, BlockState state) {
         if (!(worldIn instanceof World)) {
             return 0;
         }
-        return Math.max(this.func_176397_f((World)worldIn, pos, state) - 1, 0);
+        return Math.max(this.getInputSignal((World)worldIn, pos, state) - 1, 0);
     }
 
-    protected void func_206840_a(StateContainer.Builder<Block, BlockState> builder) {
-        builder.func_206894_a(new IProperty[]{field_185512_D, PropertiesRE.ROTATION_LFR, field_196348_c});
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(FACING, PropertiesRE.ROTATION_LFR, POWERED);
     }
 }
 
