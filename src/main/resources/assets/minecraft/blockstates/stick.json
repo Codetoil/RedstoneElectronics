@@ -1,0 +1,28 @@
+{
+    "variants": {
+        "facing=up,rotation_h=front": { "model": "block/stick" },
+        "facing=down,rotation_h=front": { "model": "block/stick", "x": 180 },
+        "facing=east,rotation_h=front": { "model": "block/stick", "y": 90, "x": 90 },
+        "facing=south,rotation_h=front": { "model": "block/stick", "y": 180, "x": 90 },
+        "facing=west,rotation_h=front": { "model": "block/stick", "y": 270, "x": 90 },
+        "facing=north,rotation_h=front": { "model": "block/stick", "y": 0, "x": 90 },
+        "facing=up,rotation_h=right": { "model": "block/stick", "z": 90 },
+        "facing=down,rotation_h=right": { "model": "block/stick", "x": 180, "z": 90 },
+        "facing=east,rotation_h=right": { "model": "block/stick", "y": 90, "x": 90, "z": 90 },
+        "facing=south,rotation_h=right": { "model": "block/stick", "y": 180, "x": 90, "z": 90 },
+        "facing=west,rotation_h=right": { "model": "block/stick", "y": 270, "x": 90, "z": 90 },
+        "facing=north,rotation_h=right": { "model": "block/stick", "y": 0, "x": 90, "z": 90 },
+        "facing=up,rotation_h=back": { "model": "block/stick", "z": 180 },
+        "facing=down,rotation_h=back": { "model": "block/stick", "x": 180, "z": 180 },
+        "facing=east,rotation_h=back": { "model": "block/stick", "y": 90, "x": 90, "z": 180 },
+        "facing=south,rotation_h=back": { "model": "block/stick", "y": 180, "x": 90, "z": 180 },
+        "facing=west,rotation_h=back": { "model": "block/stick", "y": 270, "x": 90, "z": 180 },
+        "facing=north,rotation_h=back": { "model": "block/stick", "y": 0, "x": 90, "z": 180 },
+        "facing=up,rotation_h=left": { "model": "block/stick", "z": 270 },
+        "facing=down,rotation_h=left": { "model": "block/stick", "x": 180, "z": 270 },
+        "facing=east,rotation_h=left": { "model": "block/stick", "y": 90, "x": 90, "z": 270 },
+        "facing=south,rotation_h=left": { "model": "block/stick", "y": 180, "x": 90, "z": 270 },
+        "facing=west,rotation_h=left": { "model": "block/stick", "y": 270, "x": 90, "z": 270 },
+        "facing=north,rotation_h=left": { "model": "block/stick", "y": 0, "x": 90, "z": 270 }
+    }
+}
