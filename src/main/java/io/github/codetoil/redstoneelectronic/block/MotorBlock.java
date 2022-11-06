@@ -1,6 +1,5 @@
 package io.github.codetoil.redstoneelectronic.block;
 
-import io.github.codetoil.redstoneelectronic.properties.PropertiesRE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
@@ -14,12 +13,11 @@ import net.minecraft.world.IWorld;
 
 public class MotorBlock
 extends DirectionalBlock {
-    public MotorBlock(Block.Properties p_i48415_1_) {
-        super(p_i48415_1_);
+    public MotorBlock(Block.Properties builder) {
+        super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
-        .setValue(BlockStateProperties.POWERED, Boolean.FALSE)
-        .setValue(PropertiesRE.POWERED_LAST_TICK, Boolean.FALSE));
+        .setValue(BlockStateProperties.POWERED, Boolean.FALSE));
     }
 
     public BlockState rotate(BlockState state, Rotation rotate) {
@@ -35,7 +33,7 @@ extends DirectionalBlock {
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BlockStateProperties.POWERED, PropertiesRE.POWERED_LAST_TICK);
+        builder.add(FACING, BlockStateProperties.POWERED);
     }
 }
 

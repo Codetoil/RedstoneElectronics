@@ -1,7 +1,7 @@
 package io.github.codetoil.redstoneelectronic.block;
 
-import io.github.codetoil.redstoneelectronic.properties.PropertiesRE;
-import io.github.codetoil.redstoneelectronic.properties.Rotation_LFR;
+import io.github.codetoil.redstoneelectronic.properties.REProperties;
+import io.github.codetoil.redstoneelectronic.properties.SelectorOrientation;
 import java.util.EnumSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,7 +25,8 @@ extends RedstoneDiodeBlock {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
-            .setValue(PropertiesRE.ROTATION_LFR, Rotation_LFR.FRONT));
+            .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.FRONT)
+            .setValue(POWERED, Boolean.FALSE));
     }
 
     protected int getDelay(BlockState state) {
@@ -36,13 +37,13 @@ extends RedstoneDiodeBlock {
         if (!player.abilities.mayBuild) {
             return ActionResultType.PASS;
         }
-        world.setBlock(pos, state.cycle(PropertiesRE.ROTATION_LFR), 3);
+        world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
         return ActionResultType.SUCCESS;
     }
 
     protected int getInputSignal(World worldIn, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
-        direction = state.getValue(PropertiesRE.ROTATION_LFR).reverseApply(direction);
+        direction = state.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(direction);
         BlockPos blockpos = pos.offset(direction.getNormal());
         int i = worldIn.getSignal(blockpos, direction);
         if (i >= 15) {
@@ -85,7 +86,7 @@ extends RedstoneDiodeBlock {
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, PropertiesRE.ROTATION_LFR, POWERED);
+        builder.add(FACING, REProperties.SELECTOR_ORIENTATION, POWERED);
     }
 }
 

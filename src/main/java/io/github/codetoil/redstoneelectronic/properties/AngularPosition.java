@@ -4,18 +4,18 @@ import java.util.function.Function;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 
-public enum Rotation_H implements IStringSerializable
+public enum AngularPosition implements IStringSerializable
 {
-    LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
-    FRONT(a -> a, a -> a, "front"),
-    RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right"),
-    BACK(Direction::getOpposite, Direction::getOpposite, "back");
+    COUNTERCLOCKWISE_RIGHT_ANGLE(Direction::getCounterClockWise, Direction::getClockWise, "ccw"),
+    NULL_ANGLE(a -> a, a -> a, "zero"),
+    CLOCKWISE_RIGHT_ANGLE(Direction::getClockWise, Direction::getCounterClockWise, "cw"),
+    STRAIGHT_ANGLE(Direction::getOpposite, Direction::getOpposite, "straight");
 
     private final Function<Direction, Direction> onApply;
     private final String name;
     private final Function<Direction, Direction> reverseApply;
 
-    private Rotation_H(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply, String name) {
+    private AngularPosition(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply, String name) {
         this.name = name;
         this.onApply = onApply;
         this.reverseApply = reverseApply;

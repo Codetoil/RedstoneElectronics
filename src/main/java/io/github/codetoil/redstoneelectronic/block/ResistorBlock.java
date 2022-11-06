@@ -1,6 +1,6 @@
 package io.github.codetoil.redstoneelectronic.block;
 
-import io.github.codetoil.redstoneelectronic.properties.PropertiesRE;
+import io.github.codetoil.redstoneelectronic.properties.REProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneDiodeBlock;
@@ -20,7 +20,8 @@ extends RedstoneDiodeBlock {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
-            .setValue(PropertiesRE.RESISTANCE_1_4, Integer.valueOf(1)));
+            .setValue(REProperties.RESISTANCE_1_4, Integer.valueOf(1))
+            .setValue(POWERED, Boolean.FALSE));
     }
 
     protected int getDelay(BlockState state) {
@@ -31,19 +32,19 @@ extends RedstoneDiodeBlock {
         if (!(worldIn instanceof World)) {
             return 0;
         }
-        return Math.max(this.getInputSignal((World) worldIn, pos, state) - state.getValue(PropertiesRE.RESISTANCE_1_4), 0);
+        return Math.max(this.getInputSignal((World) worldIn, pos, state) - state.getValue(REProperties.RESISTANCE_1_4), 0);
     }
 
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
         if (!player.abilities.mayBuild) {
             return ActionResultType.PASS;
         }
-        world.setBlock(pos, state.cycle(PropertiesRE.RESISTANCE_1_4), 3);
+        world.setBlock(pos, state.cycle(REProperties.RESISTANCE_1_4), 3);
         return ActionResultType.SUCCESS;
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, PropertiesRE.RESISTANCE_1_4, POWERED);
+        builder.add(FACING, REProperties.RESISTANCE_1_4, POWERED);
     }
 }
 

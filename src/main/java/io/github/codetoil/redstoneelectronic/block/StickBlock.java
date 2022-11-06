@@ -1,7 +1,7 @@
 package io.github.codetoil.redstoneelectronic.block;
 
-import io.github.codetoil.redstoneelectronic.properties.PropertiesRE;
-import io.github.codetoil.redstoneelectronic.properties.Rotation_H;
+import io.github.codetoil.redstoneelectronic.properties.REProperties;
+import io.github.codetoil.redstoneelectronic.properties.AngularPosition;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -38,7 +38,7 @@ public class StickBlock
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(StickBlock.FACING, Direction.NORTH)
-                .setValue(PropertiesRE.ROTATION_H, Rotation_H.FRONT)
+                .setValue(REProperties.ANGULAR_POSITION, AngularPosition.NULL_ANGLE)
                 .setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
     }
 
@@ -86,7 +86,7 @@ public class StickBlock
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateContainerBuilder) {
-        stateContainerBuilder.add(FACING, PropertiesRE.ROTATION_H, BlockStateProperties.WATERLOGGED);
+        stateContainerBuilder.add(FACING, REProperties.ANGULAR_POSITION, BlockStateProperties.WATERLOGGED);
     }
 
     public boolean useShapeForLightOcclusion(BlockState state) {

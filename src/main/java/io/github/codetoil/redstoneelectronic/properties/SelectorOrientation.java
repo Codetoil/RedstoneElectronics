@@ -4,7 +4,7 @@ import java.util.function.Function;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 
-public enum Rotation_LFR implements IStringSerializable
+public enum SelectorOrientation implements IStringSerializable
 {
     LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
     FRONT(a -> a, a -> a, "front"),
@@ -14,7 +14,7 @@ public enum Rotation_LFR implements IStringSerializable
     private final String name;
     private final Function<Direction, Direction> reverseApply;
 
-    private Rotation_LFR(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply, String name) {
+    private SelectorOrientation(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply, String name) {
         this.name = name;
         this.onApply = onApply;
         this.reverseApply = reverseApply;
