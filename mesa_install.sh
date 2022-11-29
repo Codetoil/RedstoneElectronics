@@ -1,7 +1,9 @@
 #!/bin/bash
 
 cp ./sources.list /etc/apt/sources.list
+
 apt-get update
+
 apt-get install -y \
 libd3dadapter9-mesa \
 libd3dadapter9-mesa-dev \
@@ -27,4 +29,5 @@ mesa-opencl-icd \
 mesa-va-drivers \
 mesa-vdpau-drivers \
 mesa-vulkan-drivers
+
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu

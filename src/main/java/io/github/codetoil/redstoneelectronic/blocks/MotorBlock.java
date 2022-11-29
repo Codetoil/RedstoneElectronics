@@ -1,5 +1,6 @@
-package io.github.codetoil.redstoneelectronic.block;
+package io.github.codetoil.redstoneelectronic.blocks;
 
+import io.github.codetoil.redstoneelectronic.properties.REProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
@@ -17,7 +18,8 @@ extends DirectionalBlock {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
-        .setValue(BlockStateProperties.POWERED, Boolean.FALSE));
+        .setValue(BlockStateProperties.POWERED, Boolean.FALSE)
+        .setValue(REProperties.CURRENTLY_ROTATING, Boolean.FALSE));
     }
 
     public BlockState rotate(BlockState state, Rotation rotate) {
@@ -33,7 +35,7 @@ extends DirectionalBlock {
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BlockStateProperties.POWERED);
+        builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
     }
 }
 

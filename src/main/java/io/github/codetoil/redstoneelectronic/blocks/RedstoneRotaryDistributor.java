@@ -1,13 +1,11 @@
-package io.github.codetoil.redstoneelectronic.block;
+package io.github.codetoil.redstoneelectronic.blocks;
 
 import io.github.codetoil.redstoneelectronic.properties.REProperties;
 import io.github.codetoil.redstoneelectronic.properties.SelectorOrientation;
 import java.util.EnumSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneDiodeBlock;
-import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
@@ -19,9 +17,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class RedstoneRotarySelector
+public class RedstoneRotaryDistributor
 extends RedstoneDiodeBlock {
-    public RedstoneRotarySelector(Block.Properties builder) {
+    public RedstoneRotaryDistributor(Block.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
@@ -33,31 +31,11 @@ extends RedstoneDiodeBlock {
         return 2;
     }
 
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
-        if (!player.abilities.mayBuild) {
-            return ActionResultType.PASS;
-        }
-        world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
-        return ActionResultType.SUCCESS;
-    }
-
-    protected int getInputSignal(World worldIn, BlockPos pos, BlockState state) {
-        Direction direction = state.getValue(FACING);
-        direction = state.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(direction);
-        BlockPos blockpos = pos.offset(direction.getNormal());
-        int i = worldIn.getSignal(blockpos, direction);
-        if (i >= 15) {
-            return i;
-        }
-        BlockState blockstate = worldIn.getBlockState(blockpos);
-        return Math.max(i, blockstate.getBlock() == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedstoneWireBlock.POWER) : 0);
-    }
-
     public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-        if (!(blockState.getValue(POWERED)).booleanValue()) {
+        if (!((Boolean)blockState.getValue(POWERED)).booleanValue()) {
             return 0;
         }
-        return blockState.getValue(FACING) == side ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
+        return blockState.getValue(FACING) == blockState.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(side) ? this.getSignal(blockAccess, pos, blockState) : 0;
     }
 
     protected void updateNeighborsInFront(World worldIn, BlockPos pos, BlockState state) {
@@ -78,11 +56,19 @@ extends RedstoneDiodeBlock {
         worldIn.updateNeighborsAtExceptFromFacing(blockpos3, this, direction);
     }
 
-    protected int getOutputSignal(IBlockReader worldIn, BlockPos pos, BlockState state) {
+    protected int getSignal(IBlockReader worldIn, BlockPos pos, BlockState state) {
         if (!(worldIn instanceof World)) {
             return 0;
         }
         return Math.max(this.getInputSignal((World)worldIn, pos, state) - 1, 0);
+    }
+
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+        if (!player.abilities.mayBuild) {
+            return ActionResultType.PASS;
+        }
+        world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
+        return ActionResultType.SUCCESS;
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {

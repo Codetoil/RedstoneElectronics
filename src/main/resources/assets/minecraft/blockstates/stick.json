@@ -1,28 +1,10 @@
 {
     "variants": {
-        "facing=up,angular_position=zero": { "model": "block/stick" },
-        "facing=down,angular_position=zero": { "model": "block/stick", "x": 180 },
-        "facing=east,angular_position=zero": { "model": "block/stick", "y": 90, "x": 90 },
-        "facing=south,angular_position=zero": { "model": "block/stick", "y": 180, "x": 90 },
-        "facing=west,angular_position=zero": { "model": "block/stick", "y": 270, "x": 90 },
-        "facing=north,angular_position=zero": { "model": "block/stick", "y": 0, "x": 90 },
-        "facing=up,angular_position=ccw": { "model": "block/stick", "z": 90 },
-        "facing=down,angular_position=ccw": { "model": "block/stick", "x": 180, "z": 90 },
-        "facing=east,angular_position=ccw": { "model": "block/stick", "y": 90, "x": 90, "z": 90 },
-        "facing=south,angular_position=ccw": { "model": "block/stick", "y": 180, "x": 90, "z": 90 },
-        "facing=west,angular_position=ccw": { "model": "block/stick", "y": 270, "x": 90, "z": 90 },
-        "facing=north,angular_position=ccw": { "model": "block/stick", "y": 0, "x": 90, "z": 90 },
-        "facing=up,angular_position=straight": { "model": "block/stick", "z": 180 },
-        "facing=down,angular_position=straight": { "model": "block/stick", "x": 180, "z": 180 },
-        "facing=east,angular_position=straight": { "model": "block/stick", "y": 90, "x": 90, "z": 180 },
-        "facing=south,angular_position=straight": { "model": "block/stick", "y": 180, "x": 90, "z": 180 },
-        "facing=west,angular_position=straight": { "model": "block/stick", "y": 270, "x": 90, "z": 180 },
-        "facing=north,angular_position=straight": { "model": "block/stick", "y": 0, "x": 90, "z": 180 },
-        "facing=up,angular_position=cw": { "model": "block/stick", "z": 270 },
-        "facing=down,angular_position=cw": { "model": "block/stick", "x": 180, "z": 270 },
-        "facing=east,angular_position=cw": { "model": "block/stick", "y": 90, "x": 90, "z": 270 },
-        "facing=south,angular_position=cw": { "model": "block/stick", "y": 180, "x": 90, "z": 270 },
-        "facing=west,angular_position=cw": { "model": "block/stick", "y": 270, "x": 90, "z": 270 },
-        "facing=north,angular_position=cw": { "model": "block/stick", "y": 0, "x": 90, "z": 270 }
+        "facing=up": { "model": "block/stick" },
+        "facing=down": { "model": "block/stick", "x": 180 },
+        "facing=east": { "model": "block/stick", "y": 90, "x": 90 },
+        "facing=south": { "model": "block/stick", "y": 180, "x": 90 },
+        "facing=west": { "model": "block/stick", "y": 270, "x": 90 },
+        "facing=north": { "model": "block/stick", "y": 0, "x": 90 }
     }
 }

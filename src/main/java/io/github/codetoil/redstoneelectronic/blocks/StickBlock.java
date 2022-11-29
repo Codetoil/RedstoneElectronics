@@ -1,7 +1,5 @@
-package io.github.codetoil.redstoneelectronic.block;
+package io.github.codetoil.redstoneelectronic.blocks;
 
-import io.github.codetoil.redstoneelectronic.properties.REProperties;
-import io.github.codetoil.redstoneelectronic.properties.AngularPosition;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -13,6 +11,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -38,7 +37,6 @@ public class StickBlock
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(StickBlock.FACING, Direction.NORTH)
-                .setValue(REProperties.ANGULAR_POSITION, AngularPosition.NULL_ANGLE)
                 .setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
     }
 
@@ -86,7 +84,7 @@ public class StickBlock
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateContainerBuilder) {
-        stateContainerBuilder.add(FACING, REProperties.ANGULAR_POSITION, BlockStateProperties.WATERLOGGED);
+        stateContainerBuilder.add(FACING, BlockStateProperties.WATERLOGGED);
     }
 
     public boolean useShapeForLightOcclusion(BlockState state) {
@@ -101,12 +99,16 @@ public class StickBlock
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.NORMAL;
+        return PushReaction.DESTROY;
     }
 
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         return state.getValue(BlockStateProperties.WATERLOGGED) != false ? Fluids.WATER.getSource(false)
             : super.getFluidState(state);
+    }
+
+    public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType pathType) {
+        return false;
     }
 }

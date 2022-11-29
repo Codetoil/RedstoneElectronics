@@ -1,4 +1,4 @@
-package io.github.codetoil.redstoneelectronic.block;
+package io.github.codetoil.redstoneelectronic.blocks;
 
 import io.github.codetoil.redstoneelectronic.properties.REProperties;
 import net.minecraft.block.Block;
