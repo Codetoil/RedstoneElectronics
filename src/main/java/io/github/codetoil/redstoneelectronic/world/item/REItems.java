@@ -20,9 +20,9 @@ package io.github.codetoil.redstoneelectronic.items;
 
 import io.github.codetoil.redstoneelectronic.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronic.blocks.REBlocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;

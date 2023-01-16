@@ -19,10 +19,10 @@
 package io.github.codetoil.redstoneelectronic.properties;
 
 import java.util.function.Function;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 
-public enum SelectorOrientation implements IStringSerializable
+public enum SelectorOrientation implements StringRepresentable
 {
     LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
     FRONT(a -> a, a -> a, "front"),

@@ -18,9 +18,9 @@
 
 package io.github.codetoil.redstoneelectronic.properties;
 
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class REProperties {
     public static final EnumProperty<SelectorOrientation> SELECTOR_ORIENTATION = EnumProperty.create("selector_orientation", SelectorOrientation.class);

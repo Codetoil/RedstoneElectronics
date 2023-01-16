@@ -21,22 +21,23 @@
 import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronic.properties.REProperties;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DirectionalBlock;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 
 public class MotorBlock
 extends DirectionalBlock {
-    public MotorBlock(Block.Properties builder) {
+    public MotorBlock(BlockBehavior.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
@@ -48,7 +49,7 @@ extends DirectionalBlock {
         return state.setValue(FACING, rotate.rotate(state.getValue(FACING)));
     }
 
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
         return super.rotate(state, world, pos, direction);
     }
 
@@ -67,7 +68,7 @@ extends DirectionalBlock {
 
     @Override
     @Nullable
-    public BlockEntity createBlockEntity(BlockState state, IBlockReader world) {
+    public BlockEntity createBlockEntity(BlockState state, BlockGetter world) {
         return super.createBlockEntity(state, world);
     }
 }

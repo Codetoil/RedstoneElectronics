@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.tileentities;
+package io.github.codetoil.redstoneelectronic.blockentities;
 
 import io.github.codetoil.redstoneelectronic.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronic.blocks.REBlocks;
@@ -24,6 +24,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class REBlockEntityTypes {
     private static final DeferredRegister<BlockEntityType<?>> RE_BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, RedstoneElectronics.MODID);

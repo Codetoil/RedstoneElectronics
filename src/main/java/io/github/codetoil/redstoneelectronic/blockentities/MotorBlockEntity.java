@@ -16,14 +16,14 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.tileentities;
+package io.github.codetoil.redstoneelectronic.blockentities;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
 
-public class MotorBlockEntity extends BlockEntity implements ITickableTileEntity {
+public class MotorBlockEntity extends BlockEntity implements TickableBlockEntity {
     private BlockPos posOfFinalBlock;
     private int rotationalVelocity;
     private float angle;
@@ -34,7 +34,6 @@ public class MotorBlockEntity extends BlockEntity implements ITickableTileEntity
 
     @Override
     public void tick() {
-        // TODO Auto-generated method stub
         
     }
 
