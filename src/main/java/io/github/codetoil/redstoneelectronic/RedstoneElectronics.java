@@ -21,7 +21,7 @@ package io.github.codetoil.redstoneelectronic;
 import io.github.codetoil.redstoneelectronic.blocks.REBlocks;
 import io.github.codetoil.redstoneelectronic.items.REItems;
 import io.github.codetoil.redstoneelectronic.properties.REProperties;
-import io.github.codetoil.redstoneelectronic.tileentities.RETileEntityTypes;
+import io.github.codetoil.redstoneelectronic.tileentities.REBlockEntityTypes;
 
 import java.util.stream.Collectors;
 
@@ -51,7 +51,7 @@ public class RedstoneElectronics {
         REProperties.init();
         REBlocks.init();
         REItems.init();
-        RETileEntityTypes.init();
+        REBlockEntityTypes.init();
     }
 
     private void setup(FMLCommonSetupEvent event) {

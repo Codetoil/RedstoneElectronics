@@ -18,16 +18,18 @@
 
 package io.github.codetoil.redstoneelectronic.tileentities;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 
-public class MotorTileEntity extends TileEntity implements ITickableTileEntity {
+public class MotorBlockEntity extends BlockEntity implements ITickableTileEntity {
     private BlockPos posOfFinalBlock;
     private int rotationalVelocity;
+    private float angle;
 
-    public MotorTileEntity() {
-        super(RETileEntityTypes.MOTOR_TYLE_ENTITY_TYPE.get()); // temporary
+    public MotorBlockEntity(BlockPos pos, BlockState state) {
+        super(REBlockEntityTypes.MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 
     @Override
@@ -35,5 +37,6 @@ public class MotorTileEntity extends TileEntity implements ITickableTileEntity {
         // TODO Auto-generated method stub
         
     }
-    
+
+
 }

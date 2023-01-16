@@ -18,16 +18,20 @@
 
  package io.github.codetoil.redstoneelectronic.blocks;
 
+import javax.annotation.Nullable;
+
 import io.github.codetoil.redstoneelectronic.properties.REProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
 public class MotorBlock
@@ -54,6 +58,17 @@ extends DirectionalBlock {
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
+    }
+
+    @Override
+    public boolean hasBlockEntity(BlockState state) {
+        return super.hasBlockEntity(state);
+    }
+
+    @Override
+    @Nullable
+    public BlockEntity createBlockEntity(BlockState state, IBlockReader world) {
+        return super.createBlockEntity(state, world);
     }
 }
 
