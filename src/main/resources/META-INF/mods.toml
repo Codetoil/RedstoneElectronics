@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,37)"
+loaderVersion="[40,41)"
 license="All rights reserved"
 
 [[mods]]
@@ -13,12 +13,12 @@ license="All rights reserved"
 [[dependencies.redstoneelectronics]]
     modId="forge"
     mandatory=true
-    versionRange="[36,37)"
+    versionRange="[40,41)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.redstoneelectronics]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5]"
+    versionRange="[1.18.2]"
     ordering="NONE"
     side="BOTH"
