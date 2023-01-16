@@ -20,10 +20,6 @@
   },
   "customizations": {
     "vscode": {"extensions": [
-			"vscjava.vscode-gradle",
-			"vscjava.vscode-java-pack",
-			"DavidAnson.vscode-markdownlint",
-			"eamodio.gitlens"
 		]}
   },
   "postStartCommand": "sudo ./mesa_install.sh"
