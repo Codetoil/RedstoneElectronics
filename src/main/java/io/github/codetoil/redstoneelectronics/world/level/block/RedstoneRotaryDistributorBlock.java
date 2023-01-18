@@ -38,7 +38,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class RedstoneRotaryDistributorBlock
 extends DiodeBlockBlock {
-    public RedstoneRotaryDistributor(BlockBehavior.Properties builder) {
+    public RedstoneRotaryDistributorBlock(BlockBehavior.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
