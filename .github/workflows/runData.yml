@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Reports
-          path: run/reports
+          path: run/generated/reports
