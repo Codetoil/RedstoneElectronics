@@ -37,11 +37,11 @@ public class RedstoneElectronics {
     public static final String MODID = "redstoneelectronics";
 
     public RedstoneElectronics() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        MinecraftForge.EVENT_BUS.register(this);
+        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        // MinecraftForge.EVENT_BUS.register(this);
         REProperties.init();
         REBlocks.init();
         REItems.init();

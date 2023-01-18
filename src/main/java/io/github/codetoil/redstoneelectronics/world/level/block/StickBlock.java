@@ -112,7 +112,7 @@ public class StickBlock
 
     public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
         if (state.getValue(BlockStateProperties.WATERLOGGED).booleanValue()) {
-            world.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+            world.getFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
         return super.rotate(state, world, pos, direction);
     }

@@ -76,13 +76,13 @@ extends DiodeBlock {
     }
 
     protected int getSignal(BlockGetter worldIn, BlockPos pos, BlockState state) {
-        if (!(worldIn instanceof World)) {
+        if (!(worldIn instanceof Level)) {
             return 0;
         }
-        return Math.max(this.getInputSignal((World)worldIn, pos, state) - 1, 0);
+        return Math.max(this.getInputSignal((Level) worldIn, pos, state) - 1, 0);
     }
 
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Entity player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
         if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
