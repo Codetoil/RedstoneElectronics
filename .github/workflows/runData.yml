@@ -29,10 +29,15 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - name: prepare run
-        run: ./gradlew prepareRunData --no-daemon
+        uses: nick-fields/retry@v2
+          with:
+            timeout_minutes: 1000
+            max_attempts: 3
+            retry_on: error
+            command: ./gradlew prepareRunData
       - name: run
         continue-on-error: true
-        run: ./gradlew runData --no-daemon
+        run: ./gradlew runData
       - name: capturing reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
