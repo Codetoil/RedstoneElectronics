@@ -29,4 +29,4 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - name: run
-        run: ./gradlew runData
+        run: ./gradlew runData --no-daemon
