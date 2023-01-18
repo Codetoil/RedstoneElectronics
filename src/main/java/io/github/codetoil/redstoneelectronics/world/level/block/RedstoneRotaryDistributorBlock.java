@@ -24,7 +24,7 @@ import java.util.EnumSet;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -38,7 +38,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class RedstoneRotaryDistributorBlock
 extends DiodeBlockBlock {
-    public RedstoneRotaryDistributorBlock(BlockBehavior.Properties builder) {
+    public RedstoneRotaryDistributorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)

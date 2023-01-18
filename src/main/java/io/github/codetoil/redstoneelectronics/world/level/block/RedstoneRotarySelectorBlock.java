@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -39,7 +39,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class RedstoneRotarySelectorBlock
 extends DiodeBlock {
-    public RedstoneRotarySelectorBlock(Block.Properties builder) {
+    public RedstoneRotarySelectorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)

@@ -22,7 +22,7 @@ import java.util.Random;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.material.PushReaction;
@@ -52,7 +52,7 @@ public class StickBlock
     protected static final VoxelShape STICK_NS_AABB = Block.box(7.0, 7.0, 0.0, 9.0, 9.0, 16.0);
     protected static final VoxelShape STICK_EW_AABB = Block.box(0.0, 7.0, 7.0, 16.0, 9.0, 9.0);
 
-    public StickBlock(BlockBehavior.Properties properties) {
+    public StickBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(StickBlock.FACING, Direction.NORTH)
