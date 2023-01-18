@@ -66,12 +66,6 @@ public class RedstoneElectronics {
             gen.addProvider(new WorldgenRegistryDumpReport(gen));
             gen.addProvider(new RegistryDumpReport(gen));
         }
-        try {
-            gen.run();
-        } catch (IOException e)
-        {
-            logger.error(e);
-        }
     }
 }
 

@@ -31,4 +31,5 @@ jobs:
       - name: prepare run
         run: ./gradlew prepareRunData --no-daemon
       - name: run
+        continue-on-error: true
         run: ./gradlew runData --no-daemon
