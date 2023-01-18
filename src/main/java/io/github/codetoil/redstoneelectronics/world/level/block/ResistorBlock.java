@@ -18,7 +18,8 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block;
 
-import io.github.codetoil.redstoneelectronic.properties.REProperties;
+
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -62,7 +63,7 @@ extends DiodeBlock {
         return InteractionResult.SUCCESS;
     }
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, REProperties.RESISTANCE_1_4, POWERED);
     }
 }

@@ -19,14 +19,14 @@
 package io.github.codetoil.redstoneelectronics.world.item;
 
 import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
-import io.github.codetoil.redstoneelectronic.world.level.block.REBlocks;
+import io.github.codetoil.RedstoneElectronics.world.level.block.REBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemGroup;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class REItems {
     private static final DeferredRegister<Item> RE_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, RedstoneElectronics.MODID);

@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronics.world.level.block.state.properties.properties;
+package io.github.codetoil.redstoneelectronics.world.level.block.state.properties;
 
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;

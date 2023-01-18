@@ -18,15 +18,15 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block;
 
-import io.github.codetoil.redstoneelectronic.RedstoneElectronics;
+import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class REBlocks {
     private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, RedstoneElectronics.MODID);

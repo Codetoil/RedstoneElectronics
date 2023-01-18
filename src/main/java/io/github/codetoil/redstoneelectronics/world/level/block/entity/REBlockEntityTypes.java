@@ -20,10 +20,10 @@ package io.github.codetoil.redstoneelectronics.world.level.block.entity;
 
 import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.REBlocks;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class REBlockEntityTypes {

@@ -19,11 +19,10 @@
 package io.github.codetoil.redstoneelectronics.world.level.block.entity;
 
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 
-public class MotorBlockEntity extends BlockEntity implements TickableBlockEntity {
+public class MotorBlockEntity extends BlockEntity {
     private BlockPos posOfFinalBlock;
     private int rotationalVelocity;
     private float angle;
@@ -31,11 +30,5 @@ public class MotorBlockEntity extends BlockEntity implements TickableBlockEntity
     public MotorBlockEntity(BlockPos pos, BlockState state) {
         super(REBlockEntityTypes.MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
-
-    @Override
-    public void tick() {
-        
-    }
-
 
 }
