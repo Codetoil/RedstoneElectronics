@@ -16,11 +16,11 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
- package io.github.codetoil.redstoneelectronic.blocks;
+ package io.github.codetoil.redstoneelectronics.world.level.block;
 
 import javax.annotation.Nullable;
 
-import io.github.codetoil.redstoneelectronic.properties.REProperties;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehavior;
@@ -57,7 +57,7 @@ extends DirectionalBlock {
         return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
     }
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
     }
 

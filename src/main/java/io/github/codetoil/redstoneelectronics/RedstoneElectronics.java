@@ -16,12 +16,12 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic;
+package io.github.codetoil.redstoneelectronics;
 
-import io.github.codetoil.redstoneelectronic.blocks.REBlocks;
-import io.github.codetoil.redstoneelectronic.items.REItems;
-import io.github.codetoil.redstoneelectronic.properties.REProperties;
-import io.github.codetoil.redstoneelectronic.tileentities.REBlockEntityTypes;
+import io.github.codetoil.redstoneelectronics.world.level.block.REBlocks;
+import io.github.codetoil.redstoneelectronics.world.item.REItems;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
+import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import java.util.stream.Collectors;
 

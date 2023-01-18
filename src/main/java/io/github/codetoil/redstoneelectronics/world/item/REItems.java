@@ -16,10 +16,10 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.items;
+package io.github.codetoil.redstoneelectronics.world.item;
 
-import io.github.codetoil.redstoneelectronic.RedstoneElectronics;
-import io.github.codetoil.redstoneelectronic.blocks.REBlocks;
+import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
+import io.github.codetoil.redstoneelectronic.world.level.block.REBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemGroup;

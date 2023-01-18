@@ -16,42 +16,43 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.blocks;
+package io.github.codetoil.redstoneelectronics.world.level.block;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DirectionalBlock;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class StickBlock
         extends DirectionalBlock
-        implements IWaterLoggable {
+        implements SimpleWaterloggedBlock {
     protected static final VoxelShape STICK_VERTICAL_AABB = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
     protected static final VoxelShape STICK_NS_AABB = Block.box(7.0, 7.0, 0.0, 9.0, 9.0, 16.0);
     protected static final VoxelShape STICK_EW_AABB = Block.box(0.0, 7.0, 7.0, 16.0, 9.0, 9.0);
 
-    public StickBlock(Block.Properties properties) {
+    public StickBlock(BlockBehavior.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(StickBlock.FACING, Direction.NORTH)
@@ -66,8 +67,8 @@ public class StickBlock
         return blockState.setValue(FACING, mirror.mirror(blockState.getValue(FACING)));
     }
 
-    public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos,
-            ISelectionContext selectionContext) {
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockReader, BlockPos blockPos,
+            CollisionContext selectionContext) {
         switch ((blockState.getValue(FACING)).getAxis()) {
             default: {
                 return STICK_EW_AABB;
@@ -84,11 +85,11 @@ public class StickBlock
         return "item.minecraft.stick";
     }
 
-    public BlockState getStateForPlacement(BlockItemUseContext blockItemUseContext) {
-        Direction direction = blockItemUseContext.getClickedFace();
-        BlockState state1 = blockItemUseContext.getLevel()
-                .getBlockState(blockItemUseContext.getClickedPos().offset(direction.getOpposite().getNormal()));
-        Fluid fluid = blockItemUseContext.getLevel().getFluidState(blockItemUseContext.getClickedPos()).getType();
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getClickedFace();
+        BlockState state1 = context.getLevel()
+                .getBlockState(context.getClickedPos().offset(direction.getOpposite().getNormal()));
+        Fluid fluid = context.getLevel().getFluidState(context.getClickedPos()).getType();
         BlockState state2 = (BlockState) this.stateDefinition.any().setValue(
                 BlockStateProperties.WATERLOGGED,
                 Boolean.valueOf(fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER));
@@ -98,10 +99,10 @@ public class StickBlock
     }
 
     @OnlyIn(value = Dist.CLIENT)
-    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
+    public void animateTick(BlockState p_180655_1_, Level p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
     }
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateContainerBuilder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateContainerBuilder) {
         stateContainerBuilder.add(FACING, BlockStateProperties.WATERLOGGED);
     }
 
@@ -109,7 +110,7 @@ public class StickBlock
         return true;
     }
 
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
         if (state.getValue(BlockStateProperties.WATERLOGGED).booleanValue()) {
             world.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
@@ -126,7 +127,7 @@ public class StickBlock
             : super.getFluidState(state);
     }
 
-    public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType pathType) {
+    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType pathType) {
         return false;
     }
 }

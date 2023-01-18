@@ -16,28 +16,29 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.blocks;
+package io.github.codetoil.redstoneelectronics.world.level.block;
 
-import io.github.codetoil.redstoneelectronic.properties.REProperties;
-import io.github.codetoil.redstoneelectronic.properties.SelectorOrientation;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 import java.util.EnumSet;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RedstoneDiodeBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.BlockBehavior;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class RedstoneRotaryDistributor
-extends RedstoneDiodeBlock {
-    public RedstoneRotaryDistributor(Block.Properties builder) {
+public class RedstoneRotaryDistributorBlock
+extends DiodeBlockBlock {
+    public RedstoneRotaryDistributor(BlockBehavior.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
@@ -49,21 +50,21 @@ extends RedstoneDiodeBlock {
         return 2;
     }
 
-    public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
         if (!((Boolean)blockState.getValue(POWERED)).booleanValue()) {
             return 0;
         }
         return blockState.getValue(FACING) == blockState.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(side) ? this.getSignal(blockAccess, pos, blockState) : 0;
     }
 
-    protected void updateNeighborsInFront(World worldIn, BlockPos pos, BlockState state) {
+    protected void updateNeighborsInFront(Level worldIn, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         BlockPos blockpos1 = pos.offset(direction.getOpposite().getNormal());
         BlockPos blockpos2 = pos.offset(direction.getClockWise().getNormal());
         BlockPos blockpos3 = pos.offset(direction.getCounterClockWise().getNormal());
-        if (ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify((World)worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
+        if (ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
         worldIn.neighborChanged(blockpos1, this, pos);
@@ -74,22 +75,22 @@ extends RedstoneDiodeBlock {
         worldIn.updateNeighborsAtExceptFromFacing(blockpos3, this, direction);
     }
 
-    protected int getSignal(IBlockReader worldIn, BlockPos pos, BlockState state) {
+    protected int getSignal(BlockGetter worldIn, BlockPos pos, BlockState state) {
         if (!(worldIn instanceof World)) {
             return 0;
         }
         return Math.max(this.getInputSignal((World)worldIn, pos, state) - 1, 0);
     }
 
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+    public ActionResultType use(BlockState state, Level world, BlockPos pos, PlayerEntity player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
         if (!player.abilities.mayBuild) {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         }
         world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, REProperties.SELECTOR_ORIENTATION, POWERED);
     }
 }

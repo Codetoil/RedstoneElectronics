@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.properties;
+package io.github.codetoil.redstoneelectronics.world.level.block.state.properties;
 
 import java.util.function.Function;
 import net.minecraft.core.Direction;

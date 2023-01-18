@@ -16,18 +16,26 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronic.properties;
+package io.github.codetoil.redstoneelectronics.world.level.block.entity;
 
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
 
-public class REProperties {
-    public static final EnumProperty<SelectorOrientation> SELECTOR_ORIENTATION = EnumProperty.create("selector_orientation", SelectorOrientation.class);
-    public static final IntegerProperty RESISTANCE_1_4 = IntegerProperty.create("resistance", (int)1, (int)4);
-    public static final BooleanProperty CURRENTLY_ROTATING = BooleanProperty.create("currently_rotating");
+public class MotorBlockEntity extends BlockEntity implements TickableBlockEntity {
+    private BlockPos posOfFinalBlock;
+    private int rotationalVelocity;
+    private float angle;
 
-    public static void init() {
+    public MotorBlockEntity(BlockPos pos, BlockState state) {
+        super(REBlockEntityTypes.MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
-}
 
+    @Override
+    public void tick() {
+        
+    }
+
+
+}
