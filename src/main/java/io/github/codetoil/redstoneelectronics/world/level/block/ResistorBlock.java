@@ -56,7 +56,7 @@ extends DiodeBlock {
     }
 
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
-        if (!player.abilities.mayBuild) {
+        if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
         world.setBlock(pos, state.cycle(REProperties.RESISTANCE_1_4), 3);

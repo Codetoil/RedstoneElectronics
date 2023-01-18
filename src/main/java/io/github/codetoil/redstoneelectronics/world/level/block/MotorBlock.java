@@ -60,16 +60,5 @@ extends DirectionalBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
     }
-
-    @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return super.hasBlockEntity(state);
-    }
-
-    @Override
-    @Nullable
-    public BlockEntity createBlockEntity(BlockState state, BlockGetter world) {
-        return super.createBlockEntity(state, world);
-    }
 }
 

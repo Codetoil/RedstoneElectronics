@@ -37,7 +37,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class RedstoneRotaryDistributorBlock
-extends DiodeBlockBlock {
+extends DiodeBlock {
     public RedstoneRotaryDistributorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
@@ -82,8 +82,8 @@ extends DiodeBlockBlock {
         return Math.max(this.getInputSignal((World)worldIn, pos, state) - 1, 0);
     }
 
-    public ActionResultType use(BlockState state, Level world, BlockPos pos, PlayerEntity player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
-        if (!player.abilities.mayBuild) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Entity player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
+        if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
         world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);

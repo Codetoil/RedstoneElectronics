@@ -22,6 +22,7 @@ import io.github.codetoil.redstoneelectronics.world.level.block.state.properties
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 import java.util.EnumSet;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,7 +53,7 @@ extends DiodeBlock {
     }
 
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
-        if (!player.abilities.mayBuild) {
+        if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
         world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
