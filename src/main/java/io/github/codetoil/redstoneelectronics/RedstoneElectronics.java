@@ -41,7 +41,7 @@ public class RedstoneElectronics {
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData)
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
         // MinecraftForge.EVENT_BUS.register(this);
         REProperties.init();
         REBlocks.init();
@@ -50,7 +50,7 @@ public class RedstoneElectronics {
     }
 
     private void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator()
+        DataGenerator gen = event.getGenerator();
         if (event.includeReports())
         {
             gen.addProvider(new BlockListReport(gen));
