@@ -25,9 +25,16 @@ import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEn
 
 import java.util.stream.Collectors;
 
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.info.BlockListReport;
+import net.minecraft.data.info.CommandsReport;
+import net.minecraft.data.info.WorldgenRegistryDumpReport;
+import net.minecraft.data.info.RegistryDumpReport;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
