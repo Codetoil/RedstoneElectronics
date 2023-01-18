@@ -24,6 +24,7 @@ import io.github.codetoil.redstoneelectronics.world.level.block.state.properties
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import java.util.stream.Collectors;
+import java.io.IOException;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.info.BlockListReport;
