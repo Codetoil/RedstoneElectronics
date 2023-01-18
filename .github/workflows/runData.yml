@@ -32,7 +32,7 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 1000
-          max_attempts: 3
+          max_attempts: 10
           retry_on: error
           command: ./gradlew prepareRunData
       - name: run
