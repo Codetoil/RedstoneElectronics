@@ -62,8 +62,6 @@ public class RedstoneElectronics {
         if (event.includeReports())
         {
             gen.addProvider(new BlockListReport(gen));
-            gen.addProvider(new CommandsReport(gen));
-            gen.addProvider(new WorldgenRegistryDumpReport(gen));
             gen.addProvider(new RegistryDumpReport(gen));
         }
     }
