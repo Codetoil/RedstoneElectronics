@@ -33,3 +33,9 @@ jobs:
       - name: run
         continue-on-error: true
         run: ./gradlew runData --no-daemon
+      - name: capture build artifacts
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
+        uses: actions/upload-artifact@v3
+        with:
+          name: Reports
+          path: run/reports
