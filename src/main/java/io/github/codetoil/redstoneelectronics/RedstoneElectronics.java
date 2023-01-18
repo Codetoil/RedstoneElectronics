@@ -59,7 +59,6 @@ public class RedstoneElectronics {
 
     private void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
-        logger.info(gen.getOutputFolder());
         if (event.includeReports())
         {
             gen.addProvider(new BlockListReport(gen));
