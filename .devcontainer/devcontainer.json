@@ -1,6 +1,5 @@
 {
   "image": "mcr.microsoft.com/devcontainers/java:17",
-  // "runArgs": ["--gpus", "all"],
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "none",
@@ -17,10 +16,6 @@
   "forwardPorts": [6080],
   "containerEnv": {
     "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current"
-  },
-  "customizations": {
-    "vscode": {"extensions": [
-		]}
   },
   "postStartCommand": "sudo ./mesa_install.sh"
 }
