@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(value="redstoneelectronics")
 public class RedstoneElectronics {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
     public static final String MODID = "redstoneelectronics";
 
     public RedstoneElectronics() {
@@ -65,7 +65,12 @@ public class RedstoneElectronics {
             gen.addProvider(new WorldgenRegistryDumpReport(gen));
             gen.addProvider(new RegistryDumpReport(gen));
         }
-        gen.run();
+        try {
+            gen.run();
+        } catch (IOException e)
+        {
+            logger.error(e);
+        }
     }
 }
 
