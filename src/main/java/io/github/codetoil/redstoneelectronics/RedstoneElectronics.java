@@ -41,11 +41,23 @@ public class RedstoneElectronics {
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData)
         // MinecraftForge.EVENT_BUS.register(this);
         REProperties.init();
         REBlocks.init();
         REItems.init();
         REBlockEntityTypes.init();
+    }
+
+    private void gatherData(GatherDataEvent event) {
+        DataGenerator gen = event.getGenerator()
+        if (event.includeReports())
+        {
+            gen.addProvider(new BlockListReport(gen));
+            gen.addProvider(new CommandsReport(gen));
+            gen.addProvider(new WorldgenRegistryDumpReport(gen));
+            gen.addProvider(new RegistryDumpReport(gen));
+        }
     }
 }
 
