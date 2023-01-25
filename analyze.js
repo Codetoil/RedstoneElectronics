@@ -11,7 +11,7 @@ let blockJson = JSON.parse(blocksRaw);
 
 let blockNames = Object.getOwnPropertyNames(blockJson).map(key => blockJson[key]);
 
-for (blockName in blocksToLookFor)
+for (let blockName in blocksToLookFor)
 {
     if (!blockNames.includes(blockName))
     {
