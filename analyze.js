@@ -14,6 +14,7 @@ let blockKeys = Object.keys(blockJson).map(key => blockJson[key]);
 if (!blocksToLookFor.every((blockName) => blockKeys.includes(blockName)))
 {
     console.error("Error: not all blocks found");
+    console.debug(blockJson);
     console.debug(blockKeys);
     console.debug(blocksToLookFor);
     process.exit(1);
