@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[40,41)"
-license="All rights reserved"
+license="GNU General Public License v3.0 or later"
 
 [[mods]]
     modId="redstoneelectronics"
