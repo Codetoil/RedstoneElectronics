@@ -9,25 +9,23 @@ let blocksToLookFor = ["redstoneelectronics:redstone_resistor", "redstoneelectro
 let blocksRaw = fs.readFileSync('src/generated/resources/reports/blocks.json');
 let blockJson = JSON.parse(blocksRaw);
 
-let blockKeys = Object.keys(blockJson).map(key => blockJson[key]);
+let blockNames = Object.getOwnPropertyNames(blockJson).map(key => blockJson[key]);
 
-if (!blocksToLookFor.every((blockName) => blockKeys.includes(blockName)))
+for (blockName in blocksToLookFor)
 {
-    console.error("Error: not all blocks found");
-    console.debug(blockJson);
-    console.debug(blockKeys);
-    console.debug(blocksToLookFor);
-    process.exit(1);
-}
-let blockValues = blocksToLookFor.map((blockName) => blockKeys[blockName]);
+    if (!blockNames.includes(blockName))
+    {
+        console.error("Error: block not in registry: %s", blockName);
+        process.exit(1);
+    }
+    let block = blockNames[blockName];
 
-if (!blockValues.every((block) => properties in block))
-{
-    console.error("Error: not all blocks have properties.");
-    process.exit(2);
+    if (!(properties in block))
+    {
+        console.error("Error: block %s has no properties.", blockName);
+        process.exit(2);
+    }
 }
-
-let blockProperties = blockValues.map((block) => block.properties);
 
 let registriesraw = fs.readFileSync('src/generated/resources/reports/registries.json');
 
