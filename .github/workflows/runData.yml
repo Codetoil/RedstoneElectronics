@@ -32,6 +32,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Setup Yarn CI
+        run: yarn install --frozen-lockfile
       - name: Run Data Generator Preperation
         uses: nick-fields/retry@v2
         with:
@@ -43,7 +45,7 @@ jobs:
         continue-on-error: true
         run: ./gradlew runData
       - name: Run Node Tester
-        run: yarn start
+        run: yarn test
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3

@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "description": "Test script for Redstone Electronics",
     "scripts": {
-      "start": "nodejs analyze.js",
+      "test": "nodejs analyze.js",
       "build": "echo This test script is static. The mod itself is built using gradle."
     },
     "repository": {
