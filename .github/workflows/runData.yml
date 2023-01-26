@@ -34,6 +34,13 @@ jobs:
           node-version: 18
       - name: Setup Yarn CI
         run: yarn install --frozen-lockfile
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: Gradle Caches
       - name: Run Data Generator Preperation
         uses: nick-fields/retry@v2
         with:
@@ -41,12 +48,6 @@ jobs:
           max_attempts: 10
           retry_on: error
           command: ./gradlew prepareRunData
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
       - name: Run Data Generation
         continue-on-error: true
         run: ./gradlew runData
