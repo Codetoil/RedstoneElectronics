@@ -43,7 +43,7 @@ jobs:
         continue-on-error: true
         run: ./gradlew runData
       - name: Run Node Tester
-        run: node analyze.js
+        run: yarn start
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
