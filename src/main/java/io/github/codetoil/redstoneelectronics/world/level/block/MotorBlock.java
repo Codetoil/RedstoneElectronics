@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
- package io.github.codetoil.redstoneelectronics.world.level.block;
+package io.github.codetoil.redstoneelectronics.world.level.block;
 
 import javax.annotation.Nullable;
 
@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
@@ -36,7 +37,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 public class MotorBlock
-extends DirectionalBlock {
+extends DirectionalBlock implements EntityBlock {
     public MotorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
@@ -45,20 +46,35 @@ extends DirectionalBlock {
         .setValue(REProperties.CURRENTLY_ROTATING, Boolean.FALSE));
     }
 
+    @Override
     public BlockState rotate(BlockState state, Rotation rotate) {
         return state.setValue(FACING, rotate.rotate(state.getValue(FACING)));
     }
 
+    @Override
     public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
         return super.rotate(state, world, pos, direction);
     }
 
+    @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
+    }
+
+    @Override
+    public MotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new MotorBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return type == REBlockEntityTypes.MOTOR_TYLE_ENTITY_TYPE.get() ? MotorBlockEntity::tick : null;
     }
 }
 

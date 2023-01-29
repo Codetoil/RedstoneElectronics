@@ -18,17 +18,32 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block.entity;
 
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties;
 
 public class MotorBlockEntity extends BlockEntity {
-    private BlockPos posOfFinalBlock;
-    private int rotationalVelocity;
-    private float angle;
+    private BlockPos posOfRotatingBlock;
+    private SelectorOrientation goalOrientation;
+    private float progress;
 
     public MotorBlockEntity(BlockPos pos, BlockState state) {
         super(REBlockEntityTypes.MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 
+    protected void saveAdditional(CompoundTag tag) {
+
+    }
+
+    void load(CompoundTag tag) {
+
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState state, MotorBlockEntity blockEntity) {
+        
+    }
 }
