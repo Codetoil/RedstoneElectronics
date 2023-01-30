@@ -38,7 +38,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
     private float progressO;
     private long lastTicked;
 
-    public MotorBlockEntity(BlockPos pos, BlockState state) {
+    public ServoMotorBlockEntity(BlockPos pos, BlockState state) {
         super(REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 

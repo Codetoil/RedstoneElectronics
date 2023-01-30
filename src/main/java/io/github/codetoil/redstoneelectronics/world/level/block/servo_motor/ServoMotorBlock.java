@@ -41,7 +41,7 @@ import net.minecraft.core.BlockPos;
 
 public class ServoMotorBlock
 extends DirectionalBlock implements EntityBlock {
-    public MotorBlock(BlockBehaviour.Properties builder) {
+    public ServoMotorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)

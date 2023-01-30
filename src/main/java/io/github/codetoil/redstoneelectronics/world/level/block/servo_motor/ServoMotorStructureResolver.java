@@ -27,14 +27,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 
-public class MotorStructureResolver {
+public class ServoMotorStructureResolver {
     private final Level level;
     private final BlockPos startPos;
     private final Direction.Axis axis;
     private final SelectorOrientation goalOrientation;
     private final List<BlockPos> toRotate = Lists.newArrayList();
 
-    public MotorStructureResolver(Level level, BlockPos startPos, Direction.Axis axis, SelectorOrientation goalOrientation) {
+    public ServoMotorStructureResolver(Level level, BlockPos startPos, Direction.Axis axis, SelectorOrientation goalOrientation) {
         this.level = level;
         this.startPos = startPos;
         this.axis = axis;
