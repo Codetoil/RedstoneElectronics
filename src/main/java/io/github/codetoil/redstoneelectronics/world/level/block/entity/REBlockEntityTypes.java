@@ -26,12 +26,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class REBlockEntityTypes {
     private static final DeferredRegister<BlockEntityType<?>> RE_BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, RedstoneElectronics.MODID);
 
-    public static final RegistryObject<BlockEntityType<ServoMotorBlockEntity>> SERVO_MOTOR_BLOCK_ENTITY_TYPE = RE_BLOCK_ENTITIES.register("servo_motor_block_entity", () -> BlockEntityType.Builder.of(REBlocks.SERVO_MOTOR_BLOCK.get()::newBlockEntity, REBlocks.SERVO_MOTOR_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ServoMotorBlockEntity>> SERVO_MOTOR_BLOCK_ENTITY_TYPE = RE_BLOCK_ENTITIES.register("servo_motor_block_entity", () -> BlockEntityType.Builder.of(((EntityBlock) REBlocks.SERVO_MOTOR_BLOCK.get())::newBlockEntity, REBlocks.SERVO_MOTOR_BLOCK.get()).build(null));
 
     public static void init() {
         RE_BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
