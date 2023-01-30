@@ -4,7 +4,7 @@ license="GNU General Public License v3.0 or later"
 
 [[mods]]
     modId="redstoneelectronics"
-    version="0.2.0"
+    version="0.2.0+prealpha.1"
     displayName="Redstone Electronics"
     authors="Codetoil"
     description='''

@@ -19,7 +19,7 @@ const blockDataToLookFor = {
     powered: ["true", "false"],
     selector_orientation: ["left", "front", "right"],
   },
-  "redstoneelectronics:redstone_motor": {
+  "redstoneelectronics:servo_motor": {
     currently_rotating: ["true", "false"],
     facing: ["north", "east", "south", "west", "up", "down"],
     powered: ["true", "false"],
