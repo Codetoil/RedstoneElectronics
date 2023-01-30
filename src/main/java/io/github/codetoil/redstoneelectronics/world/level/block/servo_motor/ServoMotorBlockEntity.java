@@ -20,6 +20,7 @@ package io.github.codetoil.redstoneelectronics.world.level.block.motor;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,8 +28,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.util.Mth;
 
-import io.github.codetoil.redstoneelectronics.world.level.block.REBlockEntityTypes;
-import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REBlockEntityTypes;
+import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 
 public class ServoMotorBlockEntity extends BlockEntity {
     private BlockState rotatedState;
@@ -71,7 +72,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         }
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, MotorBlockEntity blockEntity) {
+    public static void tick(Level level, BlockPos pos, BlockState state, ServoMotorBlockEntity blockEntity) {
         
     }
 

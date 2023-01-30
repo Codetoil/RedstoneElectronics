@@ -21,12 +21,14 @@ package io.github.codetoil.redstoneelectronics.world.level.block;
 import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
+
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -70,7 +72,7 @@ extends DirectionalBlock implements EntityBlock {
     }
 
     @Override
-    public MotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public ServoMotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return null;
     }
 
