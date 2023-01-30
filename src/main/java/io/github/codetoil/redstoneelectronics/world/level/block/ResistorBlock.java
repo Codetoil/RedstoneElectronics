@@ -48,19 +48,19 @@ extends DiodeBlock {
         return 2;
     }
 
-    protected int getOutputSignal(BlockGetter worldIn, BlockPos pos, BlockState state) {
-        if (!(worldIn instanceof Level)) {
+    protected int getOutputSignal(BlockGetter blockGetter, BlockPos pos, BlockState state) {
+        if (!(blockGetter instanceof Level)) {
             return 0;
         }
-        return Math.max(this.getInputSignal((Level) worldIn, pos, state) - state.getValue(REProperties.RESISTANCE_1_4), 0);
+        return Math.max(this.getInputSignal((Level) blockGetter, pos, state) - state.getValue(REProperties.RESISTANCE_1_4), 0);
     }
 
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
         if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
-        world.setBlock(pos, state.cycle(REProperties.RESISTANCE_1_4), 3);
-        return InteractionResult.SUCCESS;
+        level.setBlock(pos, state.cycle(REProperties.RESISTANCE_1_4), 3);
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

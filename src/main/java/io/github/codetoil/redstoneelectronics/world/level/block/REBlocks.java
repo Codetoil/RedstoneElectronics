@@ -27,6 +27,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import io.github.codetoil.redstoneelectronics.world.level.block.servo_motor.ServoMotorBlock;
 
 public class REBlocks {
     private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, RedstoneElectronics.MODID);
@@ -35,7 +36,7 @@ public class REBlocks {
     public static final RegistryObject<Block> RESISTOR_BLOCK = RE_BLOCKS.register("redstone_resistor", () -> new ResistorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_selector", () -> new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_distributer", () -> new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> MOTOR_BLOCK = RE_BLOCKS.register("redstone_motor", () -> new MotorBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(0.5f)));
+    public static final RegistryObject<Block> SERVO_MOTOR_BLOCK = RE_BLOCKS.register("servo_motor", () -> new ServoMotorBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(0.5f)));
     public static final RegistryObject<Block> STICK_BLOCK = MC_BLOCKS.register("stick", () -> new StickBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0f).sound(SoundType.WOOD)));
 
     public static void init() {

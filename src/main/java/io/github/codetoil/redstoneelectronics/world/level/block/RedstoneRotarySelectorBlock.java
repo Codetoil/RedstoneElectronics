@@ -52,56 +52,56 @@ extends DiodeBlock {
         return 2;
     }
 
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
         if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
-        world.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
-        return InteractionResult.SUCCESS;
+        level.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
-    protected int getInputSignal(Level worldIn, BlockPos pos, BlockState state) {
+    protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         direction = state.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(direction);
         BlockPos blockpos = pos.offset(direction.getNormal());
-        int i = worldIn.getSignal(blockpos, direction);
+        int i = level.getSignal(blockpos, direction);
         if (i >= 15) {
             return i;
         }
-        BlockState blockstate = worldIn.getBlockState(blockpos);
+        BlockState blockstate = level.getBlockState(blockpos);
         return Math.max(i, blockstate.getBlock() == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedStoneWireBlock.POWER) : 0);
     }
 
-    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos pos, Direction direction) {
         if (!(blockState.getValue(POWERED)).booleanValue()) {
             return 0;
         }
-        return blockState.getValue(FACING) == side ? this.getOutputSignal(blockAccess, pos, blockState) : 0;
+        return blockState.getValue(FACING) == direction ? this.getOutputSignal(blockGetter, pos, blockState) : 0;
     }
 
-    protected void updateNeighborsInFront(Level worldIn, BlockPos pos, BlockState state) {
+    protected void updateNeighborsInFront(Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         BlockPos blockpos1 = pos.offset(direction.getOpposite().getNormal());
         BlockPos blockpos2 = pos.offset(direction.getClockWise().getNormal());
         BlockPos blockpos3 = pos.offset(direction.getCounterClockWise().getNormal());
-        if (ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify(worldIn, pos, worldIn.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
+        if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+         || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
-        worldIn.neighborChanged(blockpos1, this, pos);
-        worldIn.updateNeighborsAtExceptFromFacing(blockpos1, this, direction);
-        worldIn.neighborChanged(blockpos2, this, pos);
-        worldIn.updateNeighborsAtExceptFromFacing(blockpos2, this, direction);
-        worldIn.neighborChanged(blockpos3, this, pos);
-        worldIn.updateNeighborsAtExceptFromFacing(blockpos3, this, direction);
+        level.neighborChanged(blockpos1, this, pos);
+        level.updateNeighborsAtExceptFromFacing(blockpos1, this, direction);
+        level.neighborChanged(blockpos2, this, pos);
+        level.updateNeighborsAtExceptFromFacing(blockpos2, this, direction);
+        level.neighborChanged(blockpos3, this, pos);
+        level.updateNeighborsAtExceptFromFacing(blockpos3, this, direction);
     }
 
-    protected int getOutputSignal(BlockGetter worldIn, BlockPos pos, BlockState state) {
-        if (!(worldIn instanceof Level)) {
+    protected int getOutputSignal(BlockGetter blockGetter, BlockPos pos, BlockState state) {
+        if (!(blockGetter instanceof Level)) {
             return 0;
         }
-        return Math.max(this.getInputSignal((Level) worldIn, pos, state) - 1, 0);
+        return Math.max(this.getInputSignal((Level) blockGetter, pos, state) - 1, 0);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
