@@ -79,7 +79,7 @@ extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == REBlockEntityTypes.MOTOR_TYLE_ENTITY_TYPE.get() ? ServoMotorBlockEntity::tick : null;
+        return type == REBlockEntityTypes.SERVO_MOTOR_TYLE_ENTITY_TYPE.get() ? ServoMotorBlockEntity::tick : null;
     }
 }
 

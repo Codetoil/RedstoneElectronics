@@ -51,7 +51,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         tag.putString("goal", this.goalOrientation.getSerializedName());
     }
 
-    void load(CompoundTag tag) {
+    public void load(CompoundTag tag) {
         super.load(tag);
         this.rotatedState = NbtUtils.readBlockState(tag.getCompound("blockState"));
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
