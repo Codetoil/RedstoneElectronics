@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronics.world.level.block.motor;
+package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.core.Direction;

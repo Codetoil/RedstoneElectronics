@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.codetoil.redstoneelectronics.world.level.block;
+package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 
 import javax.annotation.Nullable;
 
