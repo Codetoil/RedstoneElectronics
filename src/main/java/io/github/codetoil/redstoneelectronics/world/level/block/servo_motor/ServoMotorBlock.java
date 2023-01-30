@@ -74,7 +74,7 @@ extends DirectionalBlock implements EntityBlock {
 
     @Override
     public ServoMotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new ServoMotorBlockEntity(pos, state);
     }
 
     @Nullable
