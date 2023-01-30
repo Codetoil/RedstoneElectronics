@@ -20,6 +20,7 @@ package io.github.codetoil.redstoneelectronics.world.level.block.entity;
 
 import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.REBlocks;
+import io.github.codetoil.redstoneelectronics.world.level.block.servo_motor.ServoMotorBlock;
 import io.github.codetoil.redstoneelectronics.world.level.block.servo_motor.ServoMotorBlockEntity;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
