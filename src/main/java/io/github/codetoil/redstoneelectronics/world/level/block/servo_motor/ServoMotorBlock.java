@@ -21,6 +21,7 @@ package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
+import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -79,7 +80,7 @@ extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == REBlockEntityTypes.SERVO_MOTOR_TYLE_ENTITY_TYPE.get() ? ServoMotorBlockEntity::tick : null;
+        return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? ServoMotorBlockEntity::tick : null;
     }
 }
 
