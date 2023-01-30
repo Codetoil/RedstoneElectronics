@@ -80,7 +80,13 @@ extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? ((BlockEntityTicker<T>) ((BlockEntityTicker) ServoMotorBlockEntity::tick)) : null;
+        return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? CastBlockEntityTicker::tick : null;
+    }
+
+    private class CastBlockEntityTicker {
+        public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+            ServoMotorBlockEntity.tick(level, pos, state, (ServoMotorBlockEntity) blockEntity);
+        }
     }
 }
 
