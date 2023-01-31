@@ -94,7 +94,7 @@ minecraft {
             mods {
                 redstoneelectronics {
                     source sourceSets.main
-                    source sourceSets.gameTestMain 
+                    source sourceSets.test
                 }
             }
         }
