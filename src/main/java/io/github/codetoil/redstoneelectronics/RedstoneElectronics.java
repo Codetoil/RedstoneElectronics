@@ -18,6 +18,7 @@
 
 package io.github.codetoil.redstoneelectronics;
 
+import io.github.codetoil.redstoneelectronics.gametest.REGameTests;
 import io.github.codetoil.redstoneelectronics.world.level.block.REBlocks;
 import io.github.codetoil.redstoneelectronics.world.item.REItems;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
@@ -60,7 +61,7 @@ public class RedstoneElectronics {
     }
 
     private void registerTests(RegisterGameTestsEvent event) {
-        event.register(ExampleGameTests.class);
+        event.register(REGameTests.class);
     }
 
     private void gatherData(GatherDataEvent event) {
