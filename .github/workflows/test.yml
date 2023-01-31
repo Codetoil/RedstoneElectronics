@@ -49,7 +49,6 @@ jobs:
           retry_on: error
           command: ./gradlew prepareRunData
       - name: Run Data Generation
-        continue-on-error: true
         run: ./gradlew runData
       - name: Run Testing Script
         run: yarn test
