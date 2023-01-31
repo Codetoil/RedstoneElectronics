@@ -28,10 +28,6 @@ jobs:
       - name: Make Gradle Wrapper Executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
       - name: Setup Yarn CI
         run: yarn install --frozen-lockfile
       - name: Cache Gradle packages
@@ -41,24 +37,18 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: Gradle Caches
-      - name: Run Data Generator Preperation
+      - name: Run Test Preperation
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 1000
           max_attempts: 10
           retry_on: error
-          command: ./gradlew prepareRunData
-      - name: Run Data Generation
-        run: ./gradlew runData
-      - name: Run Testing Script
-        run: yarn test
-      - name: Run Minecraft Test Server
+          command: ./gradlew prepareRunTestServer
+      - name: Run Test Suite
         run: ./gradlew runGameTestServer
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
         with:
           name: Reports
-          path: |
-            src/generated/resources
-            gametest
+          path: gametest
