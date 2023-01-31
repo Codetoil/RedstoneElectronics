@@ -38,9 +38,9 @@ jobs:
             ~/.gradle/wrapper
           key: Gradle Caches ${{ runner.os }}
       - name: Run Test Preperation
-        run: ./gradlew prepareRunTestServer
+        run: ./gradlew prepareRunTest
       - name: Run Test Suite
-        run: ./gradlew runGameTestServer
+        run: ./gradlew runTest
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
