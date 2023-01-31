@@ -72,7 +72,7 @@ minecraft {
             }
         }
 
-        test {
+        gameTestServer {
             workingDirectory project.file('gametest')
 
             forceExit = false
