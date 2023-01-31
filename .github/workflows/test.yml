@@ -38,12 +38,7 @@ jobs:
             ~/.gradle/wrapper
           key: Gradle Caches
       - name: Run Test Preperation
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 1000
-          max_attempts: 10
-          retry_on: error
-          command: ./gradlew prepareRunTestServer
+        run: ./gradlew prepareRunTestServer
       - name: Run Test Suite
         run: ./gradlew runGameTestServer
       - name: Capture Reports
