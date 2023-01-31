@@ -59,6 +59,8 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
+            forceExit = false
+            
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed.
             // "SCAN": For mods scan.
@@ -80,6 +82,8 @@ minecraft {
 
         gameTestServer {
             workingDirectory project.file('gametest')
+
+            forceExit = false
 
             property 'forge.enabledGameTestNamespaces', 'redstoneelctronics'
 
@@ -106,6 +110,8 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
+            forceExit = false
+
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed.
             // "SCAN": For mods scan.
@@ -127,6 +133,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+
+            forceExit = false
 
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed.
