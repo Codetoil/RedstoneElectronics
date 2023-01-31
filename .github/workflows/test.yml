@@ -13,7 +13,7 @@ jobs:
           17,    # Current LTS version of Java & minimum supported by Minecraft
         ]
         # and run on both Linux and Windows
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
@@ -36,7 +36,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: Gradle Caches
+          key: Gradle Caches ${{ runner.os }}
       - name: Run Test Preperation
         run: ./gradlew prepareRunTestServer
       - name: Run Test Suite
