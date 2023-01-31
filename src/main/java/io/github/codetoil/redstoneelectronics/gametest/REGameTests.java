@@ -1,5 +1,6 @@
 package io.github.codetoil.redstoneelectronics.gametest;
 
+import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
