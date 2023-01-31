@@ -26,14 +26,6 @@ sourceSets {
             srcDir 'src/generated/resources'
         }
     }
-    gameTestMain {
-        java {
-            srcDir 'src/test/java'
-        }
-        resources {
-            srcDir 'src/test/reosurces'
-        }
-    }
 }
 
 minecraft {
@@ -80,7 +72,7 @@ minecraft {
             }
         }
 
-        gameTestServer {
+        test {
             workingDirectory project.file('gametest')
 
             forceExit = false
