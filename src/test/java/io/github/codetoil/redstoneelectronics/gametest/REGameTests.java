@@ -11,7 +11,7 @@ import java.util.List;
 public class REGameTests {
     @GameTest
     public static void blockExistanceTests(GameTestHelper helper) {
-        List.<>of("redstoneelectronics:redstone_resistor",
+        List.<String>of("redstoneelectronics:redstone_resistor",
                 "redstoneelectronics:redstone_rotary_selector",
                 "redstoneelectronics:redstone_rotary_distributer",
                 "redstoneelectronics:servo_motor",
