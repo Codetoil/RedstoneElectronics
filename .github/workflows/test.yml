@@ -1,8 +1,8 @@
-name: runData
+name: test
 on: [pull_request, push]
 
 jobs:
-  runData:
+  test:
     strategy:
       matrix:
         dist: [
@@ -53,6 +53,8 @@ jobs:
         run: ./gradlew runData
       - name: Run Testing Script
         run: yarn test
+      - name: Run Minecraft Test Server
+        run: ./gradlew runGameTestServer
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
