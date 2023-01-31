@@ -12,13 +12,34 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.2.0+prealpha.1'
+version = '0.2.0+prealpha.2'
 group = 'io.github.codetoil' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'redstoneelectronics'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            srcDir 'src/generated/resources'
+        }
+    }
+    gameTestMain {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/reosurces'
+        }
+    }
+}
+
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
     // Channel:   Version:
@@ -131,26 +152,6 @@ minecraft {
                     source sourceSets.main
                 }
             }
-        }
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-            srcDir 'src/generated/resources'
-        }
-    }
-    gameTestMain {
-        java {
-            srcDir 'src/test/java'
-        }
-        resources {
-            srcDir 'src/test/reosurces'
         }
     }
 }
