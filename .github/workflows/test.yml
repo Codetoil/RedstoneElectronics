@@ -28,8 +28,6 @@ jobs:
       - name: Make Gradle Wrapper Executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
-      - name: Setup Yarn CI
-        run: yarn install --frozen-lockfile
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -37,13 +35,17 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: Gradle Caches ${{ runner.os }}
-      - name: Run Test Preperation
+      - name: Run Test Preperation for Minecraft Server
         run: ./gradlew prepareRunGameTestServer
-      - name: Run Test Suite
+      - name: Run Test Suite for Minecraft Server
         run: ./gradlew runGameTestServer
+      - name: Run Tests
+        run: ./gradlew test
       - name: Capture Reports
         if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
         with:
           name: Reports
-          path: gametest
+          path: |
+            gametest
+            build
