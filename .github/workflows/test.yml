@@ -60,4 +60,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Reports
-          path: src/generated/resources
+          path: |
+            src/generated/resources
+            gametest
