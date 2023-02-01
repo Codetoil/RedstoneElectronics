@@ -72,17 +72,12 @@ jobs:
         ]
         # and run on both Linux and Windows
         os: [ubuntu-latest, windows-latest]
-        isMicrosoftJDKAndJava18:
-          - ${{ github.dist == 'microsoft' && github.java == '18' }}
-        isMicrosoftJDKAndJava19:
-          - ${{ github.dist == 'microsoft' && github.java == '19' }}
+        isMicrosoftJDKAndNotJava17:
+          - ${{ matrix.dist == 'microsoft' && matrix.java != '17' }}
         exclude:
-          - isMicrosoftJDKAndJava18: true
+          - isMicrosoftJDKAndNotJava17: true
             dist: microsoft
-            java: 18
-          - isMicrosoftJDKAndJava19: true
-            dist: microsoft
-            java: 19
+            java: [18, 17]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
