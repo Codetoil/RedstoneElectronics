@@ -9,8 +9,7 @@ jobs:
           temurin,
           zulu,
           liberica,
-          microsoft,
-          corretto
+          microsoft
         ]
         # Use these Java versions
         java: [
@@ -20,7 +19,12 @@ jobs:
         ]
         # and run on both Linux and Windows
         os: [ubuntu-latest, windows-latest]
-      fail-fast: false
+        isMicrosoftJDKAndNotJava17:
+          - ${{ github.dist == 'microsoft' && github.java != '17' && github.ref == 'refs/heads/main' }}
+        exclude:
+          - isMicrosoftJDKAndNotJava17: true
+            dist: microsoft
+            java: [18, 19]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
