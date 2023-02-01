@@ -36,13 +36,17 @@ jobs:
             ~/.gradle/wrapper
           key: Gradle Caches ${{ runner.os }}
       - name: Run Test Suite
-        continue-on-error: true
         run: ./gradlew test
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
       - name: Capture Artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '17' && matrix.dist == 'temurin' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts
+          name: Test Results ${{ runner.os }} ${{ matrix.dist }} java ${{matrix.java}}
           path: |
             gametest
             build
+
