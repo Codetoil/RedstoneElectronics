@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.2.0+prealpha.2'
+version = '0.2.0+prealpha.2+' + System.getenv("COMMIT_SHA")
 group = 'io.github.codetoil' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'redstoneelectronics'
 
