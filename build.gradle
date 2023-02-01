@@ -77,7 +77,7 @@ minecraft {
 
             forceExit = false
 
-            property 'forge.enabledGameTestNamespaces', 'redstoneelctronics'
+            property 'forge.enabledGameTestNamespaces', 'redstoneelectronics'
 
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed.
