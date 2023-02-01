@@ -18,7 +18,6 @@
 
 package io.github.codetoil.redstoneelectronics;
 
-import io.github.codetoil.redstoneelectronics.gametest.REGameTests;
 import io.github.codetoil.redstoneelectronics.world.level.block.REBlocks;
 import io.github.codetoil.redstoneelectronics.world.item.REItems;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
@@ -37,7 +36,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.event.RegisterGameTestsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,17 +49,12 @@ public class RedstoneElectronics {
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerTests);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
         // MinecraftForge.EVENT_BUS.register(this);
         REProperties.init();
         REBlocks.init();
         REItems.init();
         REBlockEntityTypes.init();
-    }
-
-    private void registerTests(RegisterGameTestsEvent event) {
-        event.register(REGameTests.class);
     }
 
     private void gatherData(GatherDataEvent event) {

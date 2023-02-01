@@ -8,8 +8,9 @@ import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 
+@GameTestHolder(RedstonestoneElectronics.MODID)
 public class REGameTests {
-    @GameTest(templateNamespace = RedstoneElectronics.MODID)
+    @GameTest
     public static void blockExistanceTests(GameTestHelper helper) {
         List.<String>of("redstoneelectronics:redstone_resistor",
                 "redstoneelectronics:redstone_rotary_selector",
