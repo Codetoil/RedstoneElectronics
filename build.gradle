@@ -219,6 +219,10 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
+            groupId group
+            artifactId archivesBaseName
+            version version
+
             from(components.java)
         }
     }
