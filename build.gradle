@@ -178,6 +178,10 @@ dependencies {
 
 }
 
+test {
+    useJUnitPlatform()
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
