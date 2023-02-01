@@ -73,7 +73,7 @@ jobs:
         # and run on both Linux and Windows
         os: [ubuntu-latest, windows-latest]
         isMicrosoftJDKAndNotJava17:
-          - ${{ matrix.dist == 'microsoft' && matrix.java != '17' }}
+          - ${{ matrix.dist == 'microsoft' && matrix.java !== '17' }}
         exclude:
           - isMicrosoftJDKAndNotJava17: true
             dist: microsoft
