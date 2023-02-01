@@ -8,7 +8,7 @@ import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 
-@GameTestHolder(RedstonestoneElectronics.MODID)
+@GameTestHolder(RedstoneElectronics.MODID)
 public class REGameTests {
     @GameTest
     public static void blockExistanceTests(GameTestHelper helper) {
