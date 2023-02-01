@@ -20,6 +20,7 @@ jobs:
         ]
         # and run on both Linux and Windows
         os: [ubuntu-latest, windows-latest]
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
