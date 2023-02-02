@@ -58,7 +58,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+        return new CompoundTag();
     }
 
     public void finalTick() {
