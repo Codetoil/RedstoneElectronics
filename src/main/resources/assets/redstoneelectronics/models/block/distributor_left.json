@@ -4,7 +4,7 @@
   "textures": {
     "particle": "minecraft:block/comparator",
     "unlit": "minecraft:block/redstone_torch_off",
-    "top": "redstoneelectronics:block/distributor_left",
+    "top": "redstoneelectronics:block/distributor",
     "slab": "minecraft:block/smooth_stone"
   },
   "display": {

@@ -3,8 +3,8 @@
   "ambientocclusion": false,
   "textures": {
     "particle": "minecraft:block/comparator",
-    "unlit": "minecraft:block/redstone_torch",
-    "top": "redstoneelectronics:block/distributor_left_on",
+    "lit": "minecraft:block/redstone_torch",
+    "top": "redstoneelectronics:block/distributor",
     "slab": "minecraft:block/smooth_stone"
   },
   "display": {
@@ -74,11 +74,11 @@
       "from": [7, 2, 11],
       "to": [9, 7, 13],
       "faces": {
-        "north": { "texture": "#unlit", "uv": [7, 6, 9, 11] },
-        "east": { "texture": "#unlit", "uv": [7, 6, 9, 11] },
-        "south": { "texture": "#unlit", "uv": [7, 6, 9, 11] },
-        "west": { "texture": "#unlit", "uv": [7, 6, 9, 11] },
-        "up": { "texture": "#unlit", "uv": [7, 6, 9, 8] }
+        "north": { "texture": "#lit", "uv": [7, 6, 9, 11] },
+        "east": { "texture": "#lit", "uv": [7, 6, 9, 11] },
+        "south": { "texture": "#lit", "uv": [7, 6, 9, 11] },
+        "west": { "texture": "#lit", "uv": [7, 6, 9, 11] },
+        "up": { "texture": "#lit", "uv": [7, 6, 9, 8] }
       }
     },
     {
@@ -86,11 +86,11 @@
       "from": [2, 2, 5],
       "to": [4, 6, 7],
       "faces": {
-        "north": { "texture": "#unlit", "uv": [7, 6, 9, 10] },
-        "east": { "texture": "#unlit", "uv": [7, 6, 9, 10] },
-        "south": { "texture": "#unlit", "uv": [7, 6, 9, 10] },
-        "west": { "texture": "#unlit", "uv": [7, 6, 9, 10] },
-        "up": { "texture": "#unlit", "uv": [7, 6, 9, 8] }
+        "north": { "texture": "#lit", "uv": [7, 6, 9, 10] },
+        "east": { "texture": "#lit", "uv": [7, 6, 9, 10] },
+        "south": { "texture": "#lit", "uv": [7, 6, 9, 10] },
+        "west": { "texture": "#lit", "uv": [7, 6, 9, 10] },
+        "up": { "texture": "#lit", "uv": [7, 6, 9, 8] }
       }
     }
   ]

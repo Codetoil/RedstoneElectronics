@@ -3,9 +3,9 @@
   "ambientocclusion": false,
   "textures": {
     "unlit": "block/redstone_torch_off",
-    "top": "redstoneelectronics:block/distributor_front",
+    "top": "redstoneelectronics:block/distributor",
     "slab": "block/smooth_stone",
-    "particle": "block/oak_planks",
+    "particle": "minecraft:block/comparator",
     "oak_planks": "block/oak_planks"
   },
   "elements": [
