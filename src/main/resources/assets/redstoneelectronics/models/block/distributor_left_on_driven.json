@@ -5,7 +5,7 @@
     "lit": "block/redstone_torch",
     "top": "redstoneelectronics:block/distributor",
     "slab": "block/smooth_stone",
-    "particle": "minecraft:block/comparator",
+    "particle": "redstoneelectronics:block/distributor",
     "oak_planks": "block/oak_planks"
   },
   "elements": [

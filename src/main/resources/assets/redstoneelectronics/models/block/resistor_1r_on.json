@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "redstoneelectronics:block/resistor_on",
+    "particle": "redstoneelectronics:block/resistor",
     "slab": "block/smooth_stone",
-    "top": "redstoneelectronics:block/resistor_on",
+    "top": "redstoneelectronics:block/resistor",
     "lit": "block/redstone_torch"
   },
   "elements": [

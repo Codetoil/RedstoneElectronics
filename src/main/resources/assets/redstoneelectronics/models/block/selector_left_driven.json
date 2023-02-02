@@ -5,7 +5,7 @@
     "unlit": "block/redstone_torch_off",
     "top": "redstoneelectronics:block/selector",
     "slab": "block/smooth_stone",
-    "particle": "block/oak_planks",
+    "particle": "redstoneelectronics:block/selector",
     "oak_planks": "block/oak_planks"
   },
   "elements": [

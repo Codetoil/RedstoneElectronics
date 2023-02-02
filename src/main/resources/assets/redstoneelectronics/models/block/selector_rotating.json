@@ -5,7 +5,7 @@
     "unlit": "block/redstone_torch_off",
     "top": "redstoneelectronics:block/selector",
     "slab": "block/smooth_stone",
-    "particle": "minecraft:block/comparator"
+    "particle": "redstoneelectronics:block/selector"
   },
   "elements": [
     {
