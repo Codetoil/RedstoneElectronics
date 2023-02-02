@@ -33,7 +33,7 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(value="redstoneelectronics")
+@Mod(value=RedstoneElectronics.MODID)
 public class RedstoneElectronics {
     @SuppressWarnings("unused")
     private static final Logger logger = LogManager.getLogger();

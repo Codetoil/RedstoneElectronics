@@ -1,5 +1,5 @@
 {
-  "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc), but modified by Codetoil",
+  "credit": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc), but modified by Codetoil",
   "textures": {
     "particle": "minecraft:block/oak_planks",
     "oak_planks": "minecraft:block/oak_planks"
