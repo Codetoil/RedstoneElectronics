@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,8 @@ public enum SelectorOrientation implements StringRepresentable
 {
     LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
     FRONT(a -> a, a -> a, "front"),
-    RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right");
+    RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right"),
+    ROTATING(a -> a, a -> a, "rotating");
 
     private final Function<Direction, Direction> onApply;
     private final String name;

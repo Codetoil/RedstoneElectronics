@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -23,16 +23,10 @@ import io.github.codetoil.redstoneelectronics.world.item.REItems;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
-import java.util.stream.Collectors;
-import java.io.IOException;
-
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.info.BlockListReport;
-import net.minecraft.data.info.CommandsReport;
-import net.minecraft.data.info.WorldgenRegistryDumpReport;
 import net.minecraft.data.info.RegistryDumpReport;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -41,6 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(value="redstoneelectronics")
 public class RedstoneElectronics {
+    @SuppressWarnings("unused")
     private static final Logger logger = LogManager.getLogger();
     public static final String MODID = "redstoneelectronics";
 

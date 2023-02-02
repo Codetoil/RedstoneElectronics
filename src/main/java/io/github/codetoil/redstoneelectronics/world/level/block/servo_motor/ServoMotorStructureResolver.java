@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@ package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,33 +29,42 @@ import io.github.codetoil.redstoneelectronics.world.level.block.state.properties
 
 public class ServoMotorStructureResolver {
     private final Level level;
-    private final BlockPos startPos;
-    private final Direction.Axis axis;
-    private final SelectorOrientation goalOrientation;
+    private final BlockPos motorPos;
+    private final Direction direction;
+    private final SelectorOrientation goal;
     private final List<BlockPos> toRotate = Lists.newArrayList();
 
-    public ServoMotorStructureResolver(Level level, BlockPos startPos, Direction.Axis axis, SelectorOrientation goalOrientation) {
+    public ServoMotorStructureResolver(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goal) {
         this.level = level;
-        this.startPos = startPos;
-        this.axis = axis;
-        this.goalOrientation = goalOrientation;
+        this.motorPos = motorPos;
+        this.direction = direction;
+        this.goal = goal;
     }
 
     public boolean resolve() {
         this.toRotate.clear();
-        if (!this.level.getBlockState(this.startPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
+        BlockPos startPos = this.motorPos.relative(this.direction);
+        if (!this.level.getBlockState(startPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
         { // TODO Add stick rotation.
             return false;
         }
-        this.toRotate.add(this.startPos);
+        this.toRotate.add(startPos);
         return true;
     }
 
-    public Direction.Axis getRotationAxis() {
-        return this.axis;
+    public Direction getMotorFacingDirection() {
+        return this.direction;
     }
 
-    public List<BlockPos> getToRotate() {
+    public Direction.Axis getMotorAxis() {
+        return this.direction.getAxis();
+    }
+
+    public SelectorOrientation getGoal() {
+        return this.goal;
+    }
+
+    public List<BlockPos> getBlocksToRotate() {
         return this.toRotate;
     }
 }

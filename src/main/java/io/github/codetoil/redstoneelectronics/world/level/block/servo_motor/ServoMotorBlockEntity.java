@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -23,11 +23,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.util.Mth;
-
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 

@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -43,7 +43,8 @@ extends DiodeBlock {
         this.registerDefaultState(this.stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.FRONT)
-            .setValue(POWERED, Boolean.FALSE));
+            .setValue(POWERED, Boolean.FALSE)
+            .setValue(REProperties.DRIVEN, Boolean.FALSE));
     }
 
     protected int getDelay(BlockState state) {
@@ -91,7 +92,7 @@ extends DiodeBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, REProperties.SELECTOR_ORIENTATION, POWERED);
+        builder.add(FACING, REProperties.SELECTOR_ORIENTATION, POWERED, REProperties.DRIVEN);
     }
 }
 

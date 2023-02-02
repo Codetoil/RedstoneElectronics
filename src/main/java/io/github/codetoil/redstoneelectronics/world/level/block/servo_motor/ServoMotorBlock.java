@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,7 @@ package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
+import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,7 +36,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ extends DirectionalBlock implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
         .setValue(BlockStateProperties.POWERED, Boolean.FALSE)
-        .setValue(REProperties.CURRENTLY_ROTATING, Boolean.FALSE));
+        .setValue(REProperties.SPINNING, Boolean.FALSE));
     }
 
     @Override
@@ -69,12 +69,22 @@ extends DirectionalBlock implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BlockStateProperties.POWERED, REProperties.CURRENTLY_ROTATING);
+        builder.add(FACING, BlockStateProperties.POWERED, REProperties.SPINNING);
     }
 
     @Override
     public ServoMotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ServoMotorBlockEntity(pos, state);
+    }
+
+    private boolean rotateBlocks(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goalOrientation) {
+        ServoMotorStructureResolver servoMotorStructureResolver;
+        if (!(servoMotorStructureResolver = new ServoMotorStructureResolver(level, motorPos, direction, goalOrientation)).resolve())
+        {
+            return false;
+        }
+        
+        return true; // TODO Temporary
     }
 
     @Nullable

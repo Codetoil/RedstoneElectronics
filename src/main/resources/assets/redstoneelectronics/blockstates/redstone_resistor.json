@@ -1,36 +1,124 @@
 {
-    "variants": {
-        "facing=south,powered=false,resistance=1": { "model": "redstoneelectronics:block/resistor_1r" },
-        "facing=west,powered=false,resistance=1": { "model": "redstoneelectronics:block/resistor_1r", "y": 90 },
-        "facing=north,powered=false,resistance=1": { "model": "redstoneelectronics:block/resistor_1r", "y": 180 },
-        "facing=east,powered=false,resistance=1": { "model": "redstoneelectronics:block/resistor_1r", "y": 270 },
-        "facing=south,powered=false,resistance=2": { "model": "redstoneelectronics:block/resistor_2r" },
-        "facing=west,powered=false,resistance=2": { "model": "redstoneelectronics:block/resistor_2r", "y": 90 },
-        "facing=north,powered=false,resistance=2": { "model": "redstoneelectronics:block/resistor_2r", "y": 180 },
-        "facing=east,powered=false,resistance=2": { "model": "redstoneelectronics:block/resistor_2r", "y": 270 },
-        "facing=south,powered=false,resistance=3": { "model": "redstoneelectronics:block/resistor_3r" },
-        "facing=west,powered=false,resistance=3": { "model": "redstoneelectronics:block/resistor_3r", "y": 90 },
-        "facing=north,powered=false,resistance=3": { "model": "redstoneelectronics:block/resistor_3r", "y": 180 },
-        "facing=east,powered=false,resistance=3": { "model": "redstoneelectronics:block/resistor_3r", "y": 270 },
-        "facing=south,powered=false,resistance=4": { "model": "redstoneelectronics:block/resistor_4r" },
-        "facing=west,powered=false,resistance=4": { "model": "redstoneelectronics:block/resistor_4r", "y": 90 },
-        "facing=north,powered=false,resistance=4": { "model": "redstoneelectronics:block/resistor_4r", "y": 180 },
-        "facing=east,powered=false,resistance=4": { "model": "redstoneelectronics:block/resistor_4r", "y": 270 },
-        "facing=south,powered=true,resistance=1": { "model": "redstoneelectronics:block/resistor_1r_on" },
-        "facing=west,powered=true,resistance=1": { "model": "redstoneelectronics:block/resistor_1r_on", "y": 90 },
-        "facing=north,powered=true,resistance=1": { "model": "redstoneelectronics:block/resistor_1r_on", "y": 180 },
-        "facing=east,powered=true,resistance=1": { "model": "redstoneelectronics:block/resistor_1r_on", "y": 270 },
-        "facing=south,powered=true,resistance=2": { "model": "redstoneelectronics:block/resistor_2r_on" },
-        "facing=west,powered=true,resistance=2": { "model": "redstoneelectronics:block/resistor_2r_on", "y": 90 },
-        "facing=north,powered=true,resistance=2": { "model": "redstoneelectronics:block/resistor_2r_on", "y": 180 },
-        "facing=east,powered=true,resistance=2": { "model": "redstoneelectronics:block/resistor_2r_on", "y": 270 },
-        "facing=south,powered=true,resistance=3": { "model": "redstoneelectronics:block/resistor_3r_on" },
-        "facing=west,powered=true,resistance=3": { "model": "redstoneelectronics:block/resistor_3r_on", "y": 90 },
-        "facing=north,powered=true,resistance=3": { "model": "redstoneelectronics:block/resistor_3r_on", "y": 180 },
-        "facing=east,powered=true,resistance=3": { "model": "redstoneelectronics:block/resistor_3r_on", "y": 270 },
-        "facing=south,powered=true,resistance=4": { "model": "redstoneelectronics:block/resistor_4r_on" },
-        "facing=west,powered=true,resistance=4": { "model": "redstoneelectronics:block/resistor_4r_on", "y": 90 },
-        "facing=north,powered=true,resistance=4": { "model": "redstoneelectronics:block/resistor_4r_on", "y": 180 },
-        "facing=east,powered=true,resistance=4": { "model": "redstoneelectronics:block/resistor_4r_on", "y": 270 }
+  "variants": {
+    "facing=south,powered=false,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r"
+    },
+    "facing=west,powered=false,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r",
+      "y": 90
+    },
+    "facing=north,powered=false,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r",
+      "y": 180
+    },
+    "facing=east,powered=false,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r",
+      "y": 270
+    },
+    "facing=south,powered=false,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r"
+    },
+    "facing=west,powered=false,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r",
+      "y": 90
+    },
+    "facing=north,powered=false,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r",
+      "y": 180
+    },
+    "facing=east,powered=false,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r",
+      "y": 270
+    },
+    "facing=south,powered=false,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r"
+    },
+    "facing=west,powered=false,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r",
+      "y": 90
+    },
+    "facing=north,powered=false,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r",
+      "y": 180
+    },
+    "facing=east,powered=false,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r",
+      "y": 270
+    },
+    "facing=south,powered=false,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r"
+    },
+    "facing=west,powered=false,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r",
+      "y": 90
+    },
+    "facing=north,powered=false,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r",
+      "y": 180
+    },
+    "facing=east,powered=false,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r",
+      "y": 270
+    },
+    "facing=south,powered=true,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r_on"
+    },
+    "facing=west,powered=true,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r_on",
+      "y": 90
+    },
+    "facing=north,powered=true,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r_on",
+      "y": 180
+    },
+    "facing=east,powered=true,resistance=1": {
+      "model": "redstoneelectronics:block/resistor_1r_on",
+      "y": 270
+    },
+    "facing=south,powered=true,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r_on"
+    },
+    "facing=west,powered=true,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r_on",
+      "y": 90
+    },
+    "facing=north,powered=true,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r_on",
+      "y": 180
+    },
+    "facing=east,powered=true,resistance=2": {
+      "model": "redstoneelectronics:block/resistor_2r_on",
+      "y": 270
+    },
+    "facing=south,powered=true,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r_on"
+    },
+    "facing=west,powered=true,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r_on",
+      "y": 90
+    },
+    "facing=north,powered=true,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r_on",
+      "y": 180
+    },
+    "facing=east,powered=true,resistance=3": {
+      "model": "redstoneelectronics:block/resistor_3r_on",
+      "y": 270
+    },
+    "facing=south,powered=true,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r_on"
+    },
+    "facing=west,powered=true,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r_on",
+      "y": 90
+    },
+    "facing=north,powered=true,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r_on",
+      "y": 180
+    },
+    "facing=east,powered=true,resistance=4": {
+      "model": "redstoneelectronics:block/resistor_4r_on",
+      "y": 270
     }
+  }
 }

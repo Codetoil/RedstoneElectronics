@@ -1,5 +1,5 @@
 /**
- *  Redstone Electronics is a MC Mod that adds restone components.
+ *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 public class REProperties {
     public static final EnumProperty<SelectorOrientation> SELECTOR_ORIENTATION = EnumProperty.create("selector_orientation", SelectorOrientation.class);
     public static final IntegerProperty RESISTANCE_1_4 = IntegerProperty.create("resistance", 1, 4);
-    public static final BooleanProperty CURRENTLY_ROTATING = BooleanProperty.create("currently_rotating");
+    public static final BooleanProperty SPINNING = BooleanProperty.create("spinning");
+    public static final BooleanProperty DRIVEN = BooleanProperty.create("driven");
 
     public static void init() {
     }

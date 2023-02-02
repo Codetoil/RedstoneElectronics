@@ -1,10 +1,10 @@
 {
-    "variants": {
-        "facing=up": { "model": "block/stick" },
-        "facing=down": { "model": "block/stick", "x": 180 },
-        "facing=east": { "model": "block/stick", "y": 90, "x": 90 },
-        "facing=south": { "model": "block/stick", "y": 180, "x": 90 },
-        "facing=west": { "model": "block/stick", "y": 270, "x": 90 },
-        "facing=north": { "model": "block/stick", "y": 0, "x": 90 }
-    }
+  "variants": {
+    "facing=up": { "model": "block/stick" },
+    "facing=down": { "model": "block/stick", "x": 180 },
+    "facing=east": { "model": "block/stick", "y": 90, "x": 90 },
+    "facing=south": { "model": "block/stick", "y": 180, "x": 90 },
+    "facing=west": { "model": "block/stick", "y": 270, "x": 90 },
+    "facing=north": { "model": "block/stick", "y": 0, "x": 90 }
+  }
 }
