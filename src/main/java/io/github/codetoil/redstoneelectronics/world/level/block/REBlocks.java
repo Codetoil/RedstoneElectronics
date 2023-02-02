@@ -34,8 +34,8 @@ public class REBlocks {
     private static final DeferredRegister<Block> MC_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
 
     public static final RegistryObject<Block> RESISTOR_BLOCK = RE_BLOCKS.register("redstone_resistor", () -> new ResistorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_selector", () -> new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_distributer", () -> new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_selector", () -> new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK = RE_BLOCKS.register("redstone_rotary_distributor", () -> new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> SERVO_MOTOR_BLOCK = RE_BLOCKS.register("servo_motor", () -> new ServoMotorBlock(BlockBehaviour.Properties.of(Material.PISTON).strength(0.5f)));
     public static final RegistryObject<Block> STICK_BLOCK = MC_BLOCKS.register("stick", () -> new StickBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0f).sound(SoundType.WOOD)));
 
