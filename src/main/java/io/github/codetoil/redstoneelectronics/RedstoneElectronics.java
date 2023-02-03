@@ -35,8 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(value=RedstoneElectronics.MODID)
 public class RedstoneElectronics {
-    @SuppressWarnings("unused")
-    private static final Logger logger = LogManager.getLogger();
+    public static final Logger logger = LogManager.getLogger();
     public static final String MODID = "redstoneelectronics";
 
     public RedstoneElectronics() {

@@ -87,7 +87,9 @@ extends DiodeBlock {
         if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }
-        level.setBlock(pos, state.cycle(REProperties.SELECTOR_ORIENTATION), 3);
+        SelectorOrientation current = state.getValue(REProperties.SELECTOR_ORIENTATION);
+        state.setValue(REProperties.SELECTOR_ORIENTATION, current.next(state));
+        level.setBlock(pos, state, 3);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 

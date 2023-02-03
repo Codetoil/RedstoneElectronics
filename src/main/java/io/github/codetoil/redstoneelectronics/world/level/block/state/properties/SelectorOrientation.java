@@ -21,6 +21,7 @@ package io.github.codetoil.redstoneelectronics.world.level.block.state.propertie
 import java.util.function.Function;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.state.BlockState;
 
 public enum SelectorOrientation implements StringRepresentable
 {
@@ -49,6 +50,20 @@ public enum SelectorOrientation implements StringRepresentable
 
     public String getSerializedName() {
         return this.name;
+    }
+    
+    public SelectorOrientation next(BlockState state) {
+        switch (this)
+        {
+            case FRONT:
+                return SelectorOrientation.RIGHT;
+            case LEFT:
+                return SelectorOrientation.FRONT;
+            case RIGHT:
+                return SelectorOrientation.LEFT;
+            default:
+                return this;
+        }
     }
 }
 

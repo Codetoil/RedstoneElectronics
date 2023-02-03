@@ -27,7 +27,6 @@ import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEn
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -48,7 +47,6 @@ extends DirectionalBlock implements EntityBlock {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
-        .setValue(BlockStateProperties.POWERED, Boolean.FALSE)
         .setValue(REProperties.SPINNING, Boolean.FALSE));
     }
 
@@ -69,7 +67,7 @@ extends DirectionalBlock implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BlockStateProperties.POWERED, REProperties.SPINNING);
+        builder.add(FACING, REProperties.SPINNING);
     }
 
     @Override
@@ -77,6 +75,7 @@ extends DirectionalBlock implements EntityBlock {
         return new ServoMotorBlockEntity(pos, state);
     }
 
+    @SuppressWarnings("unused")
     private boolean rotateBlocks(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goalOrientation) {
         ServoMotorStructureResolver servoMotorStructureResolver;
         if (!(servoMotorStructureResolver = new ServoMotorStructureResolver(level, motorPos, direction, goalOrientation)).resolve())

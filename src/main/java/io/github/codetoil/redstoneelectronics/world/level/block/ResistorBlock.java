@@ -18,7 +18,6 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block;
 
-
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;

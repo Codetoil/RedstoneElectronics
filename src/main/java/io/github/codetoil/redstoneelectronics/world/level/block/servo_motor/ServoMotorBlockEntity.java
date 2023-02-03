@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 
@@ -32,6 +33,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
     private BlockState rotatedState;
     private Direction direction;
     private SelectorOrientation goalOrientation;
+    @SuppressWarnings("unused")
     private float progress;
     private float progressO;
     private long lastTicked;
@@ -42,6 +44,12 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
+        if (this.rotatedState == null)
+        {
+            RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
+            tag.putInt("invalid", 0);
+            return;
+        }
         tag.put("blockState", NbtUtils.writeBlockState(this.rotatedState));
         tag.putInt("direction", this.direction.get3DDataValue());
         tag.putFloat("progress", this.progressO);
@@ -50,6 +58,11 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     public void load(CompoundTag tag) {
         super.load(tag);
+        if (tag.contains("invalid"))
+        {
+            RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
+            return;
+        }
         this.rotatedState = NbtUtils.readBlockState(tag.getCompound("blockState"));
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
         this.progressO = this.progress = tag.getFloat("progress");
@@ -61,6 +74,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         return new CompoundTag();
     }
 
+    @SuppressWarnings("null")
     public void finalTick() {
         if (this.level != null && (this.progressO < 1.0f || this.level.isClientSide)) {
             this.progressO = this.progress = 1.0f;

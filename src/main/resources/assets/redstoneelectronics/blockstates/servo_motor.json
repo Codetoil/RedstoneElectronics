@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "spinning=false,facing=down": {
+      "model": "redstoneelectronics:block/servo_motor",
+      "x": 90
+    },
+    "spinning=false,facing=east": {
+      "model": "redstoneelectronics:block/servo_motor",
+      "y": 90
+    },
+    "spinning=false,facing=north": {
+      "model": "redstoneelectronics:block/servo_motor"
+    },
+    "spinning=false,facing=south": {
+      "model": "redstoneelectronics:block/servo_motor",
+      "y": 180
+    },
+    "spinning=false,facing=up": {
+      "model": "redstoneelectronics:block/servo_motor",
+      "x": 270
+    },
+    "spinning=false,facing=west": {
+      "model": "redstoneelectronics:block/servo_motor",
+      "y": 270
+    },
+    "spinning=true,facing=down": {
+      "model": "redstoneelectronics:block/servo_motor_spinning",
+      "x": 90
+    },
+    "spinning=true,facing=east": {
+      "model": "redstoneelectronics:block/servo_motor_spinning",
+      "y": 90
+    },
+    "spinning=true,facing=north": {
+      "model": "redstoneelectronics:block/servo_motor_spinning"
+    },
+    "spinning=true,facing=south": {
+      "model": "redstoneelectronics:block/servo_motor_spinning",
+      "y": 180
+    },
+    "spinning=true,facing=up": {
+      "model": "redstoneelectronics:block/servo_motor_spinning",
+      "x": 270
+    },
+    "spinning=true,facing=west": {
+      "model": "redstoneelectronics:block/servo_motor_spinning",
+      "y": 270
+    }
+  }
+}
