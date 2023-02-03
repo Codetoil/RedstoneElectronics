@@ -47,7 +47,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         if (this.rotatedState == null)
         {
             RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
-            tag.putInt("invalid", 0);
+            tag.putInt("invalid", 0); // TODO Temporary
             return;
         }
         tag.put("blockState", NbtUtils.writeBlockState(this.rotatedState));
@@ -61,7 +61,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         if (tag.contains("invalid"))
         {
             RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
-            return;
+            return; // TODO Temporary
         }
         this.rotatedState = NbtUtils.readBlockState(tag.getCompound("blockState"));
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
@@ -71,7 +71,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        return new CompoundTag();
+        return new CompoundTag(); // TODO Create Update Tag
     }
 
     @SuppressWarnings("null")
@@ -84,7 +84,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ServoMotorBlockEntity blockEntity) {
-        
+        // TODO Create Tick Method
     }
 
     public long getLastTicked() {

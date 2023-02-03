@@ -30,6 +30,7 @@ import io.github.codetoil.redstoneelectronics.world.level.block.state.properties
 public class ServoMotorStructureResolver {
     private final Level level;
     private final BlockPos motorPos;
+    private BlockPos finalPos;
     private final Direction direction;
     private final SelectorOrientation goal;
     private final List<BlockPos> toRotate = Lists.newArrayList();
@@ -43,12 +44,12 @@ public class ServoMotorStructureResolver {
 
     public boolean resolve() {
         this.toRotate.clear();
-        BlockPos startPos = this.motorPos.relative(this.direction);
-        if (!this.level.getBlockState(startPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
+        this.finalPos = this.motorPos.relative(this.direction); // TODO Temporary
+        if (!this.level.getBlockState(this.finalPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
         { // TODO Add stick rotation.
             return false;
         }
-        this.toRotate.add(startPos);
+        this.toRotate.add(this.finalPos);
         return true;
     }
 
