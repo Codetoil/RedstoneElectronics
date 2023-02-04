@@ -18,7 +18,12 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Nullable;
+
+import com.google.common.collect.Maps;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
@@ -75,13 +80,20 @@ extends DirectionalBlock implements EntityBlock {
         return new ServoMotorBlockEntity(pos, state);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+    public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
+        return false;
+    }
+
     private boolean rotateBlocks(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goalOrientation) {
         ServoMotorStructureResolver servoMotorStructureResolver;
         if (!(servoMotorStructureResolver = new ServoMotorStructureResolver(level, motorPos, direction, goalOrientation)).resolve())
         {
             return false;
         }
+        HashMap<BlockPos, BlockState> map = Maps.newHashMap();
+        List<BlockPos> toRotate = servoMotorStructureResolver.getBlocksToRotate();
+        List<BlockPos> toCycle = servoMotorStructureResolver.getBlocksToCycle();
         
         return true; // TODO Temporary
     }

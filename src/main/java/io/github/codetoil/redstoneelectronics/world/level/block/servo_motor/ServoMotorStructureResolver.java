@@ -34,6 +34,7 @@ public class ServoMotorStructureResolver {
     private final Direction direction;
     private final SelectorOrientation goal;
     private final List<BlockPos> toRotate = Lists.newArrayList();
+    private final List<BlockPos> toCycle = Lists.newArrayList();
 
     public ServoMotorStructureResolver(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goal) {
         this.level = level;
@@ -43,13 +44,14 @@ public class ServoMotorStructureResolver {
     }
 
     public boolean resolve() {
+        this.toCycle.clear();
         this.toRotate.clear();
         this.finalPos = this.motorPos.relative(this.direction); // TODO Temporary
         if (!this.level.getBlockState(this.finalPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
         { // TODO Add stick rotation.
             return false;
         }
-        this.toRotate.add(this.finalPos);
+        this.toCycle.add(this.finalPos);
         return true;
     }
 
@@ -67,5 +69,9 @@ public class ServoMotorStructureResolver {
 
     public List<BlockPos> getBlocksToRotate() {
         return this.toRotate;
+    }
+
+    public List<BlockPos> getBlocksToCycle() {
+        return this.toCycle;
     }
 }
