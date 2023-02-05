@@ -25,12 +25,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.util.Mth;
+
+import java.util.List;
+
+import org.apache.commons.compress.utils.Lists;
+
 import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 
 public class ServoMotorBlockEntity extends BlockEntity {
-    private BlockState rotatedState;
+    private BlockState cycledState;
+    private final List<BlockState> rotatedStates = Lists.<BlockState>newArrayList(); 
     private Direction direction;
     private SelectorOrientation goalOrientation;
     @SuppressWarnings("unused")
@@ -38,19 +45,27 @@ public class ServoMotorBlockEntity extends BlockEntity {
     private float progressO;
     private long lastTicked;
 
-    public ServoMotorBlockEntity(BlockPos pos, BlockState state) {
-        super(REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get(), pos, state);
+    public ServoMotorBlockEntity(BlockPos motorPos, BlockState motorState) {
+        super(REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get(), motorPos, motorState);
+    }
+
+    public ServoMotorBlockEntity(BlockPos motorPos, BlockState motorState, BlockState cycledState, List<BlockState> rotatedStates, Direction direction, SelectorOrientation goalOrientation) {
+        this(motorPos, motorState);
+        this.cycledState = cycledState;
+        this.rotatedStates.addAll(rotatedStates);
+        this.direction = direction;
+        this.goalOrientation = goalOrientation;
     }
 
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        if (this.rotatedState == null)
+        if (this.cycledState == null)
         {
             RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
             tag.putInt("invalid", 0); // TODO Temporary
             return;
         }
-        tag.put("blockState", NbtUtils.writeBlockState(this.rotatedState));
+        tag.put("blockState", NbtUtils.writeBlockState(this.cycledState));
         tag.putInt("direction", this.direction.get3DDataValue());
         tag.putFloat("progress", this.progressO);
         tag.putString("goal", this.goalOrientation.getSerializedName());
@@ -63,7 +78,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
             RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
             return; // TODO Temporary
         }
-        this.rotatedState = NbtUtils.readBlockState(tag.getCompound("blockState"));
+        this.cycledState = NbtUtils.readBlockState(tag.getCompound("blockState"));
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
         this.progressO = this.progress = tag.getFloat("progress");
         this.goalOrientation = SelectorOrientation.valueOf(tag.getString("goal"));
@@ -85,6 +100,13 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     public static void tick(Level level, BlockPos pos, BlockState state, ServoMotorBlockEntity blockEntity) {
         // TODO Create Tick Method
+    }
+
+    public float getProgress(float tValue) {
+        if (tValue > 1.0f) {
+            tValue = 1.0f;
+        }
+        return Mth.lerp(tValue, this.progressO, this.progress);
     }
 
     public long getLastTicked() {

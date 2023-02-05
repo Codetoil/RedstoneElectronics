@@ -24,6 +24,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 
@@ -32,26 +33,25 @@ public class ServoMotorStructureResolver {
     private final BlockPos motorPos;
     private BlockPos finalPos;
     private final Direction direction;
-    private final SelectorOrientation goal;
+    private SelectorOrientation goal;
     private final List<BlockPos> toRotate = Lists.newArrayList();
-    private final List<BlockPos> toCycle = Lists.newArrayList();
 
-    public ServoMotorStructureResolver(Level level, BlockPos motorPos, Direction direction, SelectorOrientation goal) {
+    public ServoMotorStructureResolver(Level level, BlockPos motorPos, Direction direction) {
         this.level = level;
         this.motorPos = motorPos;
         this.direction = direction;
-        this.goal = goal;
     }
 
     public boolean resolve() {
-        this.toCycle.clear();
         this.toRotate.clear();
         this.finalPos = this.motorPos.relative(this.direction); // TODO Temporary
-        if (!this.level.getBlockState(this.finalPos).hasProperty(REProperties.SELECTOR_ORIENTATION))
+        BlockState state = this.level.getBlockState(this.finalPos);
+        if (!state.hasProperty(REProperties.SELECTOR_ORIENTATION))
         { // TODO Add stick rotation.
             return false;
         }
-        this.toCycle.add(this.finalPos);
+        SelectorOrientation current = state.getValue(REProperties.SELECTOR_ORIENTATION);
+        this.goal = current.next(state);
         return true;
     }
 
@@ -71,7 +71,7 @@ public class ServoMotorStructureResolver {
         return this.toRotate;
     }
 
-    public List<BlockPos> getBlocksToCycle() {
-        return this.toCycle;
+    public BlockPos getBlockToCycle() {
+        return this.finalPos;
     }
 }
