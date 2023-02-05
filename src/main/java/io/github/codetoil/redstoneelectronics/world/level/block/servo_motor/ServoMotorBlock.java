@@ -18,12 +18,11 @@
 
 package io.github.codetoil.redstoneelectronics.world.level.block.servo_motor;
 
-import java.util.stream.Collectors;
-
 import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
+import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import net.minecraft.world.level.block.state.BlockState;
@@ -122,7 +121,17 @@ extends DirectionalBlock implements EntityBlock {
             return false;
         }
         
-        return !this.startRotation(level, pos, direction);
+        if (!this.startRotation(level, pos, direction))
+        {
+            return false;
+        }
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity == null)
+        {
+            return false;
+        }
+        return blockEntity.triggerEvent(id, param);
     }
 
     private boolean startRotation(Level level, BlockPos motorPos, Direction direction) {
@@ -145,16 +154,15 @@ extends DirectionalBlock implements EntityBlock {
         {
             return false;
         }
+        RedstoneElectronics.logger.info("Creating Block Entity!");
         ServoMotorBlockEntity blockEntity = new ServoMotorBlockEntity(finalPos,
                                             level.getBlockState(motorPos), 
-                                            level.getBlockState(finalPos), 
+                                            finalPos, 
                                             servoMotorStructureResolver
-                                                .getBlocksToRotate()
-                                                .stream()
-                                                .map(level::getBlockState)
-                                                .collect(Collectors.toList()),
+                                                .getBlocksToRotate(),
                                             direction,
                                             servoMotorStructureResolver.getGoal());
+        RedstoneElectronics.logger.info(blockEntity);
         level.setBlockEntity(blockEntity);
         return true;
     }
@@ -162,12 +170,13 @@ extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        RedstoneElectronics.logger.info("Getting Ticker:" + (type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get()));
         return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? CastBlockEntityTicker::tick : null;
     }
 
     private class CastBlockEntityTicker {
         public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
-            ServoMotorBlockEntity.tick(level, pos, state, (ServoMotorBlockEntity) blockEntity);
+            ((ServoMotorBlockEntity) blockEntity).tick(level, pos, state);
         }
     }
 }
