@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -175,6 +176,14 @@ extends DirectionalBlock implements EntityBlock {
             servoMotorStructureResolver.getGoal());
         level.setBlockEntity(blockEntity);
         return true;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return (BlockState)this.defaultBlockState()
+            .setValue(FACING, context.getNearestLookingDirection().getOpposite().getOpposite())
+            .setValue(REProperties.SPINNING, Boolean.FALSE)
+            .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE);
     }
 
     @Nullable

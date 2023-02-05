@@ -121,7 +121,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
                 this.finalTick();
             }
         } else {
-            float f = this.progress + 0.5f;
+            float f = this.progress + ((this.goalOrientation == SelectorOrientation.LEFT) ? 0.25f : 0.5f);
             this.progress = f;
             if (this.progress >= 1.0f) {
                 this.progress = 1.0f;

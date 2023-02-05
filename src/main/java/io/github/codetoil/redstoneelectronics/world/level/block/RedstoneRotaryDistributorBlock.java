@@ -88,7 +88,7 @@ extends DiodeBlock {
             return InteractionResult.PASS;
         }
         SelectorOrientation current = state.getValue(REProperties.SELECTOR_ORIENTATION);
-        state.setValue(REProperties.SELECTOR_ORIENTATION, current.next(state));
+        state = state.setValue(REProperties.SELECTOR_ORIENTATION, current.next(state));
         level.setBlock(pos, state, 3);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
