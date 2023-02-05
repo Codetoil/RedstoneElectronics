@@ -143,7 +143,7 @@ extends DirectionalBlock implements EntityBlock {
         BlockPos finalPos = servoMotorStructureResolver.getBlockToCycle();
         if (!level.setBlock(motorPos, level.getBlockState(motorPos)
                                             .setValue(REProperties.SPINNING, true), 
-                                            Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS))
+                                            Block.UPDATE_CLIENTS))
         {
             return false;
         }
