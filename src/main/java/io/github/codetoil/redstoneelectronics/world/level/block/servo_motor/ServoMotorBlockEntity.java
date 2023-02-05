@@ -64,7 +64,10 @@ public class ServoMotorBlockEntity extends BlockEntity {
         super.saveAdditional(tag);
         tag.put("cycledPos", NbtUtils.writeBlockPos(this.cycledPos));
         ListTag rotatedTag = new ListTag();
-        rotatedTag.addAll(rotatedPositions.stream().map(NbtUtils::writeBlockPos).collect(Collectors.toList()));
+        rotatedTag.addAll(rotatedPositions
+            .stream()
+            .map(NbtUtils::writeBlockPos)
+            .collect(Collectors.toList()));
         tag.putInt("rotatedPositionsLength", rotatedTag.size());
         tag.put("rotatedPositions", rotatedTag);
         tag.putInt("direction", this.direction.get3DDataValue());
@@ -78,9 +81,9 @@ public class ServoMotorBlockEntity extends BlockEntity {
         int rotatedPositionsSize = tag.getInt("rotatedPositionsLength");
         ListTag rotatedTags = tag.getList("rotatedPositions", rotatedPositionsSize);
         this.rotatedPositions.addAll(rotatedTags.stream()
-                                .map(rotatedTag -> (CompoundTag) rotatedTag)
-                                .map(NbtUtils::readBlockPos)
-                                .collect(Collectors.toList()));
+            .map(rotatedTag -> (CompoundTag) rotatedTag)
+            .map(NbtUtils::readBlockPos)
+            .collect(Collectors.toList()));
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
         this.progressO = this.progress = tag.getFloat("progress");
         this.goalOrientation = SelectorOrientation.valueOf(tag.getString("goal"));
@@ -98,12 +101,13 @@ public class ServoMotorBlockEntity extends BlockEntity {
             this.level.removeBlockEntity(this.worldPosition);
             this.setRemoved();
             this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition)
-                                        .setValue(REProperties.SPINNING, false),
-                                        Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
+                .setValue(REProperties.SPINNING, false)
+                .setValue(REProperties.HAS_BEEN_ACTIVATED, true),
+                Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
             this.level.setBlock(this.cycledPos, this.level.getBlockState(this.cycledPos)
-                                        .setValue(REProperties.DRIVEN, true)
-                                        .setValue(REProperties.SELECTOR_ORIENTATION, this.goalOrientation),
-                                        Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
+                .setValue(REProperties.DRIVEN, true)
+                .setValue(REProperties.SELECTOR_ORIENTATION, this.goalOrientation),
+                Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
     }
 

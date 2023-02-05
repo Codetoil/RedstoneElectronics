@@ -27,6 +27,7 @@ public class REProperties {
     public static final IntegerProperty RESISTANCE_1_4 = IntegerProperty.create("resistance", 1, 4);
     public static final BooleanProperty SPINNING = BooleanProperty.create("spinning");
     public static final BooleanProperty DRIVEN = BooleanProperty.create("driven");
+    public static final BooleanProperty HAS_BEEN_ACTIVATED = BooleanProperty.create("has_been_activated");
 
     public static void init() {
     }

@@ -50,7 +50,8 @@ extends DirectionalBlock implements EntityBlock {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
         .setValue(FACING, Direction.NORTH)
-        .setValue(REProperties.SPINNING, Boolean.FALSE));
+        .setValue(REProperties.SPINNING, Boolean.FALSE)
+        .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE));
     }
 
     @Override
@@ -70,7 +71,7 @@ extends DirectionalBlock implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, REProperties.SPINNING);
+        builder.add(FACING, REProperties.SPINNING, REProperties.HAS_BEEN_ACTIVATED);
     }
 
     @Override
@@ -82,12 +83,19 @@ extends DirectionalBlock implements EntityBlock {
     {
         Direction direction = state.getValue(FACING);
         boolean isPowered = level.hasNeighborSignal(pos);
-        if (isPowered && !state.getValue(REProperties.SPINNING).booleanValue())
+        if (isPowered
+                && !state.getValue(REProperties.HAS_BEEN_ACTIVATED).booleanValue()
+                && !state.getValue(REProperties.SPINNING).booleanValue())
         {
             if (new ServoMotorStructureResolver(level, pos, direction).resolve())
             {
-                level.blockEvent(pos, this, 0, direction.get3DDataValue());
+                level.blockEvent(pos, this, 0, 0);
             }
+        }
+        if (!isPowered
+                && state.getValue(REProperties.HAS_BEEN_ACTIVATED).booleanValue())
+        {
+            level.blockEvent(pos, this, 1, 0);
         }
     }
 
@@ -115,16 +123,22 @@ extends DirectionalBlock implements EntityBlock {
     @Override
     public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
         Direction direction = state.getValue(FACING);
-        if (id != 0)
+        if (id == 0)
         {
-            return false;
+            if (!this.startRotation(level, pos, direction))
+            {
+                return false;
+            }
         }
-        
-        if (!this.startRotation(level, pos, direction))
+        else if (id == 1)
         {
-            return false;
+            if (!level.setBlock(pos, level.getBlockState(pos)
+                .setValue(REProperties.HAS_BEEN_ACTIVATED, false), 
+                Block.UPDATE_CLIENTS))
+            {
+                return false;
+            }
         }
-
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity == null)
         {
@@ -141,24 +155,24 @@ extends DirectionalBlock implements EntityBlock {
         }
         BlockPos finalPos = servoMotorStructureResolver.getBlockToCycle();
         if (!level.setBlock(motorPos, level.getBlockState(motorPos)
-                                            .setValue(REProperties.SPINNING, true), 
-                                            Block.UPDATE_CLIENTS))
+            .setValue(REProperties.SPINNING, true), 
+            Block.UPDATE_CLIENTS))
         {
             return false;
         }
         if (!level.setBlock(finalPos, level.getBlockState(finalPos)
-                                            .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.ROTATING),
-                                            Block.UPDATE_CLIENTS))
+            .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.ROTATING),
+            Block.UPDATE_CLIENTS))
         {
             return false;
         }
         ServoMotorBlockEntity blockEntity = new ServoMotorBlockEntity(motorPos,
-                                            level.getBlockState(motorPos), 
-                                            finalPos, 
-                                            servoMotorStructureResolver
-                                                .getBlocksToRotate(),
-                                            direction,
-                                            servoMotorStructureResolver.getGoal());
+            level.getBlockState(motorPos), 
+            finalPos, 
+            servoMotorStructureResolver
+                .getBlocksToRotate(),
+            direction,
+            servoMotorStructureResolver.getGoal());
         level.setBlockEntity(blockEntity);
         return true;
     }
