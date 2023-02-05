@@ -34,7 +34,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.compress.utils.Lists;
 
-import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
@@ -75,11 +74,6 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     public void load(CompoundTag tag) {
         super.load(tag);
-        if (tag.contains("invalid"))
-        {
-            RedstoneElectronics.logger.error("Invalid Servo Motor Block Entity, skipping...");
-            return; // TODO Temporary
-        }
         this.cycledPos = NbtUtils.readBlockPos(tag.getCompound("blockPos"));
         int rotatedPositionsSize = tag.getInt("rotatedPositionsLength");
         ListTag rotatedTags = tag.getList("rotatedPositions", rotatedPositionsSize);
@@ -99,7 +93,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     @SuppressWarnings("null") // Invalid warnings, suppress them.
     public void finalTick() {
-        if (this.level != null && (this.progressO < 1.0f || this.level.isClientSide)) {
+        if (this.level != null && !this.level.isClientSide) {
             this.progressO = this.progress = 1.0f;
             this.level.removeBlockEntity(this.worldPosition);
             this.setRemoved();
@@ -107,14 +101,13 @@ public class ServoMotorBlockEntity extends BlockEntity {
                                         .setValue(REProperties.SPINNING, false),
                                         Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
             this.level.setBlock(this.cycledPos, this.level.getBlockState(this.cycledPos)
-                                        .setValue(REProperties.DRIVEN, false)
+                                        .setValue(REProperties.DRIVEN, true)
                                         .setValue(REProperties.SELECTOR_ORIENTATION, this.goalOrientation),
                                         Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
-        RedstoneElectronics.logger.info(this.progress);
         this.lastTicked = level.getGameTime();
         this.progressO = this.progress;
         if (this.progressO >= 1.0f) {

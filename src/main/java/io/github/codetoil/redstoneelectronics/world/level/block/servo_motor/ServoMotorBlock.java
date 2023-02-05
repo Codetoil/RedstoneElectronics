@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
-import io.github.codetoil.redstoneelectronics.RedstoneElectronics;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
 import net.minecraft.world.level.block.state.BlockState;
@@ -148,21 +147,18 @@ extends DirectionalBlock implements EntityBlock {
             return false;
         }
         if (!level.setBlock(finalPos, level.getBlockState(finalPos)
-                                            .setValue(REProperties.DRIVEN, true)
                                             .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.ROTATING),
                                             Block.UPDATE_CLIENTS))
         {
             return false;
         }
-        RedstoneElectronics.logger.info("Creating Block Entity!");
-        ServoMotorBlockEntity blockEntity = new ServoMotorBlockEntity(finalPos,
+        ServoMotorBlockEntity blockEntity = new ServoMotorBlockEntity(motorPos,
                                             level.getBlockState(motorPos), 
                                             finalPos, 
                                             servoMotorStructureResolver
                                                 .getBlocksToRotate(),
                                             direction,
                                             servoMotorStructureResolver.getGoal());
-        RedstoneElectronics.logger.info(blockEntity);
         level.setBlockEntity(blockEntity);
         return true;
     }
@@ -170,7 +166,6 @@ extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        RedstoneElectronics.logger.info("Getting Ticker:" + (type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get()));
         return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? CastBlockEntityTicker::tick : null;
     }
 
