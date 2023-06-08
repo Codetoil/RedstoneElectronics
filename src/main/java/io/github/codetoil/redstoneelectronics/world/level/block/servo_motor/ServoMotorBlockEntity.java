@@ -27,6 +27,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 
 import java.util.List;
@@ -60,8 +62,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         this.goalOrientation = goalOrientation;
     }
 
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    public void saveData(CompoundTag tag) {
         tag.put("cycledPos", NbtUtils.writeBlockPos(this.cycledPos));
         ListTag rotatedTag = new ListTag();
         rotatedTag.addAll(rotatedPositions
@@ -75,8 +76,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         tag.putString("goal", this.goalOrientation.getSerializedName());
     }
 
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadData(CompoundTag tag) {
         this.cycledPos = NbtUtils.readBlockPos(tag.getCompound("blockPos"));
         int rotatedPositionsSize = tag.getInt("rotatedPositionsLength");
         ListTag rotatedTags = tag.getList("rotatedPositions", rotatedPositionsSize);
@@ -89,9 +89,29 @@ public class ServoMotorBlockEntity extends BlockEntity {
         this.goalOrientation = SelectorOrientation.valueOf(tag.getString("goal"));
     }
 
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        this.saveData(tag);
+    }
+
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        loadData(tag);
+    }
+
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public ClientboundBlockEntityDataPacket getUpdatePacket(){
+        return ClientboundBlockEntityDataPacket.create(this, (entity) -> {
+            CompoundTag nbtTag = new CompoundTag();
+            this.saveData(nbtTag);
+            return nbtTag;
+        });
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        CompoundTag tag = pkt.getTag();
+        this.loadData(tag);
     }
 
     @SuppressWarnings("null") // Invalid warnings, suppress them.

@@ -205974,6 +205974,10 @@
         "up",
         "down"
       ],
+      "has_been_activated": [
+        "true",
+        "false"
+      ],
       "spinning": [
         "true",
         "false"
@@ -205983,6 +205987,7 @@
       {
         "properties": {
           "facing": "north",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -205990,6 +205995,23 @@
       {
         "properties": {
           "facing": "north",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "north",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "north",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0,
@@ -205998,6 +206020,7 @@
       {
         "properties": {
           "facing": "east",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -206005,6 +206028,23 @@
       {
         "properties": {
           "facing": "east",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "east",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "east",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0
@@ -206012,6 +206052,7 @@
       {
         "properties": {
           "facing": "south",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -206019,6 +206060,23 @@
       {
         "properties": {
           "facing": "south",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "south",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "south",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0
@@ -206026,6 +206084,7 @@
       {
         "properties": {
           "facing": "west",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -206033,6 +206092,23 @@
       {
         "properties": {
           "facing": "west",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "west",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "west",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0
@@ -206040,6 +206116,7 @@
       {
         "properties": {
           "facing": "up",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -206047,6 +206124,23 @@
       {
         "properties": {
           "facing": "up",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "up",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "up",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0
@@ -206054,6 +206148,7 @@
       {
         "properties": {
           "facing": "down",
+          "has_been_activated": "true",
           "spinning": "true"
         },
         "id": 0
@@ -206061,6 +206156,23 @@
       {
         "properties": {
           "facing": "down",
+          "has_been_activated": "true",
+          "spinning": "false"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "down",
+          "has_been_activated": "false",
+          "spinning": "true"
+        },
+        "id": 0
+      },
+      {
+        "properties": {
+          "facing": "down",
+          "has_been_activated": "false",
           "spinning": "false"
         },
         "id": 0

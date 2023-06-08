@@ -10885,7 +10885,7 @@
       "minecraft:sculk_sensor": {
         "protocol_id": 33
       },
-      "redstoneelectronics:servo_motor_block_entity": {
+      "redstoneelectronics:servo_motor": {
         "protocol_id": 34
       }
     }
@@ -13236,15 +13236,15 @@
       }
     }
   },
-  "forge:loot_modifier_serializers": {
+  "forge:world_types": {
     "protocol_id": 57,
     "entries": {}
   },
-  "forge:world_types": {
+  "minecraft:data_serializers": {
     "protocol_id": 58,
     "entries": {}
   },
-  "minecraft:data_serializers": {
+  "forge:loot_modifier_serializers": {
     "protocol_id": 59,
     "entries": {}
   }
