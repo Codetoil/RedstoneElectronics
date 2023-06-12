@@ -40,4 +40,9 @@ public class REGameTests {
             });
         helper.succeed();
     }
+
+    @GameTest
+    public static void motorTest1(GameTestHelper helper) {
+        helper.fail("test");
+    } 
 }

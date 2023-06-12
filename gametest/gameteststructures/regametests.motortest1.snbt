@@ -1,0 +1,433 @@
+{
+  size: [
+    4,
+    3,
+    4
+  ],
+  palette: [
+    {
+      Name: "minecraft:stone",
+      Properties: {
+        variant: "stone"
+      }
+    },
+    {
+      Name: "minecraft:air"
+    },
+    {
+      Name: "minecraft:redstone_wire",
+      Properties: {
+        west: "none",
+        east: "none",
+        north: "none",
+        south: "none",
+        power: "0"
+      }
+    },
+    {
+      Name: "redstoneelectronics:redstone_rotary_selector",
+      Properties: {
+        driven: "true",
+        facing: "north",
+        powered: "false",
+        selector_orientation: "front"
+      }
+    },
+    {
+      Name: "redstoneelectronics:servo_motor",
+      Properties: {
+        facing: "down",
+        spinning: "false",
+        has_been_activated: "false"
+      }
+    }
+  ],
+  blocks: [
+    {
+      state: 0,
+      pos: [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      state: 2,
+      pos: [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        3,
+        0,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        1,
+        1
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      state: 2,
+      pos: [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      state: 3,
+      pos: [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      state: 4,
+      pos: [
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      state: 2,
+      pos: [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        3,
+        0,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        3,
+        1,
+        2
+      ]
+    },
+    {
+      state: 2,
+      pos: [
+        3,
+        2,
+        2
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        1,
+        0,
+        3
+      ]
+    },
+    {
+      state: 2,
+      pos: [
+        1,
+        1,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        2,
+        0,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        1,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      state: 0,
+      pos: [
+        3,
+        0,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        1,
+        3
+      ]
+    },
+    {
+      state: 1,
+      pos: [
+        3,
+        2,
+        3
+      ]
+    }
+  ],
+  entities: [],
+  DataVersion: 2975
+} 
