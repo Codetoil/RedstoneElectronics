@@ -32,7 +32,7 @@ public class REGameTests {
     public static void blockExistenceTests(GameTestHelper helper) {
         List.<String>of("redstoneelectronics:redstone_resistor",
                 "redstoneelectronics:redstone_rotary_selector",
-                "redstoneelectronics:redstone_rotary_distributer",
+                "redstoneelectronics:redstone_rotary_distributor",
                 "redstoneelectronics:servo_motor",
                 "minecraft:stick")
             .forEach((name) -> {
