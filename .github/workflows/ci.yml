@@ -51,7 +51,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: publish
-          gradle-version: 7.6
+          gradle-version: 8.1.1
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
