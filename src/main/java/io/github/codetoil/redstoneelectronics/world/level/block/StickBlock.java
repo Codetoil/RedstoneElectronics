@@ -44,6 +44,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 public class StickBlock
         extends DirectionalBlock
@@ -81,6 +82,11 @@ public class StickBlock
         return STICK_VERTICAL_AABB;
     }
 
+    public boolean propagatesSkylightDown(@NotNull BlockState state, @NotNull BlockGetter block,
+                                          @NotNull BlockPos pos) {
+        return true;
+    }
+
     public String getDescriptionId() {
         return "item.minecraft.stick";
     }
@@ -88,46 +94,46 @@ public class StickBlock
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getClickedFace();
         BlockState state1 = context.getLevel()
-                .getBlockState(context.getClickedPos().offset(direction.getOpposite().getNormal()));
+                .getBlockState(context.getClickedPos().m_142300_(direction.getOpposite()));
         Fluid fluid = context.getLevel().getFluidState(context.getClickedPos()).getType();
-        BlockState state2 = (BlockState) this.stateDefinition.any().setValue(
+        BlockState state2 = this.stateDefinition.any().setValue(
                 BlockStateProperties.WATERLOGGED,
-                Boolean.valueOf(fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER));
+                fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER);
         return state1.getBlock() == this && state1.getValue(FACING) == direction
                 ? state2.setValue(FACING, direction.getOpposite())
                 : state2.setValue(FACING, direction);
     }
 
     @OnlyIn(value = Dist.CLIENT)
-    public void animateTick(BlockState p_180655_1_, Level p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
+    public void m_7100_(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateContainerBuilder) {
         stateContainerBuilder.add(FACING, BlockStateProperties.WATERLOGGED);
     }
 
-    public boolean useShapeForLightOcclusion(BlockState state) {
+    public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
         return true;
     }
 
     public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED).booleanValue()) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
         return super.rotate(state, world, pos, direction);
     }
 
-    public PushReaction getPistonPushReaction(BlockState state) {
+    public @NotNull PushReaction m_5537_(@NotNull BlockState state) {
         return PushReaction.DESTROY;
     }
 
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) != false ? Fluids.WATER.getSource(false)
+    public @NotNull FluidState getFluidState(BlockState state) {
+        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false)
             : super.getFluidState(state);
     }
 
-    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType pathType) {
+    public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos,
+                                  @NotNull PathComputationType pathType) {
         return false;
     }
 }

@@ -22,6 +22,7 @@ import java.util.function.Function;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public enum SelectorOrientation implements StringRepresentable
 {
@@ -34,7 +35,8 @@ public enum SelectorOrientation implements StringRepresentable
     private final String name;
     private final Function<Direction, Direction> reverseApply;
 
-    private SelectorOrientation(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply, String name) {
+    private SelectorOrientation(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply,
+                                String name) {
         this.name = name;
         this.onApply = onApply;
         this.reverseApply = reverseApply;
@@ -48,22 +50,17 @@ public enum SelectorOrientation implements StringRepresentable
         return this.reverseApply.apply(direction);
     }
 
-    public String getSerializedName() {
+    public @NotNull String getSerializedName() {
         return this.name;
     }
     
     public SelectorOrientation next(BlockState state) {
-        switch (this)
-        {
-            case FRONT:
-                return SelectorOrientation.RIGHT;
-            case LEFT:
-                return SelectorOrientation.FRONT;
-            case RIGHT:
-                return SelectorOrientation.LEFT;
-            default:
-                return this;
-        }
+        return switch (this) {
+            case FRONT -> SelectorOrientation.RIGHT;
+            case LEFT -> SelectorOrientation.FRONT;
+            case RIGHT -> SelectorOrientation.LEFT;
+            default -> this;
+        };
     }
 }
 

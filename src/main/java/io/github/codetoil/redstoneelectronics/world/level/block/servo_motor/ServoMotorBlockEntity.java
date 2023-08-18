@@ -32,17 +32,17 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.commons.compress.utils.Lists;
 
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
+import org.jetbrains.annotations.NotNull;
 
 public class ServoMotorBlockEntity extends BlockEntity {
     private BlockPos cycledPos;
-    private final List<BlockPos> rotatedPositions = Lists.<BlockPos>newArrayList(); 
+    private final List<BlockPos> rotatedPositions = Lists.newArrayList();
     private Direction direction;
     private SelectorOrientation goalOrientation;
     private float progress;
@@ -68,7 +68,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
         rotatedTag.addAll(rotatedPositions
             .stream()
             .map(NbtUtils::writeBlockPos)
-            .collect(Collectors.toList()));
+            .toList());
         tag.putInt("rotatedPositionsLength", rotatedTag.size());
         tag.put("rotatedPositions", rotatedTag);
         tag.putInt("direction", this.direction.get3DDataValue());
@@ -83,34 +83,26 @@ public class ServoMotorBlockEntity extends BlockEntity {
         this.rotatedPositions.addAll(rotatedTags.stream()
             .map(rotatedTag -> (CompoundTag) rotatedTag)
             .map(NbtUtils::readBlockPos)
-            .collect(Collectors.toList()));
+            .toList());
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
         this.progressO = this.progress = tag.getFloat("progress");
         this.goalOrientation = SelectorOrientation.valueOf(tag.getString("goal"));
     }
 
-    protected void saveAdditional(CompoundTag tag) {
+    protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
         this.saveData(tag);
     }
 
-    public void load(CompoundTag tag) {
+    public void load(@NotNull CompoundTag tag) {
         super.load(tag);
         loadData(tag);
     }
 
     @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket(){
-        return ClientboundBlockEntityDataPacket.create(this, (entity) -> {
-            CompoundTag nbtTag = new CompoundTag();
-            this.saveData(nbtTag);
-            return nbtTag;
-        });
-    }
-
-    @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag tag = pkt.getTag();
+        assert tag != null;
         this.loadData(tag);
     }
 
@@ -163,7 +155,7 @@ public class ServoMotorBlockEntity extends BlockEntity {
 
     @Override
     public String toString() {
-        return "" + this.cycledPos + "," + this.rotatedPositions + "," + this.direction + "," + this.goalOrientation;
+        return this.cycledPos + "," + this.rotatedPositions + "," + this.direction + "," + this.goalOrientation;
     }
 
 }

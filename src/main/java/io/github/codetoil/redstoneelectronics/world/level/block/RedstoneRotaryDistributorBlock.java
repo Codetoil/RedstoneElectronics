@@ -21,6 +21,9 @@ package io.github.codetoil.redstoneelectronics.world.level.block;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.SelectorOrientation;
 import java.util.EnumSet;
+import java.util.Random;
+
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +37,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
 
 public class RedstoneRotaryDistributorBlock
 extends DiodeBlock {
@@ -47,22 +53,23 @@ extends DiodeBlock {
             .setValue(REProperties.DRIVEN, Boolean.FALSE));
     }
 
-    protected int getDelay(BlockState state) {
+    protected int getDelay(@NotNull BlockState state) {
         return 2;
     }
 
-    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos pos, Direction direction) {
-        if (!((Boolean)blockState.getValue(POWERED)).booleanValue()) {
+    public int getSignal(BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos pos,
+                         @NotNull Direction direction) {
+        if (!blockState.getValue(POWERED)) {
             return 0;
         }
         return blockState.getValue(FACING) == blockState.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(direction) ? this.getSignal(blockGetter, pos, blockState) : 0;
     }
 
-    protected void updateNeighborsInFront(Level level, BlockPos pos, BlockState state) {
+    protected void updateNeighborsInFront(@NotNull Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
-        BlockPos blockpos1 = pos.offset(direction.getOpposite().getNormal());
-        BlockPos blockpos2 = pos.offset(direction.getClockWise().getNormal());
-        BlockPos blockpos3 = pos.offset(direction.getCounterClockWise().getNormal());
+        BlockPos blockpos1 = pos.m_142300_(direction.getOpposite());
+        BlockPos blockpos2 = pos.m_142300_(direction.getClockWise());
+        BlockPos blockpos3 = pos.m_142300_(direction.getCounterClockWise());
         if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
          || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
          || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
@@ -83,7 +90,25 @@ extends DiodeBlock {
         return Math.max(this.getInputSignal((Level) blockGetter, pos, state) - 1, 0);
     }
 
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+    @OnlyIn(value = Dist.CLIENT)
+    public void m_7100_(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
+        if (state.getValue(POWERED)) {
+            Direction direction = state.getValue(FACING);
+            double d0 = (double)pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+            double d1 = (double)pos.getY() + 0.4D + (random.nextDouble() - 0.5D) * 0.2D;
+            double d2 = (double)pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+            float f = random.nextBoolean() ? -0.3125F : 0.0625F;
+
+            double d3 = f * (float)direction.getStepX();
+            double d4 = f * (float)direction.getStepZ();
+            level.addParticle(DustParticleOptions.REDSTONE, d0 + d3, d1, d2 + d4,
+                    0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                          Player player, @NotNull InteractionHand hand,
+                                          @NotNull BlockHitResult blockHitResult) {
         if (!player.mayBuild()) {
             return InteractionResult.PASS;
         }

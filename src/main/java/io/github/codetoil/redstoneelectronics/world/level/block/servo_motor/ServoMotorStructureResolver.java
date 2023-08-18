@@ -44,7 +44,7 @@ public class ServoMotorStructureResolver {
 
     public boolean resolve() {
         this.toRotate.clear();
-        this.finalPos = this.motorPos.relative(this.direction); // TODO Temporary. Add stick rotation.
+        this.finalPos = this.motorPos.m_142300_(this.direction); // TODO Temporary. Add stick rotation.
         BlockState state = this.level.getBlockState(this.finalPos);
         if (!state.hasProperty(REProperties.SELECTOR_ORIENTATION))
         {

@@ -43,6 +43,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 
 public class ServoMotorBlock
@@ -56,7 +57,8 @@ extends DirectionalBlock implements EntityBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rotate) {
+    @Deprecated
+    public @NotNull BlockState rotate(BlockState state, Rotation rotate) {
         return state.setValue(FACING, rotate.rotate(state.getValue(FACING)));
     }
 
@@ -66,6 +68,7 @@ extends DirectionalBlock implements EntityBlock {
     }
 
     @Override
+    @Deprecated
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
     }
@@ -76,17 +79,20 @@ extends DirectionalBlock implements EntityBlock {
     }
 
     @Override
-    public ServoMotorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public ServoMotorBlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return null;
     }
 
     private void checkIfItShouldRotate(ServerLevel level, BlockPos pos, BlockState state)
     {
         Direction direction = state.getValue(FACING);
-        boolean isPowered = level.hasNeighborSignal(pos);
+        boolean isPowered = false;
+        for (Direction direction1: Direction.values()) {
+            isPowered = isPowered || (direction1 != direction && level.m_46616_(pos.m_142300_(direction1), direction1));
+        }
         if (isPowered
-                && !state.getValue(REProperties.HAS_BEEN_ACTIVATED).booleanValue()
-                && !state.getValue(REProperties.SPINNING).booleanValue())
+                && !state.getValue(REProperties.HAS_BEEN_ACTIVATED)
+                && !state.getValue(REProperties.SPINNING))
         {
             if (new ServoMotorStructureResolver(level, pos, direction).resolve())
             {
@@ -94,35 +100,42 @@ extends DirectionalBlock implements EntityBlock {
             }
         }
         if (!isPowered
-                && state.getValue(REProperties.HAS_BEEN_ACTIVATED).booleanValue())
+                && state.getValue(REProperties.HAS_BEEN_ACTIVATED))
         {
             level.blockEvent(pos, this, 1, 0);
         }
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack itemStack) {
+    public void setPlacedBy(Level level, @NotNull BlockPos pos, @NotNull BlockState state,
+                            @Nullable LivingEntity entity, @NotNull ItemStack itemStack) {
         if (!level.isClientSide && level instanceof ServerLevel) {
             this.checkIfItShouldRotate((ServerLevel) level, pos, state);
         }
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos pos2, boolean flag) {
+    @Deprecated
+    public void neighborChanged(@NotNull BlockState state, Level level, @NotNull BlockPos pos,
+                                @NotNull Block block, @NotNull BlockPos pos2, boolean flag) {
         if (!level.isClientSide) {
             this.checkIfItShouldRotate((ServerLevel) level, pos, state);
         }
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState state2, boolean flag) {
+    @Deprecated
+    public void onPlace(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState state2,
+                        boolean flag) {
         if (!state2.is(state.getBlock()) && !level.isClientSide && level.getBlockEntity(pos) == null) {
             this.checkIfItShouldRotate((ServerLevel) level, pos, state);
         }
     }
 
     @Override
-    public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
+    @Deprecated
+    public boolean triggerEvent(BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                int id, int param) {
         Direction direction = state.getValue(FACING);
         if (id == 0)
         {
@@ -180,7 +193,7 @@ extends DirectionalBlock implements EntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return (BlockState)this.defaultBlockState()
+        return this.defaultBlockState()
             .setValue(FACING, context.getNearestLookingDirection().getOpposite().getOpposite())
             .setValue(REProperties.SPINNING, Boolean.FALSE)
             .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE);
@@ -188,11 +201,12 @@ extends DirectionalBlock implements EntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state,
+                                                                  @NotNull BlockEntityType<T> type) {
         return type == REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE.get() ? CastBlockEntityTicker::tick : null;
     }
 
-    private class CastBlockEntityTicker {
+    private static class CastBlockEntityTicker {
         public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
             ((ServoMotorBlockEntity) blockEntity).tick(level, pos, state);
         }
