@@ -74,6 +74,13 @@ jobs:
         ]
         # and run on both Linux and Windows
         os: [ubuntu-latest, windows-latest]
+        exclude:
+          - dist: microsoft
+            java: 18
+          - dist: microsoft
+            java: 19
+          - dist: microsoft
+            java: 20
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
