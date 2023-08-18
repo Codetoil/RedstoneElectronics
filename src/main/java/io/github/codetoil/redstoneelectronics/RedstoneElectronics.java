@@ -1,17 +1,17 @@
 /**
  *  Redstone Electronics is a MC Mod that adds redstone components.
  *  Redstone Electronics (C) 2020-2023  Codetoil
- *
+ * <p>
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ * <p>
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
+ * <p>
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -39,12 +39,7 @@ public class RedstoneElectronics {
     public static final String MODID = "redstoneelectronics";
 
     public RedstoneElectronics() {
-        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
-        // MinecraftForge.EVENT_BUS.register(this);
         REProperties.init();
         REBlocks.init();
         REItems.init();
@@ -55,8 +50,8 @@ public class RedstoneElectronics {
         DataGenerator gen = event.getGenerator();
         if (event.includeReports())
         {
-            gen.addProvider(new BlockListReport(gen));
-            gen.addProvider(new RegistryDumpReport(gen));
+            gen.m_123914_(new BlockListReport(gen));
+            gen.m_123914_(new RegistryDumpReport(gen));
         }
     }
 }
