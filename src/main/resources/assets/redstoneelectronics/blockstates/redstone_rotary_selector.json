@@ -1,226 +1,258 @@
 {
   "variants": {
-    "facing=north,powered=false,selector_orientation=left,driven=false": {
+    "driven=false,facing=north,powered=false,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left",
       "y": 0
     },
-    "facing=east,powered=false,selector_orientation=left,driven=false": {
+    "driven=false,facing=east,powered=false,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left",
       "y": 90
     },
-    "facing=south,powered=false,selector_orientation=left,driven=false": {
+    "driven=false,facing=south,powered=false,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left",
       "y": 180
     },
-    "facing=west,powered=false,selector_orientation=left,driven=false": {
+    "driven=false,facing=west,powered=false,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left",
       "y": 270
     },
-    "facing=north,powered=true,selector_orientation=left,driven=false": {
+    "driven=false,facing=north,powered=true,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left_on",
       "y": 0
     },
-    "facing=east,powered=true,selector_orientation=left,driven=false": {
+    "driven=false,facing=east,powered=true,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left_on",
       "y": 90
     },
-    "facing=south,powered=true,selector_orientation=left,driven=false": {
+    "driven=false,facing=south,powered=true,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left_on",
       "y": 180
     },
-    "facing=west,powered=true,selector_orientation=left,driven=false": {
+    "driven=false,facing=west,powered=true,selector_orientation=left": {
       "model": "redstoneelectronics:block/selector_left_on",
       "y": 270
     },
-    "facing=north,powered=false,selector_orientation=front,driven=false": {
+    "driven=false,facing=north,powered=false,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front",
       "y": 0
     },
-    "facing=east,powered=false,selector_orientation=front,driven=false": {
+    "driven=false,facing=east,powered=false,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front",
       "y": 90
     },
-    "facing=south,powered=false,selector_orientation=front,driven=false": {
+    "driven=false,facing=south,powered=false,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front",
       "y": 180
     },
-    "facing=west,powered=false,selector_orientation=front,driven=false": {
+    "driven=false,facing=west,powered=false,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front",
       "y": 270
     },
-    "facing=north,powered=true,selector_orientation=front,driven=false": {
+    "driven=false,facing=north,powered=true,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front_on",
       "y": 0
     },
-    "facing=east,powered=true,selector_orientation=front,driven=false": {
+    "driven=false,facing=east,powered=true,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front_on",
       "y": 90
     },
-    "facing=south,powered=true,selector_orientation=front,driven=false": {
+    "driven=false,facing=south,powered=true,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front_on",
       "y": 180
     },
-    "facing=west,powered=true,selector_orientation=front,driven=false": {
+    "driven=false,facing=west,powered=true,selector_orientation=front": {
       "model": "redstoneelectronics:block/selector_front_on",
       "y": 270
     },
-    "facing=north,powered=false,selector_orientation=right,driven=false": {
+    "driven=false,facing=north,powered=false,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right",
       "y": 0
     },
-    "facing=east,powered=false,selector_orientation=right,driven=false": {
+    "driven=false,facing=east,powered=false,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right",
       "y": 90
     },
-    "facing=south,powered=false,selector_orientation=right,driven=false": {
+    "driven=false,facing=south,powered=false,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right",
       "y": 180
     },
-    "facing=west,powered=false,selector_orientation=right,driven=false": {
+    "driven=false,facing=west,powered=false,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right",
       "y": 270
     },
-    "facing=north,powered=true,selector_orientation=right,driven=false": {
+    "driven=false,facing=north,powered=true,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right_on",
       "y": 0
     },
-    "facing=east,powered=true,selector_orientation=right,driven=false": {
+    "driven=false,facing=east,powered=true,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right_on",
       "y": 90
     },
-    "facing=south,powered=true,selector_orientation=right,driven=false": {
+    "driven=false,facing=south,powered=true,selector_orientation=right": {
       "model": "redstoneelectronics:block/selector_right_on",
       "y": 180
     },
-    "facing=west,powered=true,selector_orientation=right,driven=false": {
-      "model": "redstoneelectronics:block/selector_right_on",
-      "y": 270
-    },
-    "facing=north,powered=false,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_driven",
-      "y": 0
-    },
-    "facing=east,powered=false,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_driven",
-      "y": 90
-    },
-    "facing=south,powered=false,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_driven",
-      "y": 180
-    },
-    "facing=west,powered=false,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_driven",
-      "y": 270
-    },
-    "facing=north,powered=true,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_on_driven",
-      "y": 0
-    },
-    "facing=east,powered=true,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_on_driven",
-      "y": 90
-    },
-    "facing=south,powered=true,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_on_driven",
-      "y": 180
-    },
-    "facing=west,powered=true,selector_orientation=left,driven=true": {
-      "model": "redstoneelectronics:block/selector_left_on_driven",
-      "y": 270
-    },
-    "facing=north,powered=false,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_driven",
-      "y": 0
-    },
-    "facing=east,powered=false,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_driven",
-      "y": 90
-    },
-    "facing=south,powered=false,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_driven",
-      "y": 180
-    },
-    "facing=west,powered=false,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_driven",
-      "y": 270
-    },
-    "facing=north,powered=true,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_on_driven",
-      "y": 0
-    },
-    "facing=east,powered=true,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_on_driven",
-      "y": 90
-    },
-    "facing=south,powered=true,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_on_driven",
-      "y": 180
-    },
-    "facing=west,powered=true,selector_orientation=front,driven=true": {
-      "model": "redstoneelectronics:block/selector_front_on_driven",
-      "y": 270
-    },
-    "facing=north,powered=false,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_driven",
-      "y": 0
-    },
-    "facing=east,powered=false,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_driven",
-      "y": 90
-    },
-    "facing=south,powered=false,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_driven",
-      "y": 180
-    },
-    "facing=west,powered=false,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_driven",
-      "y": 270
-    },
-    "facing=north,powered=true,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_on_driven",
-      "y": 0
-    },
-    "facing=east,powered=true,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_on_driven",
-      "y": 90
-    },
-    "facing=south,powered=true,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_on_driven",
-      "y": 180
-    },
-    "facing=west,powered=true,selector_orientation=right,driven=true": {
-      "model": "redstoneelectronics:block/selector_right_on_driven",
-      "y": 270
-    },
-    "facing=north,powered=false,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=north,powered=false,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating",
       "y": 0
     },
-    "facing=east,powered=false,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=east,powered=false,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating",
       "y": 90
     },
-    "facing=south,powered=false,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=south,powered=false,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating",
       "y": 180
     },
-    "facing=west,powered=false,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=west,powered=false,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating",
       "y": 270
     },
-    "facing=north,powered=true,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=north,powered=true,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating_on",
       "y": 0
     },
-    "facing=east,powered=true,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=east,powered=true,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating_on",
       "y": 90
     },
-    "facing=south,powered=true,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=south,powered=true,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating_on",
       "y": 180
     },
-    "facing=west,powered=true,selector_orientation=rotating,driven=true": {
+    "driven=false,facing=west,powered=true,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating_on",
+      "y": 270
+    },
+    "driven=false,facing=west,powered=true,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_on",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=false,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=false,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=false,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=false,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=true,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_on_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=true,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_on_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=true,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_on_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=true,selector_orientation=left": {
+      "model": "redstoneelectronics:block/selector_left_on_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=false,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=false,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=false,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=false,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=true,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_on_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=true,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_on_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=true,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_on_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=true,selector_orientation=front": {
+      "model": "redstoneelectronics:block/selector_front_on_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=false,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=false,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=false,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=false,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=true,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_on_driven",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=true,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_on_driven",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=true,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_on_driven",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=true,selector_orientation=right": {
+      "model": "redstoneelectronics:block/selector_right_on_driven",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=false,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=false,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=false,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=false,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating",
+      "y": 270
+    },
+    "driven=true,facing=north,powered=true,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating_on",
+      "y": 0
+    },
+    "driven=true,facing=east,powered=true,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating_on",
+      "y": 90
+    },
+    "driven=true,facing=south,powered=true,selector_orientation=rotating": {
+      "model": "redstoneelectronics:block/selector_rotating_on",
+      "y": 180
+    },
+    "driven=true,facing=west,powered=true,selector_orientation=rotating": {
       "model": "redstoneelectronics:block/selector_rotating_on",
       "y": 270
     }

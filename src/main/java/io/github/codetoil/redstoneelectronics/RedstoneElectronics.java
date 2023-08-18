@@ -23,11 +23,15 @@ import io.github.codetoil.redstoneelectronics.world.item.REItems;
 import io.github.codetoil.redstoneelectronics.world.level.block.state.properties.REProperties;
 import io.github.codetoil.redstoneelectronics.world.level.block.entity.REBlockEntityTypes;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.info.BlockListReport;
 import net.minecraft.data.info.RegistryDumpReport;
 
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
@@ -39,11 +43,18 @@ public class RedstoneElectronics {
     public static final String MODID = "redstoneelectronics";
 
     public RedstoneElectronics() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
         REProperties.init();
         REBlocks.init();
         REItems.init();
         REBlockEntityTypes.init();
+    }
+
+    private void clientSetup(FMLClientSetupEvent event) {
+        ItemBlockRenderTypes.setRenderLayer(REBlocks.RESISTOR_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(REBlocks.ROTARY_DISTRIBUTOR_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(REBlocks.ROTARY_SELECTOR_BLOCK.get(), RenderType.cutout());
     }
 
     private void gatherData(GatherDataEvent event) {
