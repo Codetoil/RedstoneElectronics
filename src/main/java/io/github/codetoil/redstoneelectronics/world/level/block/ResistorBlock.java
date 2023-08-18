@@ -81,7 +81,7 @@ extends DiodeBlock {
             double d0 = (double)pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
             double d1 = (double)pos.getY() + 0.4D + (random.nextDouble() - 0.5D) * 0.2D;
             double d2 = (double)pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
-            float f = random.nextBoolean() ? -0.3125F : 0.0625F;
+            float f = random.nextBoolean() ? -0.3125F : state.getValue(REProperties.RESISTANCE_1_4) * 0.125F - 0.0625F;
 
             double d3 = f * (float)direction.getStepX();
             double d4 = f * (float)direction.getStepZ();
