@@ -75,7 +75,7 @@ public class RedstoneElectronic {
             LOGGER.info("HELLO from Register Block");
             resistorBlock = (Block)new ResistorBlock(Block.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)).setRegistryName(RedstoneElectronic.MODID, "redstone_resistor");
             rotarySelectorBlock = (Block)new RedstoneRotarySelector(Block.Properties.of(Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_selector");
-            rotaryDistributorBlock = (Block)new RedstoneRotaryDistributor(Block.Properties.of((Material)Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_distributer");
+            rotaryDistributorBlock = (Block)new RedstoneRotaryDistributor(Block.Properties.of((Material)Material.DECORATION).strength(0.0f).sound(SoundType.WOOD)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_distributor");
             stickBlock = (Block)new StickBlock(Block.Properties.of(Material.WOOD).strength(2.0f).sound(SoundType.WOOD)).setRegistryName("minecraft", "stick");
             motorBlock = new MotorBlock(Block.Properties.of(Material.PISTON).strength(0.5f));
             blockRegistryEvent.getRegistry().registerAll(resistorBlock, rotarySelectorBlock, rotaryDistributorBlock, stickBlock);
@@ -85,7 +85,7 @@ public class RedstoneElectronic {
         public static void onItemRegistry(RegistryEvent.Register<Item> itemRegistryEvent) {
             resistorBlockItem = new BlockItem(resistorBlock, new Item.Properties().tab(ItemGroup.TAB_REDSTONE)).setRegistryName(RedstoneElectronic.MODID, "redstone_resistor");
             rotarySelectorBlockItem = new BlockItem(rotarySelectorBlock, new Item.Properties().tab(ItemGroup.TAB_REDSTONE)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_selector");
-            rotaryDistributorBlockItem = new BlockItem(rotaryDistributorBlock, new Item.Properties().tab(ItemGroup.TAB_REDSTONE)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_distributer");
+            rotaryDistributorBlockItem = new BlockItem(rotaryDistributorBlock, new Item.Properties().tab(ItemGroup.TAB_REDSTONE)).setRegistryName(RedstoneElectronic.MODID, "redstone_rotary_distributor");
             stickItem = new BlockItem(stickBlock, new Item.Properties().tab(ItemGroup.TAB_MATERIALS)).setRegistryName("minecraft", "stick");
             motorItem = new BlockItem(motorBlock, new Item.Properties().tab(ItemGroup.TAB_REDSTONE)).setRegistryName(RedstoneElectronic.MODID, "redstone_motor");
             itemRegistryEvent.getRegistry().registerAll(resistorBlockItem, rotarySelectorBlockItem, rotaryDistributorBlockItem, stickItem);
