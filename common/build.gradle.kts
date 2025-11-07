@@ -1,12 +1,12 @@
 plugins {
     id("multiloader-common")
-    id("fabric-loom")
+    id("org.quiltmc.loom")
     id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
 }
 
 loom {
-    accessWidenerPath = common.project
-        .file("../../src/main/resources/accesswideners/${commonMod.minecraft_version}-${commonMod.mod_id}.accesswidener")
+    accessWidenerPath = common.project.file("src/main/resources/accesswideners/${commonMod.mod_id}" +
+            "-${commonMod.minecraft_version}.accesswidener")
 }
 
 dependencies {

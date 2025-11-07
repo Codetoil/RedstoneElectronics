@@ -109,36 +109,6 @@ sourceSets.main {
     resources.srcDir("src/generated/resources")
 }
 
-repositories {
-    // Put repositories for dependencies here
-    mavenCentral()
-    maven {
-        name = "Forge"
-        url = uri("https://maven.minecraftforge.net")
-    }
-    maven {
-        name = "Minecraft libraries"
-        url = uri("https://libraries.minecraft.net")
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Sponge"
-                url = uri("https://repo.spongepowered.org/repository/maven-public")
-            }
-        }
-        filter {
-            includeGroupAndSubgroups("org.spongepowered")
-        }
-    }
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    // flatDir {
-    //     dir 'libs'
-    // }
-}
-
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
@@ -152,6 +122,7 @@ dependencies {
     // in your development environment, helping you catch issues early.
     annotationProcessor ("net.minecraftforge:eventbus-validator:7.0-beta.12")
 
+    implementation ("org.spongepowered:mixin:0.8.7")
     annotationProcessor ("org.spongepowered:mixin:0.8.7:processor")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0") as Any)
@@ -177,6 +148,6 @@ eclipse {
 
 tasks {
     processResources {
-        exclude("${commonMod.mod_id}.accesswidener")
+        exclude("${commonMod.mod_id}-${commonMod.minecraft_version}.accesswidener")
     }
 }

@@ -1,6 +1,6 @@
 plugins {
-    id ("multiloader-loader")
-    id ("fabric-loom")
+    id("multiloader-loader")
+    id("org.quiltmc.loom")
     id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 dependencies {
@@ -16,7 +16,8 @@ dependencies {
 }
 
 loom {
-    accessWidenerPath = common.project.file("../../src/main/resources/accesswideners/${commonMod.minecraft_version}-${commonMod.mod_id}.accesswidener")
+    accessWidenerPath = common.project.file("src/main/resources/accesswideners/${commonMod.mod_id}" +
+            "-${commonMod.minecraft_version}.accesswidener")
 
     runs {
         getByName("client") {
@@ -37,7 +38,7 @@ loom {
 }
 
 tasks.named<ProcessResources>("processResources") {
-    val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.mod_id}.accesswidener")
+    val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.mod_id}-${commonMod.minecraft_version}.accesswidener")
 
     from(awFile.parentFile) {
         include(awFile.name)

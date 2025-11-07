@@ -26,12 +26,13 @@ repositories {
     exclusiveContent {
         forRepositories(
             maven("https://maven.parchmentmc.org") { name = "ParchmentMC" },
-            maven("https://maven.neoforged.net/releases") { name = "NeoForge" },
         )
         filter { includeGroup("org.parchmentmc.data") }
     }
-    maven("https://maven.quiltmc.org/repository/release/")
-    maven("https://maven.minecraftforge.net")
+    maven("https://maven.fabricmc.net/") { name = "FabricMC" }
+    maven("https://maven.minecraftforge.net") { name = "MinecraftForge" }
+    maven("https://maven.neoforged.net/releases") { name = "NeoForge" }
+    maven("https://maven.quiltmc.org/repository/release") { name = "QuiltMC" }
     maven("https://www.cursemaven.com")
     maven("https://api.modrinth.com/maven") {
         name = "Modrinth"
@@ -39,46 +40,31 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
-    maven("https://maven.resourcefulbees.com/repository/maven-public/") { name = "ResourcefulBees" }
-    maven("https://maven.terraformersmc.com/releases/") { name = "TerraformersMC" }
-    maven("https://maven.isxander.dev/releases")
-    maven("https://maven.isxander.dev/snapshots")
-    maven("https://maven.quiltmc.org/repository/release")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://maven.ladysnake.org/releases") { name = "Ladysnake Libs" }
-    maven("https://maven.theillusivec4.top/")
-    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
-
-    maven("https://maven.jamieswhiteshirt.com/libs-release") {
-        content {
-            includeGroup("com.jamieswhitefshirt")
-        }
-    }
-
-    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
 }
 
 tasks {
     processResources {
         val expandProps = mapOf(
-            "javaVersion" to commonMod.propOrNull("java_version"),
-            "modId" to commonMod.mod_id,
-            "modName" to commonMod.mod_name,
-            "modVersion" to commonMod.version,
-            "modGroup" to commonMod.group,
-            "modAuthor" to commonMod.mod_author,
-            "modDescription" to commonMod.mod_description,
-            "modLicense" to commonMod.license,
-            "modGitHub" to commonMod.mod_github,
-            "modDiscord" to commonMod.mod_author_discord,
-            "minecraftVersion" to commonMod.propOrNull("minecraft_version"),
-            "fabricLoaderVersion" to commonMod.propOrNull("fabric_loader_version"),
-            "fabricApiVersion" to commonMod.propOrNull("fabric_version"),
-            "minecraftForgeVersion" to commonMod.propOrNull("minecraftforge_version"),
-            "neoForgeVersion" to commonMod.propOrNull("neoforge_version"),
-            "quiltLoaderVersion" to commonMod.propOrNull("quilt_loader_version"),
-            "quiltedFabricApiVersion" to commonMod.propOrNull("quilted_fabric_api"),
-            "minecraftVersion" to commonMod.propOrNull("minecraft_version"),
+            "java_version" to commonMod.propOrNull("java_version"),
+            "mod_id" to commonMod.mod_id,
+            "mod_name" to commonMod.mod_name,
+            "version" to commonMod.version,
+            "mod_group" to commonMod.group,
+            "mod_author" to commonMod.mod_author,
+            "mod_description" to commonMod.mod_description,
+            "license" to commonMod.license,
+            "mod_github" to commonMod.mod_github,
+            "mod_author_discord" to commonMod.mod_author_discord,
+            "minecraft_version" to commonMod.propOrNull("minecraft_version"),
+            "fabric_loader_version" to commonMod.propOrNull("fabric_loader_version"),
+            "fabric_api_version" to commonMod.propOrNull("fabric_version"),
+            "minecraftforge_version" to commonMod.propOrNull("minecraftforge_version"),
+            "neoforge_version" to commonMod.propOrNull("neoforge_version"),
+            "quilt_loader_version" to commonMod.propOrNull("quilt_loader_version"),
+            "quilted_fabric_api_version" to commonMod.propOrNull("quilted_fabric_api_version"),
+            "minecraft_version" to commonMod.propOrNull("minecraft_version"),
+            "minecraft_version_range" to commonMod.propOrNull("minecraft_version_range"),
+            "neoforge_loader_version_range" to commonMod.propOrNull("neoforge_loader_version_range"),
         ).filterValues { it?.isNotEmpty() == true }.mapValues { (_, v) -> v!! }
 
         val jsonExpandProps = expandProps.mapValues { (_, v) -> v.replace("\n", "\\\\n") }
@@ -96,5 +82,5 @@ tasks {
 }
 
 tasks.named("processResources") {
-    dependsOn(":common:${commonMod.propOrNull("minecraft_version")}:stonecutterGenerate")
+    dependsOn(":common:${commonMod.minecraft_version}:stonecutterGenerate")
 }

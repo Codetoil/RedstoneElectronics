@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(value=RedstoneElectronics.MODID)
 public class RedstoneElectronics {
     public static final Logger logger = LogManager.getLogger();
-    public static final String MODID = /*$ mod_version */;
+    public static final String MODID = "redstone_electronics";
 
     public RedstoneElectronics() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
