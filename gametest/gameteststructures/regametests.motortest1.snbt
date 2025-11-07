@@ -25,7 +25,7 @@
       }
     },
     {
-      Name: "redstoneelectronics:redstone_rotary_selector",
+      Name: "redstone_electronics:redstone_rotary_selector",
       Properties: {
         driven: "true",
         facing: "north",
@@ -34,7 +34,7 @@
       }
     },
     {
-      Name: "redstoneelectronics:servo_motor",
+      Name: "redstone_electronics:servo_motor",
       Properties: {
         facing: "down",
         spinning: "false",

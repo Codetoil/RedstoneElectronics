@@ -1,0 +1,40 @@
+plugins {
+    id ("multiloader-loader")
+    id ("org.quiltmc.loom") version "1.7.4"
+}
+
+loom {
+    // Loom and Loader both use this block in order to gather more information about your mod.
+    mods {
+        // This should match your mod id.
+        "${mod_id}" {
+            // Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
+            sourceSet("main")
+            // If you shade (directly include classes, not JiJ) a dependency into your mod, include it here using one of these methods:
+            // dependency("com.example.shadowedmod:1.2.3")
+            // configuration("exampleShadedConfigurationName")
+        }
+    }
+
+    def aw = project(':common').file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
+}
+
+// All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
+// See https://docs.gradle.org/current/userguide/platforms.html for information on how version catalogs work.
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
+    modImplementation "${quilt_loader_version}"
+
+    // QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
+    // Quilted Fabric API will automatically pull in the correct QSL version.
+    modImplementation "${quilted_fabric_api}"
+
+    implementation("io.github.llamalad7:mixinextras-fabric:0.5.0")
+}

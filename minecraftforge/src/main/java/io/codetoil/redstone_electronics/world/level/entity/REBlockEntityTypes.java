@@ -1,0 +1,43 @@
+/**
+ *  Redstone Electronics is a MC Mod that adds redstone components.
+ *  Redstone Electronics (C) 2020-2023  Codetoil
+ * <p>
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * <p>
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * <p>
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package io.codetoil.redstone_electronics.world.level.block.entity;
+
+import io.codetoil.redstone_electronics.RedstoneElectronics;
+import io.codetoil.redstone_electronics.world.level.block.REBlocks;
+import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlock;
+import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlockEntity;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
+public class REBlockEntityTypes {
+    private static final DeferredRegister<BlockEntityType<?>> RE_BLOCK_ENTITIES =
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, RedstoneElectronics.MODID);
+
+    public static final RegistryObject<BlockEntityType<ServoMotorBlockEntity>> SERVO_MOTOR_BLOCK_ENTITY_TYPE =
+            RE_BLOCK_ENTITIES.register("servo_motor", () ->
+                    BlockEntityType.Builder.of(((ServoMotorBlock) REBlocks.SERVO_MOTOR_BLOCK.get())::newBlockEntity,
+                            REBlocks.SERVO_MOTOR_BLOCK.get()).build(null));
+
+    public static void init() {
+        RE_BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
+}
