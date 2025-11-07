@@ -4,6 +4,12 @@ plugins {
     id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
+fletchingTable {
+    accessConverter.register("main") {
+        add("accesswideners/${commonMod.minecraft_version}-${commonMod.mod_id}.accesswidener")
+    }
+}
+
 neoForge {
     version = commonMod.neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists
@@ -23,7 +29,7 @@ neoForge {
             client()
         }
         register("serverData") {
-            if (stonecutter.compare(commonMod.minecraft_version, "1.21.2") < 0) data() else serverData()
+            if (stonecutter.eval(stonecutter.current.version, "<=1.21.2")) data() else serverData()
 
             // DataGen can be run by - "./gradlew :neoforge:runData" in Terminal.
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
@@ -34,7 +40,7 @@ neoForge {
         }
     }
     mods {
-        register("${commonMod.mod_id}") {
+        register(commonMod.mod_id) {
             sourceSet(sourceSets.main.get())
         }
     }
@@ -42,7 +48,7 @@ neoForge {
 
 dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.0")) {
-        // jarJar.ranged(it, "[0.5.0,)")
+        //jarJar.ranged(this, "[0.5.0,)")
     }
 }
 

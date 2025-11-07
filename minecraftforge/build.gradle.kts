@@ -27,10 +27,10 @@ minecraft {
     // Additional setup is needed to use their mappings: https://parchmentmc.org/docs/getting-started
     //
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings ("parchment", "${commonMod.parchment_minecraft}-${commonMod.parchment_version}")
+    mappings ("parchment", "${commonMod.parchment_version}-${commonMod.parchment_minecraft}")
 
     // Forge 1.20.6 and newer use official mappings at runtime, so we shouldn't reobf from official to SRG
-    reobf = stonecutter.eval(stonecutter.current.version, ">=1.20.6")
+    reobf = stonecutter.eval(stonecutter.current.version, "<1.20.6")
 
     // When true, this property will have all Eclipse/IntelliJ IDEA run configurations run the "prepareX" task for the given run configuration before launching the game.
     // In most cases, it is not necessary to enable.
@@ -127,7 +127,7 @@ dependencies {
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0") as Any)
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
-        //jarJar.ranged(it, "[0.5.0,)")
+        jarJar.ranged(this, "[0.5.0,)")
     }
 }
 

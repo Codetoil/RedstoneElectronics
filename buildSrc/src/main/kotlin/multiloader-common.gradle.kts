@@ -31,6 +31,9 @@ repositories {
     }
     maven("https://maven.fabricmc.net/") { name = "FabricMC" }
     maven("https://maven.minecraftforge.net") { name = "MinecraftForge" }
+    maven("https://libraries.minecraft.net") {
+        name = "Minecraft libraries"
+    }
     maven("https://maven.neoforged.net/releases") { name = "NeoForge" }
     maven("https://maven.quiltmc.org/repository/release") { name = "QuiltMC" }
     maven("https://www.cursemaven.com")
