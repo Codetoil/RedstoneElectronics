@@ -5,8 +5,10 @@ plugins {
 }
 
 loom {
-    accessWidenerPath = common.project.file("src/main/resources/accesswideners/${commonMod.mod_id}" +
-            "-${commonMod.minecraft_version}.accesswidener")
+    accessWidenerPath = common.project.file(
+        "src/main/resources/accesswideners/${commonMod.mod_id}" +
+                "-${commonMod.minecraft_version}.accesswidener"
+    )
 
     runs {
         getByName("client") {

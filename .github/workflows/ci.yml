@@ -4,7 +4,7 @@
 # against bad commits.
 
 name: ci
-on: [pull_request, push, release]
+on: [ pull_request, push, release ]
 
 jobs:
   build:
@@ -73,7 +73,7 @@ jobs:
           20
         ]
         # and run on both Linux and Windows
-        os: [ubuntu-latest, windows-latest]
+        os: [ ubuntu-latest, windows-latest ]
         exclude:
           - dist: microsoft
             java: 18

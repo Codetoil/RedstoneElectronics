@@ -1,19 +1,19 @@
 /**
- *  Redstone Electronics is a MC Mod that adds redstone components.
- *  Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics is a MC Mod that adds redstone components.
+ * Redstone Electronics (C) 2020-2023  Codetoil
  * <p>
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * <p>
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * <p>
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package io.codetoil.redstone_electronics;
@@ -37,7 +37,7 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(value=RedstoneElectronics.MODID)
+@Mod(value = RedstoneElectronics.MODID)
 public class RedstoneElectronics {
     public static final Logger logger = LogManager.getLogger();
     public static final String MODID = "redstone_electronics";
@@ -59,8 +59,7 @@ public class RedstoneElectronics {
 
     private void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
-        if (event.includeReports())
-        {
+        if (event.includeReports()) {
             gen.m_123914_(new BlockListReport(gen));
             gen.m_123914_(new RegistryDumpReport(gen));
         }

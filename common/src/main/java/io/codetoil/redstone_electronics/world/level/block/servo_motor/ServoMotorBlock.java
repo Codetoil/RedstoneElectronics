@@ -1,19 +1,19 @@
 /**
- *  Redstone Electronics is a MC Mod that adds redstone components.
- *  Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics is a MC Mod that adds redstone components.
+ * Redstone Electronics (C) 2020-2023  Codetoil
  * <p>
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * <p>
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * <p>
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package io.codetoil.redstone_electronics.world.level.block.servo_motor;
@@ -47,13 +47,13 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class ServoMotorBlock
-extends DirectionalBlock implements EntityBlock {
+        extends DirectionalBlock implements EntityBlock {
     public ServoMotorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
-        .setValue(FACING, Direction.NORTH)
-        .setValue(REProperties.SPINNING, Boolean.FALSE)
-        .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE));
+                .setValue(FACING, Direction.NORTH)
+                .setValue(REProperties.SPINNING, Boolean.FALSE)
+                .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE));
     }
 
     @Override
@@ -83,25 +83,21 @@ extends DirectionalBlock implements EntityBlock {
         return null;
     }
 
-    private void checkIfItShouldRotate(ServerLevel level, BlockPos pos, BlockState state)
-    {
+    private void checkIfItShouldRotate(ServerLevel level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         boolean isPowered = false;
-        for (Direction direction1: Direction.values()) {
+        for (Direction direction1 : Direction.values()) {
             isPowered = isPowered || (direction1 != direction && level.m_46616_(pos.m_142300_(direction1), direction1));
         }
         if (isPowered
                 && !state.getValue(REProperties.HAS_BEEN_ACTIVATED)
-                && !state.getValue(REProperties.SPINNING))
-        {
-            if (new ServoMotorStructureResolver(level, pos, direction).resolve())
-            {
+                && !state.getValue(REProperties.SPINNING)) {
+            if (new ServoMotorStructureResolver(level, pos, direction).resolve()) {
                 level.blockEvent(pos, this, 0, 0);
             }
         }
         if (!isPowered
-                && state.getValue(REProperties.HAS_BEEN_ACTIVATED))
-        {
+                && state.getValue(REProperties.HAS_BEEN_ACTIVATED)) {
             level.blockEvent(pos, this, 1, 0);
         }
     }
@@ -137,25 +133,19 @@ extends DirectionalBlock implements EntityBlock {
     public boolean triggerEvent(BlockState state, @NotNull Level level, @NotNull BlockPos pos,
                                 int id, int param) {
         Direction direction = state.getValue(FACING);
-        if (id == 0)
-        {
-            if (!this.startRotation(level, pos, direction))
-            {
+        if (id == 0) {
+            if (!this.startRotation(level, pos, direction)) {
                 return false;
             }
-        }
-        else if (id == 1)
-        {
+        } else if (id == 1) {
             if (!level.setBlock(pos, level.getBlockState(pos)
-                .setValue(REProperties.HAS_BEEN_ACTIVATED, false), 
-                Block.UPDATE_CLIENTS))
-            {
+                            .setValue(REProperties.HAS_BEEN_ACTIVATED, false),
+                    Block.UPDATE_CLIENTS)) {
                 return false;
             }
         }
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null)
-        {
+        if (blockEntity == null) {
             return false;
         }
         return blockEntity.triggerEvent(id, param);
@@ -163,30 +153,27 @@ extends DirectionalBlock implements EntityBlock {
 
     private boolean startRotation(Level level, BlockPos motorPos, Direction direction) {
         ServoMotorStructureResolver servoMotorStructureResolver;
-        if (!(servoMotorStructureResolver = new ServoMotorStructureResolver(level, motorPos, direction)).resolve())
-        {
+        if (!(servoMotorStructureResolver = new ServoMotorStructureResolver(level, motorPos, direction)).resolve()) {
             return false;
         }
         BlockPos finalPos = servoMotorStructureResolver.getBlockToCycle();
         if (!level.setBlock(motorPos, level.getBlockState(motorPos)
-            .setValue(REProperties.SPINNING, true), 
-            Block.UPDATE_CLIENTS))
-        {
+                        .setValue(REProperties.SPINNING, true),
+                Block.UPDATE_CLIENTS)) {
             return false;
         }
         if (!level.setBlock(finalPos, level.getBlockState(finalPos)
-            .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.ROTATING),
-            Block.UPDATE_CLIENTS))
-        {
+                        .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.ROTATING),
+                Block.UPDATE_CLIENTS)) {
             return false;
         }
         ServoMotorBlockEntity blockEntity = new ServoMotorBlockEntity(motorPos,
-            level.getBlockState(motorPos), 
-            finalPos, 
-            servoMotorStructureResolver
-                .getBlocksToRotate(),
-            direction,
-            servoMotorStructureResolver.getGoal());
+                level.getBlockState(motorPos),
+                finalPos,
+                servoMotorStructureResolver
+                        .getBlocksToRotate(),
+                direction,
+                servoMotorStructureResolver.getGoal());
         level.setBlockEntity(blockEntity);
         return true;
     }
@@ -194,9 +181,9 @@ extends DirectionalBlock implements EntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
-            .setValue(FACING, context.getNearestLookingDirection().getOpposite().getOpposite())
-            .setValue(REProperties.SPINNING, Boolean.FALSE)
-            .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE);
+                .setValue(FACING, context.getNearestLookingDirection().getOpposite().getOpposite())
+                .setValue(REProperties.SPINNING, Boolean.FALSE)
+                .setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE);
     }
 
     @Nullable

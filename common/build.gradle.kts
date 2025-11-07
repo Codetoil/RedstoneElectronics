@@ -5,20 +5,22 @@ plugins {
 }
 
 loom {
-    accessWidenerPath = common.project.file("src/main/resources/accesswideners/${commonMod.mod_id}" +
-            "-${commonMod.minecraft_version}.accesswidener")
+    accessWidenerPath = common.project.file(
+        "src/main/resources/accesswideners/${commonMod.mod_id}" +
+                "-${commonMod.minecraft_version}.accesswidener"
+    )
 }
 
 dependencies {
-    minecraft ("com.mojang:minecraft:${commonMod.minecraft_version}")
-    mappings (loom.layered {
+    minecraft("com.mojang:minecraft:${commonMod.minecraft_version}")
+    mappings(loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${commonMod.parchment_minecraft}:${commonMod.parchment_version}@zip")
     })
 
-    compileOnly ("org.spongepowered:mixin:0.8.7")
-    compileOnly ("io.github.llamalad7:mixinextras-common:0.5.0")
-    annotationProcessor ("io.github.llamalad7:mixinextras-common:0.5.0")
+    compileOnly("org.spongepowered:mixin:0.8.7")
+    compileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
+    annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0")
 }
 dependencies {
 }

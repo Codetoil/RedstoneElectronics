@@ -1,19 +1,19 @@
 /**
- *  Redstone Electronics is a MC Mod that adds redstone components.
- *  Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics is a MC Mod that adds redstone components.
+ * Redstone Electronics (C) 2020-2023  Codetoil
  * <p>
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * <p>
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * <p>
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package io.codetoil.redstone_electronics.world.level.block.servo_motor;
@@ -41,8 +41,8 @@ import io.codetoil.redstone_electronics.world.level.block.state.properties.Selec
 import org.jetbrains.annotations.NotNull;
 
 public class ServoMotorBlockEntity extends BlockEntity {
-    private BlockPos cycledPos;
     private final List<BlockPos> rotatedPositions = Lists.newArrayList();
+    private BlockPos cycledPos;
     private Direction direction;
     private SelectorOrientation goalOrientation;
     private float progress;
@@ -66,9 +66,9 @@ public class ServoMotorBlockEntity extends BlockEntity {
         tag.put("cycledPos", NbtUtils.writeBlockPos(this.cycledPos));
         ListTag rotatedTag = new ListTag();
         rotatedTag.addAll(rotatedPositions
-            .stream()
-            .map(NbtUtils::writeBlockPos)
-            .toList());
+                .stream()
+                .map(NbtUtils::writeBlockPos)
+                .toList());
         tag.putInt("rotatedPositionsLength", rotatedTag.size());
         tag.put("rotatedPositions", rotatedTag);
         tag.putInt("direction", this.direction.get3DDataValue());
@@ -81,9 +81,9 @@ public class ServoMotorBlockEntity extends BlockEntity {
         int rotatedPositionsSize = tag.getInt("rotatedPositionsLength");
         ListTag rotatedTags = tag.getList("rotatedPositions", rotatedPositionsSize);
         this.rotatedPositions.addAll(rotatedTags.stream()
-            .map(rotatedTag -> (CompoundTag) rotatedTag)
-            .map(NbtUtils::readBlockPos)
-            .toList());
+                .map(rotatedTag -> (CompoundTag) rotatedTag)
+                .map(NbtUtils::readBlockPos)
+                .toList());
         this.direction = Direction.from3DDataValue(tag.getInt("direction"));
         this.progressO = this.progress = tag.getFloat("progress");
         this.goalOrientation = SelectorOrientation.valueOf(tag.getString("goal"));
@@ -113,13 +113,13 @@ public class ServoMotorBlockEntity extends BlockEntity {
             this.level.removeBlockEntity(this.worldPosition);
             this.setRemoved();
             this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition)
-                .setValue(REProperties.SPINNING, false)
-                .setValue(REProperties.HAS_BEEN_ACTIVATED, true),
-                Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
+                            .setValue(REProperties.SPINNING, false)
+                            .setValue(REProperties.HAS_BEEN_ACTIVATED, true),
+                    Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
             this.level.setBlock(this.cycledPos, this.level.getBlockState(this.cycledPos)
-                .setValue(REProperties.DRIVEN, true)
-                .setValue(REProperties.SELECTOR_ORIENTATION, this.goalOrientation),
-                Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
+                            .setValue(REProperties.DRIVEN, true)
+                            .setValue(REProperties.SELECTOR_ORIENTATION, this.goalOrientation),
+                    Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
     }
 

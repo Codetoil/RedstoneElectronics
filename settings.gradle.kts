@@ -20,21 +20,21 @@ plugins {
 rootProject.name = "Redstone Electronics"
 
 val commonVersions = providers.gradleProperty("stonecutter_enabled_common_versions")
-        .orNull?.split(",")?.map { it.trim() } ?: emptyList()
+    .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val fabricVersions = providers.gradleProperty("stonecutter_enabled_fabric_versions")
-        .orNull?.split(",")?.map { it.trim() } ?: emptyList()
+    .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val minecraftforgeVersions = providers.gradleProperty("stonecutter_enabled_minecraftforge_versions")
-        .orNull?.split(",")?.map { it.trim() } ?: emptyList()
+    .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val neoforgeVersions = providers.gradleProperty("stonecutter_enabled_neoforge_versions")
-        .orNull?.split(",")?.map { it.trim() } ?: emptyList()
+    .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val quiltVersions = providers.gradleProperty("stonecutter_enabled_quilt_versions")
-        .orNull?.split(",")?.map { it.trim() } ?: emptyList()
+    .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val dists = mapOf(
-        "common" to commonVersions,
-        "fabric" to fabricVersions,
-        "minecraftforge" to minecraftforgeVersions,
-        "neoforge" to neoforgeVersions,
-        "quilt" to quiltVersions
+    "common" to commonVersions,
+    "fabric" to fabricVersions,
+    "minecraftforge" to minecraftforgeVersions,
+    "neoforge" to neoforgeVersions,
+    "quilt" to quiltVersions
 )
 val uniqueVersions = dists.values.flatten().distinct()
 println(uniqueVersions)

@@ -1,25 +1,26 @@
 /**
- *  Redstone Electronics is a MC Mod that adds redstone components.
- *  Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics is a MC Mod that adds redstone components.
+ * Redstone Electronics (C) 2020-2023  Codetoil
  * <p>
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * <p>
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * <p>
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package io.codetoil.redstone_electronics.world.level.block;
 
 import io.codetoil.redstone_electronics.world.level.block.state.properties.REProperties;
 import io.codetoil.redstone_electronics.world.level.block.state.properties.SelectorOrientation;
+
 import java.util.EnumSet;
 import java.util.Random;
 
@@ -43,14 +44,14 @@ import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.NotNull;
 
 public class RedstoneRotaryDistributorBlock
-extends DiodeBlock {
+        extends DiodeBlock {
     public RedstoneRotaryDistributorBlock(BlockBehaviour.Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any()
-            .setValue(FACING, Direction.NORTH)
-            .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.FRONT)
-            .setValue(POWERED, Boolean.FALSE)
-            .setValue(REProperties.DRIVEN, Boolean.FALSE));
+                .setValue(FACING, Direction.NORTH)
+                .setValue(REProperties.SELECTOR_ORIENTATION, SelectorOrientation.FRONT)
+                .setValue(POWERED, Boolean.FALSE)
+                .setValue(REProperties.DRIVEN, Boolean.FALSE));
     }
 
     protected int getDelay(@NotNull BlockState state) {
@@ -71,8 +72,8 @@ extends DiodeBlock {
         BlockPos blockpos2 = pos.m_142300_(direction.getClockWise());
         BlockPos blockpos3 = pos.m_142300_(direction.getCounterClockWise());
         if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
-         || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
+                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
         level.neighborChanged(blockpos1, this, pos);
@@ -94,13 +95,13 @@ extends DiodeBlock {
     public void m_7100_(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
         if (state.getValue(POWERED)) {
             Direction direction = state.getValue(FACING);
-            double d0 = (double)pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
-            double d1 = (double)pos.getY() + 0.4D + (random.nextDouble() - 0.5D) * 0.2D;
-            double d2 = (double)pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+            double d0 = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
+            double d1 = (double) pos.getY() + 0.4D + (random.nextDouble() - 0.5D) * 0.2D;
+            double d2 = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;
             float f = random.nextBoolean() ? -0.3125F : 0.0625F;
 
-            double d3 = f * (float)direction.getStepX();
-            double d4 = f * (float)direction.getStepZ();
+            double d3 = f * (float) direction.getStepX();
+            double d4 = f * (float) direction.getStepZ();
             level.addParticle(DustParticleOptions.REDSTONE, d0 + d3, d1, d2 + d4,
                     0.0D, 0.0D, 0.0D);
         }

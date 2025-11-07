@@ -14,9 +14,11 @@ fletchingTable {
     }
 }
 
-println ("Java: ${System.getProperty("java.version")}," +
-        " JVM: ${System.getProperty("java.vm.version")}" +
-        " (${System.getProperty("java.vendor")}), Arch: ${System.getProperty("os.arch")}")
+println(
+    "Java: ${System.getProperty("java.version")}," +
+            " JVM: ${System.getProperty("java.vm.version")}" +
+            " (${System.getProperty("java.vendor")}), Arch: ${System.getProperty("os.arch")}"
+)
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
     // Channel:   Version:
@@ -27,7 +29,7 @@ minecraft {
     // Additional setup is needed to use their mappings: https://parchmentmc.org/docs/getting-started
     //
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings ("parchment", "${commonMod.parchment_version}-${commonMod.parchment_minecraft}")
+    mappings("parchment", "${commonMod.parchment_version}-${commonMod.parchment_minecraft}")
 
     // Forge 1.20.6 and newer use official mappings at runtime, so we shouldn't reobf from official to SRG
     reobf = stonecutter.eval(stonecutter.current.version, "<1.20.6")
@@ -59,7 +61,7 @@ minecraft {
     runs {
         // applies to all the run configs below
         configureEach {
-            workingDirectory (project.file("run"))
+            workingDirectory(project.file("run"))
 
             // Optional additional logging. The markers can be added/remove as needed, separated by commas.
             // "SCAN": For mods scan.
@@ -67,39 +69,47 @@ minecraft {
             // "REGISTRYDUMP": For getting the contents of all registries.
 //            property 'forge.logging.markers', 'REGISTRIES'
 
-            property ("forge.logging.console.level", "debug")
+            property("forge.logging.console.level", "debug")
 
             // Recommended for development - enables more descriptive errors at the cost of slower startup and registration.
-            property ("eventbus.api.strictRuntimeChecks", "true")
+            property("eventbus.api.strictRuntimeChecks", "true")
 
-            arg ("-mixin.config=${commonMod.mod_id}.mixins.json")
+            arg("-mixin.config=${commonMod.mod_id}.mixins.json")
 
             //it = "MinecraftForge ${it.name.capitalize()} (${project.path})"
         }
 
         register("client") {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property ("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
         }
 
         register("server") {
-            property ("forge.enabledGameTestNamespaces", commonMod.mod_id)
-            args ("--nogui")
+            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            args("--nogui")
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         register("gameTestServer") {
-            property ("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
         }
 
         register("data") {
             // example of overriding the workingDirectory set in configureEach above
-            workingDirectory (project.file("run-data"))
+            workingDirectory(project.file("run-data"))
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args ("--mod", commonMod.mod_id, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/"))
+            args(
+                "--mod",
+                commonMod.mod_id,
+                "--all",
+                "--output",
+                file("src/generated/resources/"),
+                "--existing",
+                file("src/main/resources/")
+            )
         }
     }
 }
@@ -115,15 +125,15 @@ dependencies {
     // The "userdev" classifier will be requested and setup by ForgeGradle.
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
-    minecraft ("net.minecraftforge:forge:${commonMod.minecraft_version}-${commonMod.forge_version}")
+    minecraft("net.minecraftforge:forge:${commonMod.minecraft_version}-${commonMod.forge_version}")
 
     // Forge 1.21.6+ uses EventBus 7, which shifts most of its runtime validation to compile-time via an annotation processor
     // to improve performance in production environments. This line is required to enable said compile-time validation
     // in your development environment, helping you catch issues early.
-    annotationProcessor ("net.minecraftforge:eventbus-validator:7.0-beta.12")
+    annotationProcessor("net.minecraftforge:eventbus-validator:7.0-beta.12")
 
-    implementation ("org.spongepowered:mixin:0.8.7")
-    annotationProcessor ("org.spongepowered:mixin:0.8.7:processor")
+    implementation("org.spongepowered:mixin:0.8.7")
+    annotationProcessor("org.spongepowered:mixin:0.8.7:processor")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0") as Any)
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
@@ -133,8 +143,8 @@ dependencies {
 
 mixin {
     // MixinGradle Settings
-    add ("main", "${commonMod.mod_id}.refmap.json")
-    config ("${commonMod.mod_id}.mixins.json")
+    add("main", "${commonMod.mod_id}.refmap.json")
+    config("${commonMod.mod_id}.mixins.json")
 
     dumpTargetOnFailure = true
 }
@@ -143,7 +153,7 @@ eclipse {
     // Run everytime eclipse builds the code
     //autoBuildTasks genEclipseRuns
     // Run when importing the project
-    synchronizationTasks ("genEclipseRuns")
+    synchronizationTasks("genEclipseRuns")
 }
 
 tasks {
