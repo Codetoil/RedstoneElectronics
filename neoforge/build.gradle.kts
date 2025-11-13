@@ -1,6 +1,6 @@
 plugins {
     id("multiloader-loader")
-    id("net.neoforged.moddev") version "2.0.116"
+    id("net.neoforged.moddev")
     id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 

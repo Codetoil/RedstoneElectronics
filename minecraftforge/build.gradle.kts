@@ -2,9 +2,9 @@ plugins {
     id("multiloader-loader")
     id("eclipse")
     id("idea")
-    id("net.minecraftforge.gradle") version "[6.0.46,6.2)"
-    id("org.spongepowered.mixin") version "0.7.+"
-    id("org.parchmentmc.librarian.forgegradle") version "1.+"
+    id("net.minecraftforge.gradle")
+    id("org.spongepowered.mixin")
+    id("org.parchmentmc.librarian.forgegradle")
     id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
