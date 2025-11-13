@@ -31,16 +31,11 @@ import net.minecraft.data.info.RegistryDumpReport;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-@Mod(value = RedstoneElectronics.MODID)
+@Mod(value = Constants.MODID)
 public class RedstoneElectronics {
-    public static final Logger logger = LogManager.getLogger();
-    public static final String MODID = "redstone_electronics";
 
     public RedstoneElectronics() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -60,8 +55,8 @@ public class RedstoneElectronics {
     private void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         if (event.includeReports()) {
-            gen.m_123914_(new BlockListReport(gen));
-            gen.m_123914_(new RegistryDumpReport(gen));
+            gen.addProvider(new BlockListReport(gen));
+            gen.addProvider(new RegistryDumpReport(gen));
         }
     }
 }

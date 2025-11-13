@@ -1,28 +1,32 @@
 plugins {
     id("multiloader-common")
     id("org.quiltmc.loom")
-    id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
 }
 
 loom {
-    accessWidenerPath = common.project.file(
-        "src/main/resources/accesswideners/${commonMod.mod_id}" +
-                "-${commonMod.minecraft_version}.accesswidener"
-    )
+    accessWidenerPath =
+        common.project.file("../../src/main/resources/accesswideners/${commonMod.minecraft_version}-${mod.id}.accesswidener")
+
+    mixin {
+        useLegacyMixinAp = false
+    }
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${commonMod.minecraft_version}")
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${commonMod.parchment_minecraft}:${commonMod.parchment_version}@zip")
+        commonMod.propOrNull("parchment_mappings")?.let { parchmentVersion ->
+            if (parchmentVersion != "") parchment("org.parchmentmc.data:parchment-${commonMod.minecraft_version}:$parchmentVersion@zip")
+        }
     })
 
-    compileOnly("org.spongepowered:mixin:0.8.7")
-    compileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
-    annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0")
-}
-dependencies {
+    compileOnly("org.spongepowered:mixin:0.8.5")
+
+    "io.github.llamalad7:mixinextras-common:0.5.0".let {
+        compileOnly(it)
+        annotationProcessor(it)
+    }
 }
 
 val commonJava: Configuration by configurations.creating {
@@ -46,4 +50,3 @@ artifacts {
         }
     }
 }
-

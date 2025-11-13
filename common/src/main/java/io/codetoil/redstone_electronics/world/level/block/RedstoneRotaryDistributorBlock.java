@@ -24,6 +24,8 @@ import io.codetoil.redstone_electronics.world.level.block.state.properties.Selec
 import java.util.EnumSet;
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DiodeBlock;
@@ -68,12 +70,12 @@ public class RedstoneRotaryDistributorBlock
 
     protected void updateNeighborsInFront(@NotNull Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
-        BlockPos blockpos1 = pos.m_142300_(direction.getOpposite());
-        BlockPos blockpos2 = pos.m_142300_(direction.getClockWise());
-        BlockPos blockpos3 = pos.m_142300_(direction.getCounterClockWise());
-        if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
-                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
-                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
+        BlockPos blockpos1 = pos.relative(direction.getOpposite());
+        BlockPos blockpos2 = pos.relative(direction.getClockWise());
+        BlockPos blockpos3 = pos.relative(direction.getCounterClockWise());
+        if (onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
+                || onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+                || onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
         level.neighborChanged(blockpos1, this, pos);
@@ -91,8 +93,7 @@ public class RedstoneRotaryDistributorBlock
         return Math.max(this.getInputSignal((Level) blockGetter, pos, state) - 1, 0);
     }
 
-    @OnlyIn(value = Dist.CLIENT)
-    public void m_7100_(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
+    public void animateTick(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
         if (state.getValue(POWERED)) {
             Direction direction = state.getValue(FACING);
             double d0 = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.2D;

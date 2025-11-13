@@ -82,8 +82,8 @@ public class RedstoneRotarySelectorBlock
     protected int getInputSignal(Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         direction = state.getValue(REProperties.SELECTOR_ORIENTATION).reverseApply(direction);
-        BlockPos blockpos = pos.m_142300_(direction);
-        int i = level.m_46681_(blockpos, direction);
+        BlockPos blockpos = pos.relative(direction);
+        int i = level.getSignal(blockpos, direction);
         if (i >= 15) {
             return i;
         }
@@ -100,7 +100,7 @@ public class RedstoneRotarySelectorBlock
         return blockState.getValue(FACING) == direction ? this.getOutputSignal(blockGetter, pos, blockState) : 0;
     }
 
-    @OnlyIn(value = Dist.CLIENT)
+
     public void m_7100_(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
         if (state.getValue(POWERED)) {
             Direction direction = state.getValue(FACING);
@@ -118,12 +118,12 @@ public class RedstoneRotarySelectorBlock
 
     protected void updateNeighborsInFront(@NotNull Level level, BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
-        BlockPos blockpos1 = pos.m_142300_(direction.getOpposite());
-        BlockPos blockpos2 = pos.m_142300_(direction.getClockWise());
-        BlockPos blockpos3 = pos.m_142300_(direction.getCounterClockWise());
-        if (ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
-                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
-                || ForgeEventFactory.onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
+        BlockPos blockpos1 = pos.relative(direction.getOpposite());
+        BlockPos blockpos2 = pos.relative(direction.getClockWise());
+        BlockPos blockpos3 = pos.relative(direction.getCounterClockWise());
+        if (onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getOpposite()), false).isCanceled()
+                || onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getClockWise()), false).isCanceled()
+                || onNeighborNotify(level, pos, level.getBlockState(pos), EnumSet.of(direction.getCounterClockWise()), false).isCanceled()) {
             return;
         }
         level.neighborChanged(blockpos1, this, pos);

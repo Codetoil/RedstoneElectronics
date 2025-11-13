@@ -21,25 +21,28 @@ rootProject.name = "Redstone Electronics"
 
 val commonVersions = providers.gradleProperty("stonecutter_enabled_common_versions")
     .orNull?.split(",")?.map { it.trim() } ?: emptyList()
-val fabricVersions = providers.gradleProperty("stonecutter_enabled_fabric_versions")
+val fabricmcVersions = providers.gradleProperty("stonecutter_enabled_fabricmc_versions")
     .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val minecraftforgeVersions = providers.gradleProperty("stonecutter_enabled_minecraftforge_versions")
     .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val neoforgeVersions = providers.gradleProperty("stonecutter_enabled_neoforge_versions")
     .orNull?.split(",")?.map { it.trim() } ?: emptyList()
-val quiltVersions = providers.gradleProperty("stonecutter_enabled_quilt_versions")
+val quiltmcVersions = providers.gradleProperty("stonecutter_enabled_quiltmc_versions")
     .orNull?.split(",")?.map { it.trim() } ?: emptyList()
 val dists = mapOf(
     "common" to commonVersions,
-    "fabric" to fabricVersions,
+    "fabricmc" to fabricmcVersions,
     "minecraftforge" to minecraftforgeVersions,
     "neoforge" to neoforgeVersions,
-    "quilt" to quiltVersions
+    "quiltmc" to quiltmcVersions
 )
 val uniqueVersions = dists.values.flatten().distinct()
 println(uniqueVersions)
 
 stonecutter {
+    kotlinController = true
+    centralScript = "build.gradle.kts"
+
     create(rootProject) {
         versions(*uniqueVersions.toTypedArray())
         vcsVersion = "1.18.2"

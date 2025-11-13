@@ -74,7 +74,6 @@ public class ResistorBlock
         return isDiode(state);
     }
 
-    @OnlyIn(value = Dist.CLIENT)
     public void m_7100_(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
         if (state.getValue(POWERED)) {
             Direction direction = state.getValue(FACING);

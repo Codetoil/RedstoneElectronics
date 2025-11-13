@@ -1,33 +1,33 @@
 plugins {
-    id("multiloader-common")
+	id("multiloader-common")
 }
 
 val commonJava: Configuration by configurations.creating {
-    isCanBeResolved = true
+	isCanBeResolved = true
 }
 val commonResources: Configuration by configurations.creating {
-    isCanBeResolved = true
+	isCanBeResolved = true
 }
 
 dependencies {
-    val commonPath = common.hierarchy.toString()
-    compileOnly(project(path = commonPath))
-    commonJava(project(path = commonPath, configuration = "commonJava"))
-    commonResources(project(path = commonPath, configuration = "commonResources"))
+	val commonPath = common.hierarchy.toString()
+	compileOnly(project(path = commonPath))
+	commonJava(project(path = commonPath, configuration = "commonJava"))
+	commonResources(project(path = commonPath, configuration = "commonResources"))
 }
 
 tasks {
-    compileJava {
-        dependsOn(commonJava)
-        source(commonJava)
-    }
+	compileJava {
+		dependsOn(commonJava)
+		source(commonJava)
+	}
 
-    processResources {
-        dependsOn(commonResources)
-        from(commonResources)
-    }
+	processResources {
+		dependsOn(commonResources)
+		from(commonResources)
+	}
 
-    jar {
-        exclude("accesswideners/**")
-    }
+	jar {
+		exclude("accesswideners/**")
+	}
 }

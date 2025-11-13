@@ -1,114 +1,69 @@
 plugins {
-    id("multiloader-loader")
-    id("eclipse")
-    id("idea")
+    `multiloader-loader`
     id("net.minecraftforge.gradle")
-    id("org.spongepowered.mixin")
-    id("org.parchmentmc.librarian.forgegradle")
-    id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+    id("net.minecraftforge.jarjar")
+    //id("net.minecraftforge.accesstransformers")
 }
 
-fletchingTable {
-    accessConverter.register("main") {
-        add("accesswideners/${commonMod.minecraft_version}-${commonMod.mod_id}.accesswidener")
-    }
-}
+minecraft.mavenizer(repositories)
 
 println(
-    "Java: ${System.getProperty("java.version")}," +
-            " JVM: ${System.getProperty("java.vm.version")}" +
-            " (${System.getProperty("java.vendor")}), Arch: ${System.getProperty("os.arch")}"
+    "Java: ${providers.systemProperty("java.version").get()}, " +
+            "JVM: ${providers.systemProperty("java.vm.version").get()} (${
+                providers.systemProperty("java.vendor").get()
+            }), " +
+            "Arch: ${providers.systemProperty("os.arch").get()}"
 )
+
 minecraft {
-    // The mappings can be changed at any time and must be in the following format.
-    // Channel:   Version:
-    // official   MCVersion             Official field/method names from Mojang mapping files
-    // parchment  YYYY.MM.DD-MCVersion  Open community-sourced parameter names and javadocs layered on top of official
-    //
-    // Parchment is an unofficial project maintained by ParchmentMC, separate from MinecraftForge
-    // Additional setup is needed to use their mappings: https://parchmentmc.org/docs/getting-started
-    //
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings("parchment", "${commonMod.parchment_version}-${commonMod.parchment_minecraft}")
+    /*mappings(
+        if (commonMod.propOrNull("parchment_mappings") != null) "parchment" else "official",
+        if (commonMod.propOrNull("parchment_mappings") != null)
+            "${commonMod.minecraft_version}-${commonMod.prop("parchment_mappings")}" else commonMod.minecraft_version
+    )*/
+    mappings("official", commonMod.minecraft_version)
 
-    // Forge 1.20.6 and newer use official mappings at runtime, so we shouldn't reobf from official to SRG
-    reobf = stonecutter.eval(stonecutter.current.version, "<1.20.6")
+    //setAccessTransformers(true)
 
-    // When true, this property will have all Eclipse/IntelliJ IDEA run configurations run the "prepareX" task for the given run configuration before launching the game.
-    // In most cases, it is not necessary to enable.
-    // enableEclipsePrepareRuns = true
-    // enableIdeaPrepareRuns = true
-
-    // This property allows configuring Gradle's ProcessResources task(s) to run on IDE output locations before launching the game.
-    // It is REQUIRED to be set to true for this template to function.
-    // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
-    copyIdeResources = true
-
-    // When true, this property will add the folder name of all declared run configurations to generated IDE run configurations.
-    // The folder name can be set on a run configuration using the "folderName" property.
-    // By default, the folder name of a run configuration is the name of the Gradle project containing it.
-    // generateRunFolders = true
-
-    // This property enables access transformers for use in development, applied to the Minecraft artifact.
-    // The access transformer file can be anywhere in the project.
-    // However, it must be at "META-INF/accesstransformer.cfg" in the final mod jar to be loaded by Forge.
-    // This default location is a best practice to automatically put the file in the right place in the final jar.
-    // See https://docs.minecraftforge.net/en/latest/advanced/accesstransformers/ for more information.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
-        // applies to all the run configs below
         configureEach {
-            workingDirectory(project.file("run"))
+            workingDir.convention(layout.projectDirectory.dir("run"))
 
-            // Optional additional logging. The markers can be added/remove as needed, separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
-//            property 'forge.logging.markers', 'REGISTRIES'
+            //systemProperty ("forge.logging.markers", "REGISTRIES")
 
-            property("forge.logging.console.level", "debug")
+            systemProperty("forge.logging.console.level", "debug")
 
-            // Recommended for development - enables more descriptive errors at the cost of slower startup and registration.
-            property("eventbus.api.strictRuntimeChecks", "true")
+            systemProperty("eventbus.api.strictRuntimeChecks", "true")
 
-            arg("-mixin.config=${commonMod.mod_id}.mixins.json")
+            //args ("-mixin.config=${commonMod.id}.mixins.json")
 
-            //it = "MinecraftForge ${it.name.capitalize()} (${project.path})"
+            //classpath(sourceSets.main.get())
         }
 
         register("client") {
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            systemProperty("forge.enabledGameTestNamespaces", commonMod.id)
         }
 
         register("server") {
-            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            systemProperty("forge.enabledGameTestNamespaces", commonMod.id)
             args("--nogui")
         }
 
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
         register("gameTestServer") {
-            property("forge.enabledGameTestNamespaces", commonMod.mod_id)
+            systemProperty("forge.enabledGameTestNamespaces", commonMod.id)
         }
 
         register("data") {
-            // example of overriding the workingDirectory set in configureEach above
-            workingDirectory(project.file("run-data"))
+            workingDir = layout.projectDirectory.dir("run-data")
 
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args(
                 "--mod",
-                commonMod.mod_id,
+                commonMod.id,
                 "--all",
                 "--output",
-                file("src/generated/resources/"),
+                layout.projectDirectory.dir("src/generated/resources"),
                 "--existing",
-                file("src/main/resources/")
+                layout.projectDirectory.dir("src/main/resources")
             )
         }
     }
@@ -116,7 +71,13 @@ minecraft {
 
 // Include resources generated by data generators.
 sourceSets.main {
-    resources.srcDir("src/generated/resources")
+    resources.srcDir(layout.projectDirectory.dir("src/generated/resources"))
+}
+
+// This methods registers jarJar for the default jar task.
+// The closure allows you to configure the task, instead of needing to do this:
+jarJar.register() {
+    archiveClassifier = null
 }
 
 dependencies {
@@ -125,39 +86,58 @@ dependencies {
     // The "userdev" classifier will be requested and setup by ForgeGradle.
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
-    minecraft("net.minecraftforge:forge:${commonMod.minecraft_version}-${commonMod.forge_version}")
+    implementation(minecraft.dependency("net.minecraftforge:forge:${commonMod.minecraft_version}-${commonMod.prop("minecraftforge_version")}"))
 
     // Forge 1.21.6+ uses EventBus 7, which shifts most of its runtime validation to compile-time via an annotation processor
     // to improve performance in production environments. This line is required to enable said compile-time validation
     // in your development environment, helping you catch issues early.
-    annotationProcessor("net.minecraftforge:eventbus-validator:7.0-beta.12")
+    if (stonecutter.eval(stonecutter.current.version, ">=1.21.6"))
+        annotationProcessor("net.minecraftforge:eventbus-validator:${commonMod.prop("minecraftforge_eventbus_validator_version")}")
 
-    implementation("org.spongepowered:mixin:0.8.7")
-    annotationProcessor("org.spongepowered:mixin:0.8.7:processor")
+    // Example mod dependency with JEI
+    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
+    //compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    //compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
+    //runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0") as Any)
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
-        jarJar.ranged(this, "[0.5.0,)")
-    }
+    // Example mod dependency using a mod jar from ./libs with a flat dir repository
+    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
+    // The group id is ignored when searching -- in this case, it is "blank"
+    // NOTE: Support for deobfuscated dependencies has not yet been added in ForgeGradle 7.
+    //implementation "blank:coolmod-${mc_version}:${coolmod_version}"
+
+    // For more info:
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
-mixin {
-    // MixinGradle Settings
-    add("main", "${commonMod.mod_id}.refmap.json")
-    config("${commonMod.mod_id}.mixins.json")
-
-    dumpTargetOnFailure = true
-}
-
-eclipse {
-    // Run everytime eclipse builds the code
-    //autoBuildTasks genEclipseRuns
-    // Run when importing the project
-    synchronizationTasks("genEclipseRuns")
+tasks.withType(JavaCompile::class).configureEach {
+    options.encoding = "UTF-8" // Use the UTF-8 charset for Java compilation
 }
 
 tasks {
     processResources {
-        exclude("${commonMod.mod_id}-${commonMod.minecraft_version}.accesswidener")
+        exclude("${mod.id}.accesswidener")
     }
+
+    register<Copy>("copyAT") {
+        val atFile =
+            project(":common").file("src/main/resources/accesstransformers/accesstransformer-${commonMod.minecraft_version}.cfg")
+        from(atFile) {
+            rename("accesstransformer-${commonMod.minecraft_version}.cfg", "accesstransformer.cfg")
+        }
+        setDuplicatesStrategy(DuplicatesStrategy.INHERIT)
+        into("src/main/resources/META-INF")
+        mustRunAfter(common.project.tasks.getByName("stonecutterMerge"))
+    }
+}
+
+tasks.named("stonecutterPrepare") {
+    finalizedBy(tasks.named("copyAT"))
+}
+
+sourceSets.forEach {
+    val dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.setResourcesDir(dir)
+    it.java.destinationDirectory = dir
 }

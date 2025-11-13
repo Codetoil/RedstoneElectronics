@@ -18,7 +18,6 @@
 
 package io.codetoil.redstone_electronics.world.level.block;
 
-import io.codetoil.redstone_electronics.RedstoneElectronics;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
@@ -31,7 +30,7 @@ import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotor
 
 public class REBlocks {
     private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-            RedstoneElectronics.MODID);
+            Constants.MODID);
     public static final RegistryObject<Block> RESISTOR_BLOCK =
             RE_BLOCKS.register("redstone_resistor", () ->
                     new ResistorBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).strength(0.0f)

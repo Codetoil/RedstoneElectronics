@@ -94,7 +94,7 @@ public class StickBlock
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getClickedFace();
         BlockState state1 = context.getLevel()
-                .getBlockState(context.getClickedPos().m_142300_(direction.getOpposite()));
+                .getBlockState(context.getClickedPos().relative(direction.getOpposite()));
         Fluid fluid = context.getLevel().getFluidState(context.getClickedPos()).getType();
         BlockState state2 = this.stateDefinition.any().setValue(
                 BlockStateProperties.WATERLOGGED,
