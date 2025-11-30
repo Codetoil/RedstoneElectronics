@@ -1,3 +1,4 @@
+build/
 # eclipse
 bin
 *.launch
@@ -9,7 +10,9 @@ bin
 # idea
 out
 *.ipr
+run/
 *.iws
+out/
 *.iml
 .idea
 
@@ -23,3 +26,15 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
+.gradle/
+output/
+bin/
+libs/
+
+.kotlin
+.idea/
+classes/
+.vscode
+.architectury-transformer
+gradle_client_output.txt
+gradle_server_output.txt

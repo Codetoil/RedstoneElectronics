@@ -1,14 +1,14 @@
 plugins {
-    `kotlin-dsl`
-    kotlin("jvm") version "2.2.21"
+	`kotlin-dsl`
+	kotlin("jvm") version "2.2.21"
 }
 
 repositories {
-    mavenCentral()
-    gradlePluginPortal()
-    maven("https://maven.kikugie.dev/snapshots")
+	mavenCentral()
+	gradlePluginPortal()
+	maven("https://maven.kikugie.dev/snapshots")
 }
 
 dependencies {
-    implementation("dev.kikugie:stonecutter:0.7.6")
+	implementation("dev.kikugie:stonecutter:0.7.11")
 }
