@@ -1,3 +1,5 @@
+import org.slf4j.event.Level
+
 plugins {
 	`multiloader-loader`
 	id("net.neoforged.moddev")
@@ -23,25 +25,35 @@ neoForge {
 		register("client") {
 			client()
 			ideName = "NeoForge Client (${project.path})"
+			logLevel = Level.TRACE
+		}
+		register("gameTestServer") {
+			type = "gameTestServer"
+			ideName = "NeoForge GameTestServer (${project.path})"
+			logLevel = Level.TRACE
 		}
 		if (stonecutter.eval(stonecutter.current.version, ">=1.21.4")) {
 			register("clientData") {
 				clientData()
 				ideName = "NeoForge Client Data (${project.path})"
+				logLevel = Level.TRACE
 			}
 			register("serverData") {
 				serverData()
 				ideName = "NeoForge Server Data (${project.path})"
+				logLevel = Level.TRACE
 			}
 		} else {
 			register("data") {
 				data()
 				ideName = "NeoForge Data (${project.path})"
+				logLevel = Level.TRACE
 			}
 		}
 		register("server") {
 			server()
 			ideName = "NeoForge Server (${project.path})"
+			logLevel = Level.TRACE
 		}
 	}
 

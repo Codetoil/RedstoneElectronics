@@ -1,0 +1,6 @@
+{
+	"model": {
+		"type": "minecraft:model",
+		"model": "redstone_electronics:item/redstone_rotary_selector"
+	}
+}

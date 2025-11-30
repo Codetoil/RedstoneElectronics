@@ -1,7 +1,7 @@
 package io.codetoil.redstone_electronics.platform.minecraftforge;
 
 import io.codetoil.redstone_electronics.platform.services.IPlatformHelper;
-import io.codetoil.redstone_electronics.world.level.block.entity.REBlockEntityTypes;
+import io.codetoil.redstone_electronics.world.level.block.entity.RedstoneElectronicsBlockEntityTypes;
 import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.ModList;
@@ -32,6 +32,6 @@ public class MinecraftForgePlatformHelper implements IPlatformHelper
 
 	@Override
 	public Supplier<BlockEntityType<ServoMotorBlockEntity>> getServoMotorBlockEntityType() {
-		return REBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE;
+		return RedstoneElectronicsBlockEntityTypes.SERVO_MOTOR_BLOCK_ENTITY_TYPE;
 	}
 }

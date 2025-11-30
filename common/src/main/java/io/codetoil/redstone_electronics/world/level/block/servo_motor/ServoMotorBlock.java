@@ -1,6 +1,6 @@
 /**
  * Redstone Electronics is a MC Mod that adds redstone components.
- * Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics (C) 2020-2025  Codetoil
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -185,7 +185,7 @@ public class ServoMotorBlock
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState()
-			.setValue(FACING, context.getNearestLookingDirection().getOpposite().getOpposite())
+			.setValue(FACING, context.getNearestLookingDirection().getOpposite())
 			.setValue(REProperties.SPINNING, Boolean.FALSE)
 			.setValue(REProperties.HAS_BEEN_ACTIVATED, Boolean.FALSE);
 	}

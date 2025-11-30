@@ -1,6 +1,6 @@
 /**
  * Redstone Electronics is a MC Mod that adds redstone components.
- * Redstone Electronics (C) 2020-2023  Codetoil
+ * Redstone Electronics (C) 2020-2025  Codetoil
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 
 package io.codetoil.redstone_electronics;
 
-import io.codetoil.redstone_electronics.world.item.REItems;
-import io.codetoil.redstone_electronics.world.level.block.REBlocks;
-import io.codetoil.redstone_electronics.world.level.block.entity.REBlockEntityTypes;
+import io.codetoil.redstone_electronics.world.item.RedstoneElectronicsItems;
+import io.codetoil.redstone_electronics.world.level.block.RedstoneElectronicsBlocks;
+import io.codetoil.redstone_electronics.world.level.block.entity.RedstoneElectronicsBlockEntityTypes;
 import io.codetoil.redstone_electronics.world.level.block.state.properties.REProperties;
 import net.minecraft.Util;
 import net.minecraft.data.DataGenerator;
@@ -48,9 +48,9 @@ public class RedstoneElectronics
 		modEventBus.addListener(this::gatherData);
 		MinecraftForge.EVENT_BUS.addListener(this::buildCreativeModeTabContents);
 		REProperties.init();
-		REBlocks.init(modEventBus);
-		REItems.init(modEventBus);
-		REBlockEntityTypes.init(modEventBus);
+		RedstoneElectronicsBlocks.init(modEventBus);
+		RedstoneElectronicsItems.init(modEventBus);
+		RedstoneElectronicsBlockEntityTypes.init(modEventBus);
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
@@ -58,10 +58,10 @@ public class RedstoneElectronics
 
 	private void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
 		if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-			event.accept(REBlocks.RESISTOR_BLOCK);
-			event.accept(REBlocks.ROTARY_DISTRIBUTOR_BLOCK);
-			event.accept(REBlocks.ROTARY_SELECTOR_BLOCK);
-			event.accept(REBlocks.STICK_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.RESISTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.ROTARY_DISTRIBUTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.ROTARY_SELECTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.OAK_AXLE_BLOCK);
 		}
 	}
 

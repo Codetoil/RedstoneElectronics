@@ -2,5 +2,6 @@
 	"block.redstone_electronics.redstone_resistor": "Redstone Resistor",
 	"block.redstone_electronics.redstone_rotary_selector": "Redstone Rotary Selector",
 	"block.redstone_electronics.redstone_rotary_distributor": "Redstone Rotary Distributor",
-	"block.redstone_electronics.servo_motor": "Servo Motor"
+	"block.redstone_electronics.servo_motor": "Servo Motor",
+	"block.redstone_electronics.oak_axle": "Oak Axle"
 }

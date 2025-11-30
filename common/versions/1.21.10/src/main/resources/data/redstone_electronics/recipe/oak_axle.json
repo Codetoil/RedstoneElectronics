@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"x",
+		"x",
+		"x"
+	],
+	"key": {
+		"x": "minecraft:oak_planks"
+	},
+	"result": {
+		"id": "redstone_electronics:oak_axle"
+	}
+}

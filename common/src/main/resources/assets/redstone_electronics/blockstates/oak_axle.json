@@ -1,0 +1,31 @@
+{
+	"variants": {
+		"facing=up": {
+			"model": "redstone_electronics:block/oak_axle"
+		},
+		"facing=down": {
+			"model": "redstone_electronics:block/oak_axle",
+			"x": 180
+		},
+		"facing=east": {
+			"model": "redstone_electronics:block/oak_axle",
+			"y": 90,
+			"x": 90
+		},
+		"facing=south": {
+			"model": "redstone_electronics:block/oak_axle",
+			"y": 180,
+			"x": 90
+		},
+		"facing=west": {
+			"model": "redstone_electronics:block/oak_axle",
+			"y": 270,
+			"x": 90
+		},
+		"facing=north": {
+			"model": "redstone_electronics:block/oak_axle",
+			"y": 0,
+			"x": 90
+		}
+	}
+}
