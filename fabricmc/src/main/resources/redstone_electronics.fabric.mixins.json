@@ -1,15 +1,15 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "io.codetoil.redstone_electronics.mixin.platform.fabricmc",
-  "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [],
-  "client": [
-  ],
-  "server": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "io.codetoil.redstone_electronics.mixin.platform.fabricmc",
+	"refmap": "${mod_id}.refmap.json",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [],
+	"client": [
+	],
+	"server": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }
   

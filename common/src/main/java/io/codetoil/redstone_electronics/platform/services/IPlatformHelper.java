@@ -1,5 +1,10 @@
 package io.codetoil.redstone_electronics.platform.services;
 
+import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import java.util.function.Supplier;
+
 public interface IPlatformHelper
 {
 
@@ -24,6 +29,8 @@ public interface IPlatformHelper
 	 * @return True if in a development environment, false otherwise.
 	 */
 	boolean isDevelopmentEnvironment();
+
+	Supplier<BlockEntityType<ServoMotorBlockEntity>> getServoMotorBlockEntityType();
 
 	/**
 	 * Gets the name of the environment type as a string.

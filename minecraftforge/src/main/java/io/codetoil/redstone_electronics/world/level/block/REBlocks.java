@@ -18,43 +18,48 @@
 
 package io.codetoil.redstone_electronics.world.level.block;
 
+import io.codetoil.redstone_electronics.Constants;
+import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import io.codetoil.redstone_electronics.world.level.block.servo_motor.ServoMotorBlock;
 
-public class REBlocks {
-    private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-            Constants.MODID);
-    public static final RegistryObject<Block> RESISTOR_BLOCK =
-            RE_BLOCKS.register("redstone_resistor", () ->
-                    new ResistorBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).strength(0.0f)
-                            .sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK =
-            RE_BLOCKS.register("redstone_rotary_selector", () ->
-                    new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_)
-                            .strength(0.0f).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK =
-            RE_BLOCKS.register("redstone_rotary_distributor", () ->
-                    new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_)
-                            .strength(0.0f).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> SERVO_MOTOR_BLOCK =
-            RE_BLOCKS.register("servo_motor", () ->
-                    new ServoMotorBlock(BlockBehaviour.Properties.m_60939_(Material.f_76283_).strength(0.5f)));
-    private static final DeferredRegister<Block> MC_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-            "minecraft");
-    public static final RegistryObject<Block> STICK_BLOCK =
-            MC_BLOCKS.register("stick", () ->
-                    new StickBlock(BlockBehaviour.Properties.m_60939_(Material.f_76320_).strength(2.0f)
-                            .sound(SoundType.WOOD)));
+public class REBlocks
+{
+	private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+		Constants.MOD_ID);
+	public static final RegistryObject<Block> RESISTOR_BLOCK =
+		RE_BLOCKS.register("redstone_resistor", () ->
+			new ResistorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
+				.pushReaction(PushReaction.DESTROY)));
+	public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK =
+		RE_BLOCKS.register("redstone_rotary_selector", () ->
+			new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
+				.pushReaction(PushReaction.DESTROY)));
+	public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK =
+		RE_BLOCKS.register("redstone_rotary_distributor", () ->
+			new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
+				.pushReaction(PushReaction.DESTROY)));
+	public static final RegistryObject<Block> SERVO_MOTOR_BLOCK =
+		RE_BLOCKS.register("servo_motor", () ->
+			new ServoMotorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+				.strength(0.5f)
+				.sound(SoundType.STONE)));
+	private static final DeferredRegister<Block> MC_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+		"minecraft");
+	public static final RegistryObject<Block> STICK_BLOCK =
+		MC_BLOCKS.register("stick", () ->
+			new StickBlock(BlockBehaviour.Properties.of().strength(2.0f)
+				.sound(SoundType.WOOD)));
 
-    public static void init() {
-        RE_BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MC_BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-    }
+	public static void init(IEventBus bus) {
+		RE_BLOCKS.register(bus);
+		MC_BLOCKS.register(bus);
+	}
 }

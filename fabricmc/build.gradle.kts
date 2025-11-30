@@ -39,7 +39,8 @@ loom {
 }
 
 tasks.named<ProcessResources>("processResources") {
-	val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.minecraft_version}-${mod.id}.accesswidener")
+	val awFile =
+		project(":common").file("src/main/resources/accesswideners/${commonMod.minecraft_version}-${mod.id}.accesswidener")
 
 	from(awFile.parentFile) {
 		include(awFile.name)

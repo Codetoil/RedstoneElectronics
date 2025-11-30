@@ -18,33 +18,33 @@
 
 package io.codetoil.redstone_electronics.gametest;
 
-import io.codetoil.redstone_electronics.RedstoneElectronics;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
-@GameTestHolder(RedstoneElectronics.MODID)
-public class REGameTests {
-    @GameTest
-    public static void blockExistenceTests(GameTestHelper helper) {
-        List.<String>of("redstone_electronics:redstone_resistor",
-                        "redstone_electronics:redstone_rotary_selector",
-                        "redstone_electronics:redstone_rotary_distributor",
-                        "redstone_electronics:servo_motor",
-                        "minecraft:stick")
-                .forEach((name) -> {
-                    if (!ForgeRegistries.BLOCKS.containsKey(new ResourceLocation(name)))
-                        helper.fail("Block \"" + name + "\" not found in registry");
-                });
-        helper.succeed();
-    }
+@GameTestHolder(Constants.MOD_ID)
+public class REGameTests
+{
+	@GameTest
+	public static void blockExistenceTests(GameTestHelper helper) {
+		List.<String>of("redstone_electronics:redstone_resistor",
+				"redstone_electronics:redstone_rotary_selector",
+				"redstone_electronics:redstone_rotary_distributor",
+				"redstone_electronics:servo_motor",
+				"minecraft:stick")
+			.forEach((name) -> {
+				if (!ForgeRegistries.BLOCKS.containsKey(new ResourceLocation(name)))
+					helper.fail("Block \"" + name + "\" not found in registry");
+			});
+		helper.succeed();
+	}
 
-    @GameTest
-    public static void motorTest1(GameTestHelper helper) {
-        helper.fail("test");
-    }
+	@GameTest
+	public static void motorTest1(GameTestHelper helper) {
+		helper.fail("test");
+	}
 }

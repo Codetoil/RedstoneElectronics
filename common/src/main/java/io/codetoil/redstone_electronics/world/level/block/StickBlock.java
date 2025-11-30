@@ -18,122 +18,119 @@
 
 package io.codetoil.redstone_electronics.world.level.block;
 
-import java.util.Random;
-
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 public class StickBlock
-        extends DirectionalBlock
-        implements SimpleWaterloggedBlock {
-    protected static final VoxelShape STICK_VERTICAL_AABB = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
-    protected static final VoxelShape STICK_NS_AABB = Block.box(7.0, 7.0, 0.0, 9.0, 9.0, 16.0);
-    protected static final VoxelShape STICK_EW_AABB = Block.box(0.0, 7.0, 7.0, 16.0, 9.0, 9.0);
+	extends DirectionalBlock
+	implements SimpleWaterloggedBlock
+{
+	public static final MapCodec<StickBlock> CODEC = simpleCodec(StickBlock::new);
+	protected static final VoxelShape STICK_VERTICAL_AABB = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
+	protected static final VoxelShape STICK_NS_AABB = Block.box(7.0, 7.0, 0.0, 9.0, 9.0, 16.0);
+	protected static final VoxelShape STICK_EW_AABB = Block.box(0.0, 7.0, 7.0, 16.0, 9.0, 9.0);
 
-    public StickBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any()
-                .setValue(StickBlock.FACING, Direction.NORTH)
-                .setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
-    }
+	public StickBlock(BlockBehaviour.Properties properties) {
+		super(properties);
+		this.registerDefaultState(this.stateDefinition.any()
+			.setValue(StickBlock.FACING, Direction.NORTH)
+			.setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
+	}
 
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
-    }
+	@Override
+	public @NotNull MapCodec<StickBlock> codec() {
+		return CODEC;
+	}
 
-    public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.setValue(FACING, mirror.mirror(blockState.getValue(FACING)));
-    }
+	public @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
+		return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
+	}
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockReader, BlockPos blockPos,
-                               CollisionContext selectionContext) {
-        switch ((blockState.getValue(FACING)).getAxis()) {
-            default: {
-                return STICK_EW_AABB;
-            }
-            case Z: {
-                return STICK_NS_AABB;
-            }
-            case Y:
-        }
-        return STICK_VERTICAL_AABB;
-    }
+	public @NotNull BlockState mirror(BlockState blockState, Mirror mirror) {
+		return blockState.setValue(FACING, mirror.mirror(blockState.getValue(FACING)));
+	}
 
-    public boolean propagatesSkylightDown(@NotNull BlockState state, @NotNull BlockGetter block,
-                                          @NotNull BlockPos pos) {
-        return true;
-    }
+	public @NotNull VoxelShape getShape(
+		BlockState blockState, BlockGetter blockReader, BlockPos blockPos,
+		CollisionContext selectionContext
+	) {
+		switch ((blockState.getValue(FACING)).getAxis()) {
+			case X: {
+				return STICK_EW_AABB;
+			}
+			case Z: {
+				return STICK_NS_AABB;
+			}
+			case Y:
+		}
+		return STICK_VERTICAL_AABB;
+	}
 
-    public String getDescriptionId() {
-        return "item.minecraft.stick";
-    }
+	public boolean propagatesSkylightDown(
+		@NotNull BlockState state, @NotNull BlockGetter block,
+		@NotNull BlockPos pos
+	) {
+		return true;
+	}
 
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction direction = context.getClickedFace();
-        BlockState state1 = context.getLevel()
-                .getBlockState(context.getClickedPos().relative(direction.getOpposite()));
-        Fluid fluid = context.getLevel().getFluidState(context.getClickedPos()).getType();
-        BlockState state2 = this.stateDefinition.any().setValue(
-                BlockStateProperties.WATERLOGGED,
-                fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER);
-        return state1.getBlock() == this && state1.getValue(FACING) == direction
-                ? state2.setValue(FACING, direction.getOpposite())
-                : state2.setValue(FACING, direction);
-    }
+	public @NotNull String getDescriptionId() {
+		return "item.minecraft.stick";
+	}
 
-    @OnlyIn(value = Dist.CLIENT)
-    public void m_7100_(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Random random) {
-    }
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Direction direction = context.getClickedFace();
+		BlockState state1 = context.getLevel()
+			.getBlockState(context.getClickedPos().relative(direction.getOpposite()));
+		Fluid fluid = context.getLevel().getFluidState(context.getClickedPos()).getType();
+		BlockState state2 = this.stateDefinition.any().setValue(
+			BlockStateProperties.WATERLOGGED,
+			fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER);
+		return state1.getBlock() == this && state1.getValue(FACING) == direction
+			? state2.setValue(FACING, direction.getOpposite())
+			:state2.setValue(FACING, direction);
+	}
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateContainerBuilder) {
-        stateContainerBuilder.add(FACING, BlockStateProperties.WATERLOGGED);
-    }
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateContainerBuilder) {
+		stateContainerBuilder.add(FACING, BlockStateProperties.WATERLOGGED);
+	}
 
-    public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
-        return true;
-    }
+	public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
+		return true;
+	}
 
-    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
-        }
-        return super.rotate(state, world, pos, direction);
-    }
+	public @NotNull BlockState updateShape(
+		BlockState state, Direction direction, BlockState neighborState,
+		LevelAccessor level, BlockPos pos, BlockPos neighborPos
+	) {
+		if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
+		return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+	}
 
-    public @NotNull PushReaction m_5537_(@NotNull BlockState state) {
-        return PushReaction.DESTROY;
-    }
+	public @NotNull FluidState getFluidState(BlockState state) {
+		return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false)
+			:super.getFluidState(state);
+	}
 
-    public @NotNull FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false)
-                : super.getFluidState(state);
-    }
-
-    public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos,
-                                  @NotNull PathComputationType pathType) {
-        return false;
-    }
+	@Override
+	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+		return false;
+	}
 }

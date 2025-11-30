@@ -67,7 +67,8 @@ tasks {
 	processResources {
 		exclude("${mod.id}.accesswidener")
 
-		val atFile = project(":common").file("src/main/resources/accesstransformers/accesstransformer-${commonMod.minecraft_version}.cfg")
+		val atFile =
+			project(":common").file("src/main/resources/accesstransformers/accesstransformer-${commonMod.minecraft_version}.cfg")
 
 		from(atFile.parentFile) {
 			include(atFile.name)

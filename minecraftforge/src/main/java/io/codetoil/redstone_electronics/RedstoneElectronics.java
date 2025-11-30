@@ -18,46 +18,60 @@
 
 package io.codetoil.redstone_electronics;
 
-import io.codetoil.redstone_electronics.world.level.block.REBlocks;
 import io.codetoil.redstone_electronics.world.item.REItems;
-import io.codetoil.redstone_electronics.world.level.block.state.properties.REProperties;
+import io.codetoil.redstone_electronics.world.level.block.REBlocks;
 import io.codetoil.redstone_electronics.world.level.block.entity.REBlockEntityTypes;
-
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import io.codetoil.redstone_electronics.world.level.block.state.properties.REProperties;
+import net.minecraft.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.info.BlockListReport;
 import net.minecraft.data.info.RegistryDumpReport;
-
+import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
-@Mod(value = Constants.MODID)
-public class RedstoneElectronics {
+import java.util.concurrent.CompletableFuture;
 
-    public RedstoneElectronics() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
-        REProperties.init();
-        REBlocks.init();
-        REItems.init();
-        REBlockEntityTypes.init();
-    }
+@Mod(value = Constants.MOD_ID)
+public class RedstoneElectronics
+{
 
-    private void clientSetup(FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(REBlocks.RESISTOR_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(REBlocks.ROTARY_DISTRIBUTOR_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(REBlocks.ROTARY_SELECTOR_BLOCK.get(), RenderType.cutout());
-    }
+	public RedstoneElectronics(FMLJavaModLoadingContext context) {
+		IEventBus modEventBus = context.getModEventBus();
+		modEventBus.addListener(this::clientSetup);
+		modEventBus.addListener(this::gatherData);
+		MinecraftForge.EVENT_BUS.addListener(this::buildCreativeModeTabContents);
+		REProperties.init();
+		REBlocks.init(modEventBus);
+		REItems.init(modEventBus);
+		REBlockEntityTypes.init(modEventBus);
+	}
 
-    private void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
-        if (event.includeReports()) {
-            gen.addProvider(new BlockListReport(gen));
-            gen.addProvider(new RegistryDumpReport(gen));
-        }
-    }
+	private void clientSetup(FMLClientSetupEvent event) {
+	}
+
+	private void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+			event.accept(REBlocks.RESISTOR_BLOCK);
+			event.accept(REBlocks.ROTARY_DISTRIBUTOR_BLOCK);
+			event.accept(REBlocks.ROTARY_SELECTOR_BLOCK);
+			event.accept(REBlocks.STICK_BLOCK);
+		}
+	}
+
+	private void gatherData(GatherDataEvent event) {
+		DataGenerator gen = event.getGenerator();
+		if (event.includeReports()) {
+			gen.addProvider(true, new BlockListReport(gen.getPackOutput(),
+				CompletableFuture.supplyAsync(VanillaRegistries::createLookup, Util.backgroundExecutor())));
+			gen.addProvider(true, new RegistryDumpReport(gen.getPackOutput()));
+		}
+	}
 }
 

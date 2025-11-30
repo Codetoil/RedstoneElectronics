@@ -18,49 +18,52 @@
 
 package io.codetoil.redstone_electronics.world.level.block.state.properties;
 
-import java.util.function.Function;
-
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public enum SelectorOrientation implements StringRepresentable {
-    LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
-    FRONT(a -> a, a -> a, "front"),
-    RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right"),
-    ROTATING(a -> a, a -> a, "rotating");
+import java.util.function.Function;
 
-    private final Function<Direction, Direction> onApply;
-    private final String name;
-    private final Function<Direction, Direction> reverseApply;
+public enum SelectorOrientation implements StringRepresentable
+{
+	LEFT(Direction::getCounterClockWise, Direction::getClockWise, "left"),
+	FRONT(a -> a, a -> a, "front"),
+	RIGHT(Direction::getClockWise, Direction::getCounterClockWise, "right"),
+	ROTATING(a -> a, a -> a, "rotating");
 
-    private SelectorOrientation(Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply,
-                                String name) {
-        this.name = name;
-        this.onApply = onApply;
-        this.reverseApply = reverseApply;
-    }
+	private final Function<Direction, Direction> onApply;
+	private final String name;
+	private final Function<Direction, Direction> reverseApply;
 
-    public Direction onApply(Direction direction) {
-        return this.onApply.apply(direction);
-    }
+	SelectorOrientation(
+		Function<Direction, Direction> onApply, Function<Direction, Direction> reverseApply,
+		String name
+	) {
+		this.name = name;
+		this.onApply = onApply;
+		this.reverseApply = reverseApply;
+	}
 
-    public Direction reverseApply(Direction direction) {
-        return this.reverseApply.apply(direction);
-    }
+	public Direction onApply(Direction direction) {
+		return this.onApply.apply(direction);
+	}
 
-    public @NotNull String getSerializedName() {
-        return this.name;
-    }
+	public Direction reverseApply(Direction direction) {
+		return this.reverseApply.apply(direction);
+	}
 
-    public SelectorOrientation next(BlockState state) {
-        return switch (this) {
-            case FRONT -> SelectorOrientation.RIGHT;
-            case LEFT -> SelectorOrientation.FRONT;
-            case RIGHT -> SelectorOrientation.LEFT;
-            default -> this;
-        };
-    }
+	public @NotNull String getSerializedName() {
+		return this.name;
+	}
+
+	public SelectorOrientation next(BlockState state) {
+		return switch (this) {
+			case FRONT -> SelectorOrientation.RIGHT;
+			case LEFT -> SelectorOrientation.FRONT;
+			case RIGHT -> SelectorOrientation.LEFT;
+			default -> this;
+		};
+	}
 }
 

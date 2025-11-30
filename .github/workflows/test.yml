@@ -7,59 +7,59 @@ name: test
 on: [ pull_request, push ]
 
 jobs:
-  test:
-    strategy:
-      matrix:
-        dist: [
-          temurin,
-          zulu,
-          liberica,
-          microsoft
-        ]
-        # Use these Java versions
-        java: [
-          21,
-          22,
-          23,
-          24,
-          25
-        ]
-        # and run on both Linux and Windows
-        os: [ ubuntu-24.04, windows-2025, macos-26 ]
-        exclude:
-          - dist: microsoft
-            java: 22
-          - dist: microsoft
-            java: 23
-          - dist: microsoft
-            java: 24
-      fail-fast: false
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v6
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK ${{ matrix.dist }}-${{ matrix.java }}
-        uses: actions/setup-java@v5
-        with:
-          distribution: ${{ matrix.dist }}
-          java-version: ${{ matrix.java }}
-          cache: gradle
-      - name: Test with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
-          gradle-version: 9.2.1
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v3
-        if: always() # always run even if the previous step fails
-        with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
-      - name: Capture Artifacts
-        uses: actions/upload-artifact@v5
-        with:
-          name: Test Results ${{ runner.os }} ${{ matrix.dist }} java ${{matrix.java}}
-          path: |
-            gametest
-            build
+    test:
+        strategy:
+            matrix:
+                dist: [
+                    temurin,
+                    zulu,
+                    liberica,
+                    microsoft
+                ]
+                # Use these Java versions
+                java: [
+                    21,
+                    22,
+                    23,
+                    24,
+                    25
+                ]
+                # and run on both Linux and Windows
+                os: [ ubuntu-24.04, windows-2025, macos-26 ]
+                exclude:
+                    -   dist: microsoft
+                        java: 22
+                    -   dist: microsoft
+                        java: 23
+                    -   dist: microsoft
+                        java: 24
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            -   name: Checkout Repository
+                uses: actions/checkout@v6
+            -   name: Validate Gradle Wrapper
+                uses: gradle/wrapper-validation-action@v1
+            -   name: Setup JDK ${{ matrix.dist }}-${{ matrix.java }}
+                uses: actions/setup-java@v5
+                with:
+                    distribution: ${{ matrix.dist }}
+                    java-version: ${{ matrix.java }}
+                    cache: gradle
+            -   name: Test with Gradle
+                uses: gradle/gradle-build-action@v2
+                with:
+                    arguments: test
+                    gradle-version: 9.2.1
+            -   name: Publish Test Report
+                uses: mikepenz/action-junit-report@v3
+                if: always() # always run even if the previous step fails
+                with:
+                    report_paths: '**/build/test-results/test/TEST-*.xml'
+            -   name: Capture Artifacts
+                uses: actions/upload-artifact@v5
+                with:
+                    name: Test Results ${{ runner.os }} ${{ matrix.dist }} java ${{matrix.java}}
+                    path: |
+                        gametest
+                        build
