@@ -3,87 +3,31 @@
 # certain platforms or Java versions, and provides a first line of defence
 # against bad commits.
 
-name: ci
+name: publish
 on: [ pull_request, push, release ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-          gradle-version: 8.1.1
-      - name: Capture Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: Build
-          path: build/libs/
-  test:
-    strategy:
-      matrix:
-        dist: [
-          temurin,
-          zulu,
-          liberica,
-          microsoft
-        ]
-        # Use these Java versions
-        java: [
-          17,    # Current LTS version of Java & minimum supported by Minecraft
-          18,
-          19,
-          20
-        ]
-        # and run on both Linux and Windows
-        os: [ ubuntu-latest, windows-latest ]
-        exclude:
-          - dist: microsoft
-            java: 18
-          - dist: microsoft
-            java: 19
-          - dist: microsoft
-            java: 20
-      fail-fast: false
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK ${{ matrix.dist }}-${{ matrix.java }}
-        uses: actions/setup-java@v2
-        with:
-          distribution: ${{ matrix.dist }}
-          java-version: ${{ matrix.java }}
-          cache: gradle
-      - name: Test with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
-          gradle-version: 8.1.1
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v3
-        if: always() # always run even if the previous step fails
-        with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
-      - name: Capture Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: Test Results ${{ runner.os }} ${{ matrix.dist }} java ${{matrix.java}}
-          path: |
-            gametest
-            build
+    publish:
+        runs-on: ubuntu-latest
+        permissions:
+            packages: write
+        steps:
+            -   name: Checkout Repository
+                uses: actions/checkout@v6
+            -   name: Validate Gradle Wrapper
+                uses: gradle/wrapper-validation-action@v1
+            -   name: Setup JDK
+                uses: actions/setup-java@v5
+                with:
+                    distribution: temurin
+                    java-version: 21
+                    cache: gradle
+            -   name: Build with Gradle
+                uses: gradle/gradle-build-action@v2
+                with:
+                    arguments: publish
+                    gradle-version: 9.2.1
+                env:
+                    USERNAME: ${{ github.actor }}
+                    TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    COMMIT_SHA: ${{ github.sha }}
