@@ -8,12 +8,12 @@ on: [pull_request, push, release]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-2025
     permissions:
       packages: write
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Setup JDK
@@ -28,7 +28,7 @@ jobs:
           arguments: build
           gradle-version: 8.1.1
       - name: Capture Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: Build
           path: build/libs/
@@ -43,13 +43,14 @@ jobs:
         ]
         # Use these Java versions
         java: [
-          17,    # Current LTS version of Java & minimum supported by Minecraft
+          17,    # minimum supported by Minecraft
           18,
           19,
-          20
+          20,
+          21,
         ]
         # and run on both Linux and Windows
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-2025]
         exclude:
           - dist: microsoft
             java: 18
@@ -61,11 +62,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Setup JDK ${{ matrix.dist }}-${{ matrix.java }}
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ matrix.dist }}
           java-version: ${{ matrix.java }}
@@ -81,7 +82,7 @@ jobs:
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
       - name: Capture Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: Test Results ${{ runner.os }} ${{ matrix.dist }} java ${{matrix.java}}
           path: |
