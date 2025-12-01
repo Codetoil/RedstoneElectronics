@@ -31,20 +31,20 @@ public class RedstoneElectronicsItems
 {
 	private static final DeferredRegister<Item> RE_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
 		Constants.MOD_ID);
-	public static final RegistryObject<Item> RESISTOR_BLOCK_ITEM =
+	public static final RegistryObject<Item> REDSTONE_RESISTOR_BLOCK_ITEM =
 		RE_ITEMS.register("redstone_resistor", () ->
-			new BlockItem(RedstoneElectronicsBlocks.RESISTOR_BLOCK.get(), new Item.Properties()));
-	public static final RegistryObject<Item> ROTARY_SELECTOR_BLOCK_ITEM =
+			new BlockItem(RedstoneElectronicsBlocks.REDSTONE_RESISTOR_BLOCK.get(), new Item.Properties()));
+	public static final RegistryObject<Item> REDSTONE_ROTARY_SELECTOR_BLOCK_ITEM =
 		RE_ITEMS.register("redstone_rotary_selector", () ->
-			new BlockItem(RedstoneElectronicsBlocks.ROTARY_SELECTOR_BLOCK.get(), new Item.Properties()));
-	public static final RegistryObject<Item> ROTARY_DISTRIBUTOR_BLOCK_ITEM =
+			new BlockItem(RedstoneElectronicsBlocks.REDSTONE_ROTARY_SELECTOR_BLOCK.get(), new Item.Properties()));
+	public static final RegistryObject<Item> REDSTONE_ROTARY_DISTRIBUTOR_BLOCK_ITEM =
 		RE_ITEMS.register("redstone_rotary_distributor", () ->
-			new BlockItem(RedstoneElectronicsBlocks.ROTARY_DISTRIBUTOR_BLOCK.get(), new Item.Properties()));
+			new BlockItem(RedstoneElectronicsBlocks.REDSTONE_ROTARY_DISTRIBUTOR_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<Item> MOTOR_BLOCK_ITEM =
 		RE_ITEMS.register("servo_motor", () ->
 			new BlockItem(RedstoneElectronicsBlocks.SERVO_MOTOR_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<Item> OAK_AXLE_BLOCK_ITEM =
-		RE_ITEMS.register("stick", () ->
+		RE_ITEMS.register("oak_axle", () ->
 			new BlockItem(RedstoneElectronicsBlocks.OAK_AXLE_BLOCK.get(), new Item.Properties()));
 
 	public static void init(IEventBus modEventBus) {

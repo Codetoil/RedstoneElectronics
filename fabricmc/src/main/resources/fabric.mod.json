@@ -16,7 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.examplemod.ExampleMod"
+			"io.codetoil.redstone_electronics.RedstoneElectronics"
+		],
+		"client": [
+			"io.codetoil.redstone_electronics.client.RedstoneElectronicsClient"
 		]
 	},
 	"mixins": [

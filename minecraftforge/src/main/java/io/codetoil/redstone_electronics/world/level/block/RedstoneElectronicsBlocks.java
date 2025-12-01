@@ -34,15 +34,15 @@ public class RedstoneElectronicsBlocks
 {
 	private static final DeferredRegister<Block> RE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 		Constants.MOD_ID);
-	public static final RegistryObject<Block> RESISTOR_BLOCK =
+	public static final RegistryObject<Block> REDSTONE_RESISTOR_BLOCK =
 		RE_BLOCKS.register("redstone_resistor", () ->
 			new RedstoneResistorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
 				.pushReaction(PushReaction.DESTROY)));
-	public static final RegistryObject<Block> ROTARY_SELECTOR_BLOCK =
+	public static final RegistryObject<Block> REDSTONE_ROTARY_SELECTOR_BLOCK =
 		RE_BLOCKS.register("redstone_rotary_selector", () ->
 			new RedstoneRotarySelectorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
 				.pushReaction(PushReaction.DESTROY)));
-	public static final RegistryObject<Block> ROTARY_DISTRIBUTOR_BLOCK =
+	public static final RegistryObject<Block> REDSTONE_ROTARY_DISTRIBUTOR_BLOCK =
 		RE_BLOCKS.register("redstone_rotary_distributor", () ->
 			new RedstoneRotaryDistributorBlock(BlockBehaviour.Properties.of().instabreak().sound(SoundType.STONE)
 				.pushReaction(PushReaction.DESTROY)));

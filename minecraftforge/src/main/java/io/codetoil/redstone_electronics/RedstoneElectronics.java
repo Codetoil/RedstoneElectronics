@@ -58,9 +58,9 @@ public class RedstoneElectronics
 
 	private void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
 		if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-			event.accept(RedstoneElectronicsBlocks.RESISTOR_BLOCK);
-			event.accept(RedstoneElectronicsBlocks.ROTARY_DISTRIBUTOR_BLOCK);
-			event.accept(RedstoneElectronicsBlocks.ROTARY_SELECTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.REDSTONE_RESISTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.REDSTONE_ROTARY_DISTRIBUTOR_BLOCK);
+			event.accept(RedstoneElectronicsBlocks.REDSTONE_ROTARY_SELECTOR_BLOCK);
 			event.accept(RedstoneElectronicsBlocks.OAK_AXLE_BLOCK);
 		}
 	}
