@@ -16,11 +16,12 @@
 				"sources": "https://github.com/QuiltMC/quilt-template-mod"
 			},
 			"icon": "${mod_id}.png",
-			"license": "${license}"
+			"license": "GPL-3.0-or-later"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "com.example.examplemod.ExampleMod"
+			"init": "io.codetoil.redstone_electronics.RedstoneElectronics",
+			"client_init": "io.codetoil.redstone_electronics.client.RedstoneElectronicsClient"
 		},
 		"depends": [
 			{
