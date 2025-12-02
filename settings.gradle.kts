@@ -57,5 +57,3 @@ stonecutter {
 	}
 }
 
-rootProject.name = "Stonecutter-MultiLoader-Template"
-
