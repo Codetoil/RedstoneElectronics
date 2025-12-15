@@ -13,6 +13,8 @@ logoFile = "${mod_id}.png" #optional
 credits = "${credits}" #optional
 authors = "${mod_author}" #optional
 description = '''${description}''' #mandatory (Supports multiline text)
+[features.${ mod_id }]
+javaVersion = "[${java_version},)"
 [[dependencies.${ mod_id }]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory
